@@ -1,6 +1,6 @@
 //wordanimation.cpp
 
-#include "wordanimation.h"
+#include "../header/wordanimation.h"
 #include <chrono>
 #include <iostream>
 #include <string>
@@ -15,6 +15,6 @@ int animateP(string s) {
         std::chrono::milliseconds timespan(100);
         std::this_thread::sleep_for(timespan);
     }
-    std::cout << std::endl;
+    std::cout << endl;
     return 0;
 }

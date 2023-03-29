@@ -1,6 +1,6 @@
 //temp.cpp
 
-#include "wordanimation.h"
+#include "../header/wordanimation.h"
 #include <iostream>
 #include <string>
 using namespace std;

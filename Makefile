@@ -1,15 +1,15 @@
 CXX = g++
-CXXFLAGS = -Wall -Werror -std=c++11
+CXXFLAGS = -std=c++11 -Wall -Wextra -pedantic
 
 all: program
 
 program: temp.o wordanimation.o
 	$(CXX) $(CXXFLAGS) $^ -o $@
 
-temp.o: temp.cpp wordanimation.h
+temp.o: scr/temp.cpp header/wordanimation.h
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-wordanimation.o: wordanimation.cpp wordanimation.h
+wordanimation.o: scr/wordanimation.cpp header/wordanimation.h
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
