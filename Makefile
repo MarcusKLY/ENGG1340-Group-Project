@@ -18,4 +18,7 @@ program: $(OBJS)
 clean:
 	rm -f $(OBJS) $(DEPS) program
 
-.PHONY: clean
+love: program
+	./program || (make clean && false)
+
+.PHONY: all clean love
