@@ -1,3 +1,6 @@
+//main_menu.cpp
+
+#include "../header/main_menu.h"
 #include <iostream>
 #include <cstdio>
 #include <termios.h>
@@ -7,46 +10,48 @@
 #include <thread>
 
 using namespace std;
+
+
 const int WINDOW_WIDTH = 50;
 const int WINDOW_HEIGHT = 10;
 
 void drawWindow(int x, int y, int width, int height) {
     cout << "\033[" << y << ";" << x << "H"; // move cursor to top-left corner of window
     cout << endl;
-    cout << "+" << std::string(width - 2, '-') << "+" << std::endl; // top border
+    cout << "+" << string(width - 2, '-') << "+" << endl; // top border
     for (int i = 0; i < height - 2; i++) {
-        std::cout << "|" << std::string(width - 2, ' ') << "|" << std::endl; // sides
+        cout << "|" << string(width - 2, ' ') << "|" << endl; // sides
     }
-    std::cout << "+" << std::string(width - 2, '-') << "+" << std::endl; // bottom border
+    cout << "+" << string(width - 2, '-') << "+" << endl; // bottom border
 }
 
 
 void drawMenu(int selectedItem) {
-    std::cout << "\033[2J\033[1;1H"; // clear screen and move cursor to top-left corner
+    cout << "\033[2J\033[1;1H"; // clear screen and move cursor to top-left corner
     
     int windowX = (80 - WINDOW_WIDTH) / 2; // center the window horizontally
-    int windowY = (24 - WINDOW_HEIGHT) / 2; // center the window vertically
+    int windowY = 1; // center the window vertically
     drawWindow(windowX, windowY, WINDOW_WIDTH, WINDOW_HEIGHT);
 
-    std::string title = "Main Menu";
+    string title = "Main Menu";
     int titleX = windowX + 5; // move title 10 characters to the left
-    std::cout << "\033[" << windowY + 1 << ";" << titleX << "H"; // move cursor to title position
-    std::cout << title << std::endl;
+    cout << "\033[" << windowY + 1 << ";" << titleX << "H"; // move cursor to title position
+    cout << title << endl;
 
-    std::string items[3] = {"New Game", "Load Game", "Exit"};
+    string items[3] = {"New Game", "Load Game", "Exit"};
     for (int i = 0; i < 3; i++) {
-        std::cout << "\033[" << windowY + 3 + i << ";" << windowX + 2 << "H"; // move cursor to left side of menu item
+        cout << "\033[" << windowY + 3 + i << ";" << windowX + 2 << "H"; // move cursor to left side of menu item
         if (i == selectedItem) {
-            std::cout << "> "; // highlight selected item
+            cout << "> "; // highlight selected item
         } else {
-            std::cout << "  ";
+            cout << "  ";
         }
-        std::cout << items[i] << std::endl;
+        cout << items[i] << endl;
     }
 }
 
 
-int main() {
+int main_menu() {
     struct termios oldt, newt;
     tcgetattr(STDIN_FILENO, &oldt); // save terminal settings
     newt = oldt;
@@ -80,16 +85,16 @@ int main() {
             } else if (ch == '\n') { // Enter key
                 switch (selectedItem) {
                     case 0:
-                        std::cout << "Starting new game..." << std::endl;
+                        cout << "Starting new game..." << endl;
                         // TODO: Add code to start new game
                         break;
                     case 1:
-                        std::cout << "Loading game..." << std::endl;
+                        cout << "Loading game..." << endl;
                         // TODO: Add code to load game
                         break;
                     case 2:
-                        std::cout << "\033[2J\033[1;1H";
-                        std::cout << "Exiting..." << std::endl;
+                        cout << "\033[2J\033[1;1H";
+                        cout << "Exiting..." << endl;
                         this_thread::sleep_for(chrono::seconds(1));
                         done = true;
                         break;
