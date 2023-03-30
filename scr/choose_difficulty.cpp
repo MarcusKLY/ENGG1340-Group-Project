@@ -1,7 +1,7 @@
-//main_menu.cpp
+//choose_difficulty.cpp
 
-#include "../header/main_menu.h"
 #include "../header/choose_difficulty.h"
+#include "../header/main_menu.h"
 #include <iostream>
 #include <cstdio>
 #include <termios.h>
@@ -12,11 +12,10 @@
 
 using namespace std;
 
-
 const int WINDOW_WIDTH = 50;
 const int WINDOW_HEIGHT = 10;
 
-void drawWindowM(int x, int y, int width, int height) {
+void drawWindowD(int x, int y, int width, int height) {
     cout << "\033[" << y << ";" << x << "H"; // move cursor to top-left corner of window
     cout << endl;
     cout << "+" << string(width - 2, '-') << "+" << endl; // top border
@@ -27,32 +26,40 @@ void drawWindowM(int x, int y, int width, int height) {
 }
 
 
-void drawMenuM(int selectedItem) {
+void drawMenuD(int selectedItem) {
     cout << "\033[2J\033[1;1H"; // clear screen and move cursor to top-left corner
     
     int windowX = (80 - WINDOW_WIDTH) / 2; // center the window horizontally
     int windowY = 1; // center the window vertically
-    drawWindowM(windowX, windowY, WINDOW_WIDTH, WINDOW_HEIGHT);
+    drawWindowD(windowX, windowY, WINDOW_WIDTH, WINDOW_HEIGHT);
 
-    string title = "Main Menu";
+    string title = "Difficulty";
     int titleX = windowX + 5; // move title 10 characters to the left
     cout << "\033[" << windowY + 1 << ";" << titleX << "H"; // move cursor to title position
     cout << title << endl;
 
-    string items[3] = {"New Game", "Load Game", "Exit"};
-    for (int i = 0; i < 3; i++) {
+    string items[4] = {"Easy", "Normal", "Hard", "Back"};
+    for (int i = 0; i < 4; i++) {
         cout << "\033[" << windowY + 3 + i << ";" << windowX + 2 << "H"; // move cursor to left side of menu item
         if (i == selectedItem) {
             cout << "> "; // highlight selected item
         } else {
             cout << "  ";
         }
-        cout << items[i] << endl;
+        // set text color based on difficulty level
+        if (i == 0) {
+            cout << "\033[32m"; // green for Easy
+        } else if (i == 1) {
+            cout << "\033[33m"; // yellow for Normal
+        } else if (i == 2) {
+            cout << "\033[31m"; // red for Hard
+        }        
+        cout << items[i] << "\033[0m" << endl; // reset text color
     }
 }
 
 
-int main_menu() {
+int choose_difficulty() {
     struct termios oldt, newt;
     tcgetattr(STDIN_FILENO, &oldt); // save terminal settings
     newt = oldt;
@@ -62,7 +69,7 @@ int main_menu() {
     int selectedItem = 0;
     bool done = false;
     while (!done) {
-        drawMenuM(selectedItem);
+        drawMenuD(selectedItem);
         char ch;
         if (read(STDIN_FILENO, &ch, 1) == 1) { // if a character was read
             if (ch == '\033') { // escape sequence
@@ -72,11 +79,11 @@ int main_menu() {
                             if (ch == 'A') { // up arrow
                                 selectedItem--;
                                 if (selectedItem < 0) {
-                                    selectedItem = 2;
+                                    selectedItem = 3;
                                 }
                             } else if (ch == 'B') { // down arrow
                                 selectedItem++;
-                                if (selectedItem > 2) {
+                                if (selectedItem > 3) {
                                     selectedItem = 0;
                                 }
                             }
@@ -85,20 +92,22 @@ int main_menu() {
                 }
             } else if (ch == '\n') { // Enter key
                 switch (selectedItem) {
-                    case 0: // New Game
-                        choose_difficulty();
+                    case 0: // Easy
+                        cout << "Easy" << endl;
+                        main_menu();
                         break;
-                    case 1:
-                        cout << "Loading game..." << endl;
+                    case 1: // Normal
+                        cout << "Normal" << endl;
                         // TODO: Add code to load game
                         break;
-                    case 2:
-                        cout << "\033[2J\033[1;1H";
-                        cout << "Exiting..." << endl;
-                        this_thread::sleep_for(chrono::seconds(1));
-                        done = true;
-                        abort();
+                    case 2: // Hard
+                        cout << "Hard" << endl;
                         break;
+                    case 3: // Back
+                        this_thread::sleep_for(chrono::milliseconds(500));
+                        done = true;
+                        break;
+
                 }
             }
         }
