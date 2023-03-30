@@ -1,1 +1,0 @@
-//wordcolor.cpp
