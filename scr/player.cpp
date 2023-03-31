@@ -1,3 +1,6 @@
+//player.cpp
+
+#include "../header/player.h"
 #include <iostream>
 #include <string>
 #include <vector>
@@ -10,105 +13,87 @@
 
 using namespace std;
 
-struct PlayerInfo {
-    string user_id;
-    string user_name;
-    string difficulty;
-    int hp;
-    vector<string> items;
-    string location;
 
-};
+void PlayerManager::add_player(const PlayerInfo& player_info) {
+    players[player_info.user_id] = player_info;
+}
 
-class PlayerManager {
-public:
-    // Adds a player to the manager
-    void add_player(const PlayerInfo& player_info) {
-        players[player_info.user_id] = player_info;
+void PlayerManager::update_player(const PlayerInfo& player_info) {
+    players[player_info.user_id] = player_info;
+}
+
+PlayerInfo PlayerManager::get_player(const std::string& user_id) const {
+    auto it = players.find(user_id);
+    if (it == players.end()) {
+        throw std::runtime_error("Player with user ID " + user_id + " does not exist");
     }
+    return it->second;
+}
 
-    // Updates a player in the manager
-    void update_player(const PlayerInfo& player_info) {
-        players[player_info.user_id] = player_info;
+
+std::vector<PlayerInfo> PlayerManager::get_all_players() const {
+    std::vector<PlayerInfo> all_players;
+    for (const auto& player : players) {
+        all_players.push_back(player.second);
     }
+    return all_players;
+}
 
-    // Returns a player from the manager based on user ID
-    PlayerInfo get_player(const string& user_id) const {
-        auto it = players.find(user_id);
-        if (it == players.end()) {
-            throw runtime_error("Player with user ID " + user_id + " does not exist");
-        }
-        return it->second;
+void PlayerManager::load_players(const std::string& filename) {
+    std::ifstream file(filename);
+    if (!file.is_open()) {
+        throw std::runtime_error("Unable to open file " + filename);
     }
-
-    // Returns all players from the manager
-    vector<PlayerInfo> get_all_players() const {
-        vector<PlayerInfo> all_players;
-        for (const auto& player : players) {
-            all_players.push_back(player.second);
+    std::string line;
+    PlayerInfo player_info;
+    while (std::getline(file, line)) {
+        if (line == "end_player") {
+            add_player(player_info);
+            player_info = PlayerInfo();
+        } else if (line.substr(0, 5) == "item:") {
+            player_info.items.push_back(line.substr(5));
+        } else if (line.substr(0, 9) == "location:") {
+            player_info.location = line.substr(9);
+        } else {
+            std::istringstream iss(line);
+            std::getline(iss, player_info.user_id, ',');
+            std::getline(iss, player_info.user_name, ',');
+            std::getline(iss, player_info.difficulty, ',');
+            iss >> player_info.hp;
         }
-        return all_players;
-    }   
-
-    // Loads player information from a file into the manager
-    void load_players(const string& filename) {
-        ifstream file(filename);
-        if (!file.is_open()) {
-            throw runtime_error("Unable to open file " + filename);
-        }
-        string line;
-        PlayerInfo player_info;
-        while (getline(file, line)) {
-            if (line == "end_player") {
-                add_player(player_info);
-                player_info = PlayerInfo();
-            } else if (line.substr(0, 5) == "item:") {
-                player_info.items.push_back(line.substr(5));
-            } else if (line.substr(0, 9) == "location:") {
-                player_info.location = line.substr(9);
-            } else {
-                istringstream iss(line);
-                getline(iss, player_info.user_id, ',');
-                getline(iss, player_info.user_name, ',');
-                getline(iss, player_info.difficulty, ',');
-                iss >> player_info.hp;
-            }
-        }
-        file.close();
     }
-    // Saves player information from the manager to a file
-    void save_players(const string& filename) const {
-        ofstream file(filename);
-        if (!file.is_open()) {
-            throw runtime_error("Unable to open file " + filename);
-        }
-        for (auto it = players.begin(); it != players.end(); ++it) {
-            const string& user_id = it->first;
-            const PlayerInfo& player_info = it->second;
+    file.close();
+}
 
-            file << user_id << "," << player_info.user_name << "," << player_info.difficulty << "," << player_info.hp << "\n";
-            for (const auto& item : player_info.items) {
-                file << "item:" << item << "\n"; // write each item on a separate line
-            }
-            file << "location:" << player_info.location << "\n";
-            file << "end_player\n";
-        }
-        file.close();
+void PlayerManager::save_players(const std::string& filename) const {
+    std::ofstream file(filename);
+    if (!file.is_open()) {
+        throw std::runtime_error("Unable to open file " + filename);
     }
+    for (auto it = players.begin(); it != players.end(); ++it) {
+        const std::string& user_id = it->first;
+        const PlayerInfo& player_info = it->second;
 
-private:
-    unordered_map<string, PlayerInfo> players;
-};
+        file << user_id << "," << player_info.user_name << "," << player_info.difficulty << "," << player_info.hp << "\n";
+        for (const auto& item : player_info.items) {
+            file << "item:" << item << "\n"; // write each item on a separate line
+        }
+        file << "location:" << player_info.location << "\n";
+        file << "end_player\n";
+    }
+    file.close();
+}
 
-// int main() {
+
+// int mainn() {
 //     PlayerManager player_manager;
 
-//     player_manager.load_players("players.txt");
+//     player_manager.load_players("saves.sav");
 
 
 //     PlayerInfo new_player;
 //     new_player.user_id = "player3";
-//     new_player.user_name = "John";
+//     new_player.user_name = "Johnnnnn";
 //     new_player.difficulty = "easy";
 //     new_player.hp = 100;
 //     new_player.items.push_back("sword");
@@ -129,45 +114,53 @@ private:
 //     // existing_player.hp = 50;
 //     // player_manager.update_player(existing_player);
 
-//     player_manager.save_players("players.txt");
+//     player_manager.save_players("saves.sav");
 
 //     return 0;
 // }
 
 
-void print_all_players(const PlayerManager& player_manager) {
-    try {
-        for (const auto& player : player_manager.get_all_players()) {
-            cout << "User ID: " << player.user_id << "\n";
-            cout << "User Name: " << player.user_name << "\n";
-            cout << "Difficulty: " << player.difficulty << "\n";
-            cout << "HP: " << player.hp << "\n";
-            cout << "Items: [";
-            for (const auto& item : player.items) {
-                cout << item << ", ";
-            }
-            cout << "]\n";
-            cout << "Location: " << player.location << "\n\n";
-        }
-    } catch (const runtime_error& ex) {
-        cerr << "Error: " << ex.what() << "\n";
-    }
-}
+// void print_all_players(const PlayerManager& player_manager) {
+//     try {
+//         for (const auto& player : player_manager.get_all_players()) {
+//             cout << "User ID: " << player.user_id << "\n";
+//             cout << "User Name: " << player.user_name << "\n";
+//             cout << "Difficulty: " << player.difficulty << "\n";
+//             cout << "HP: " << player.hp << "\n";
+//             cout << "Items: [";
+//             for (const auto& item : player.items) {
+//                 cout << item << ", ";
+//             }
+//             cout << "]\n";
+//             cout << "Location: " << player.location << "\n\n";
+//         }
+//     } catch (const runtime_error& ex) {
+//         cerr << "Error: " << ex.what() << "\n";
+//     }
+// }
 
-int main() {
-    PlayerManager player_manager;
-    player_manager.load_players("players.txt");
-    PlayerInfo player_info = player_manager.get_player("player2");
-    for (int i=0; i<player_info.items.size(); i++) {
-        cout << player_info.items[i] << "\n";
-    }
-    // try {
-    //     PlayerManager player_manager;
-    //     player_manager.load_players("players.txt");
-    //     print_all_players(player_manager);
-    // } catch (const runtime_error& ex) {
-    //     cerr << "Error: " << ex.what() << "\n";
-    //     return 1;
-    // }
-    // return 0; 
-}
+// int main() {
+//     PlayerManager player_manager;
+//     player_manager.load_players("saves.sav");
+//     PlayerInfo player_info = player_manager.get_player("player2");
+//     // for (int i=0; i<player_info.items.size(); i++) {
+//     //     cout << player_info.items[i] << "\n";
+//     // }
+
+//     // try {
+//     //     PlayerManager player_manager;
+//     //     player_manager.load_players("players.txt");
+//     //     print_all_players(player_manager);
+//     // } catch (const runtime_error& ex) {
+//     //     cerr << "Error: " << ex.what() << "\n";
+//     //     return 1;
+//     // }
+//     // return 0; 
+// }
+
+// // int get_playerinfo_name(){
+// //     PlayerManager player_manager;
+// //     player_manager.load_players("players.txt");
+    
+// //     return 0;
+// // }

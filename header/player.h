@@ -1,23 +1,40 @@
 //player.h
 
-#ifndef PLAYER_INFO_H
-#define PLAYER_INFO_H
+#ifndef PLAYER_H
+#define PLAYER_H
 
+#include <iostream>
 #include <string>
 #include <vector>
+#include <fstream>
+#include <unordered_map>
+#include <sstream>
+#include <stdexcept>
+#include <chrono>
+#include <thread>
 
-// Define global variables for the PlayerInfo struct
-extern std::string user_id;
-extern std::string user_name;
-extern std::string difficulty;
-extern int hp;
-extern std::vector<std::string> items;
-extern std::string location;
+struct PlayerInfo {
+    std::string user_id;
+    std::string user_name;
+    std::string difficulty;
+    int hp;
+    std::vector<std::string> items;
+    std::string location;
+};
 
-// Writes player information to a file
+class PlayerManager {
+public:
+    void add_player(const PlayerInfo& player_info);
+    void update_player(const PlayerInfo& player_info);
+    PlayerInfo get_player(const std::string& user_id) const;
+    std::vector<PlayerInfo> get_all_players() const;
+    void load_players(const std::string& filename);
+    void save_players(const std::string& filename) const;
 
+private:
+    std::unordered_map<std::string, PlayerInfo> players;
+};
 
-// Reads player information from a file
-
+// int mainn();
 
 #endif

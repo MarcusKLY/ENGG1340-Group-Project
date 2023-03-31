@@ -2,6 +2,7 @@
 
 #include "../header/main_menu.h"
 #include "../header/choose_difficulty.h"
+#include "../header/load_game_menu.h"
 #include <iostream>
 #include <cstdio>
 #include <termios.h>
@@ -91,7 +92,7 @@ int main_menu() {
                         break;
                     case 1:
                         cout << "Loading game..." << endl;
-                        // TODO: Add code to load game
+                        load_game_menu();
                         break;
                     case 2:
                         cout << "\033[2J\033[1;1H";

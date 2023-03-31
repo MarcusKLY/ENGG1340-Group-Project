@@ -104,7 +104,6 @@ int choose_difficulty() {
                         cout << "Hard" << endl;
                         break;
                     case 3: // Back
-                        this_thread::sleep_for(chrono::milliseconds(500));
                         done = true;
                         break;
 
