@@ -15,9 +15,9 @@ extern std::vector<std::string> items;
 extern std::string location;
 
 // Writes player information to a file
-void write_to_file(const std::string& filename);
+
 
 // Reads player information from a file
-void read_from_file(const std::string& filename);
+
 
 #endif

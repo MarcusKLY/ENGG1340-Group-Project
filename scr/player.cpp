@@ -41,6 +41,7 @@ public:
         return it->second;
     }
 
+    // Returns all players from the manager
     vector<PlayerInfo> get_all_players() const {
         vector<PlayerInfo> all_players;
         for (const auto& player : players) {
@@ -168,5 +169,5 @@ int main() {
     //     cerr << "Error: " << ex.what() << "\n";
     //     return 1;
     // }
-    // return 0;
+    // return 0; 
 }
