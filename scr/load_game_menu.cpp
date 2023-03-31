@@ -65,7 +65,7 @@ void drawMenuL(int selectedItem) {
     cout << title << endl;
 
     // string items[4] = {"Easy", "Normal", "Hard", "Back"};
-    for (int i = 0; i < player_names.size(); i++) {
+    for (int i = 0; i < static_cast<int>(player_names.size()); i++) {
         cout << "\033[" << windowY + 3 + i << ";" << windowX + 2 << "H"; // move cursor to left side of menu item
         if (i == selectedItem) {
             cout << "> "; // highlight selected item
