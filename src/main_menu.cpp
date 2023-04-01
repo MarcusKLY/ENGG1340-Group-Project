@@ -3,6 +3,9 @@
 #include "../header/main_menu.h"
 #include "../header/choose_difficulty.h"
 #include "../header/load_game_menu.h"
+#include "../header/player.h"
+#include "../header/output_style.h"
+#include "../header/word_style.h"
 #include <iostream>
 #include <cstdio>
 #include <termios.h>
@@ -66,6 +69,13 @@ int main_menu()
     newt = oldt;
     newt.c_lflag &= ~(ICANON | ECHO);        // turn off line buffering and echoing
     tcsetattr(STDIN_FILENO, TCSANOW, &newt); // apply new terminal settings
+    PlayerManager player_manager;
+    player_manager.load_players("saves.sav");
+    int i = 0;
+    for (const auto &player : player_manager.get_all_players())
+    {
+        i++;
+    }
 
     int selectedItem = 0;
     bool done = false;
@@ -109,6 +119,12 @@ int main_menu()
                 switch (selectedItem)
                 {
                 case 0: // New Game
+                    if (i == 3)
+                    {
+                        color_print("You have reached the maximum number of save!", bold_red);
+                        this_thread::sleep_for(chrono::seconds(1));
+                        main_menu();
+                    }
                     choose_difficulty();
                     break;
                 case 1: // Load Game
@@ -126,7 +142,7 @@ int main_menu()
                     cout << "Exiting..." << endl;
                     this_thread::sleep_for(chrono::seconds(1));
                     done = true;
-                    abort();
+                    abort(); // turn to exit(0) later
                     break;
                 }
             }
