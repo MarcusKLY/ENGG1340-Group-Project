@@ -11,6 +11,9 @@ DEPS = $(OBJS:.o=.d)
 INCS = $(wildcard $(INCDIR)/*.h)
 INCFLAGS = $(addprefix -I,$(INCDIR))
 
+MKDIR_P = mkdir -p
+$(shell $(MKDIR_P) obj)
+
 all: program
 
 program: $(OBJS)
