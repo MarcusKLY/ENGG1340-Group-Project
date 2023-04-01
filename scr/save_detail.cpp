@@ -1,7 +1,10 @@
-// choose_difficulty.cpp
+// load_game_menu.cpp
 
-#include "../header/choose_difficulty.h"
-#include "../header/main_menu.h"
+#include "../header/save_detail.h"
+#include "../header/player.h"
+#include "../header/output_style.h"
+#include "../header/word_style.h"
+#include "../header/confirm_delete.h"
 #include <iostream>
 #include <cstdio>
 #include <termios.h>
@@ -9,13 +12,16 @@
 #include <cstring>
 #include <chrono>
 #include <thread>
+#include <vector>
+#include <string>
 
 using namespace std;
 
 const int WINDOW_WIDTH = 50;
 const int WINDOW_HEIGHT = 10;
 
-void drawWindowD(int x, int y, int width, int height)
+// draw a window with the given dimensions for load game menu
+void drawWindowSD(int x, int y, int width, int height)
 {
     cout << "\033[" << y << ";" << x << "H"; // move cursor to top-left corner of window
     cout << endl;
@@ -27,23 +33,31 @@ void drawWindowD(int x, int y, int width, int height)
     cout << "+" << string(width - 2, '-') << "+" << endl; // bottom border
 }
 
-void drawMenuD(int selectedItem)
+// draw the load game menu
+void drawMenuSD(int selectedItem, string player_name)
 {
+    PlayerInfo player_info;
+    PlayerManager player_manager;
+    player_manager.load_players("saves.sav");
+    player_info = player_manager.get_player(player_name);
+
     cout << "\033[2J\033[1;1H"; // clear screen and move cursor to top-left corner
 
     int windowX = (80 - WINDOW_WIDTH) / 2; // center the window horizontally
     int windowY = 1;                       // center the window vertically
-    drawWindowD(windowX, windowY, WINDOW_WIDTH, WINDOW_HEIGHT);
+    drawWindowSD(windowX, windowY, WINDOW_WIDTH, WINDOW_HEIGHT);
 
-    string title = "Difficulty";
+    string title = "Save Detail";
     int titleX = windowX + 5;                               // move title 10 characters to the left
     cout << "\033[" << windowY + 1 << ";" << titleX << "H"; // move cursor to title position
-    cout << title << endl;
+    cout << title;
+    cout << "\n\n|            Difficulty: " << player_info.difficulty << "\n|            Save Location: " << player_info.location << endl;
+    cout << endl;
 
-    string items[4] = {"Easy", "Normal", "Hard", "Back"};
-    for (int i = 0; i < 4; i++)
+    string items[3] = {"Load Game", "Delete", "Back"};
+    for (int i = 0; i < 3; i++)
     {
-        cout << "\033[" << windowY + 3 + i << ";" << windowX + 2 << "H"; // move cursor to left side of menu item
+        cout << "\033[" << windowY + 6 + i << ";" << windowX + 2 << "H"; // move cursor to left side of menu item
         if (i == selectedItem)
         {
             cout << "> "; // highlight selected item
@@ -52,26 +66,14 @@ void drawMenuD(int selectedItem)
         {
             cout << "  ";
         }
-        // set text color based on difficulty level
-        if (i == 0)
-        {
-            cout << "\033[32m"; // green for Easy
-        }
-        else if (i == 1)
-        {
-            cout << "\033[33m"; // yellow for Normal
-        }
-        else if (i == 2)
-        {
-            cout << "\033[31m"; // red for Hard
-        }
-        cout << items[i] << "\033[0m" << endl; // reset text color
+        cout << items[i] << endl;
     }
-    cout << "\n\n\n\n*Use arrow keys to navigate, enter to select" << endl;
+    cout << "\n\n*Use arrow keys to navigate, enter to select" << endl;
 }
 
-int choose_difficulty()
+int save_detail(string player_name)
 {
+    PlayerManager player_manager;
     struct termios oldt, newt;
     tcgetattr(STDIN_FILENO, &oldt); // save terminal settings
     newt = oldt;
@@ -82,7 +84,7 @@ int choose_difficulty()
     bool done = false;
     while (!done)
     {
-        drawMenuD(selectedItem);
+        drawMenuSD(selectedItem, player_name);
         char ch;
         if (read(STDIN_FILENO, &ch, 1) == 1)
         { // if a character was read
@@ -99,13 +101,13 @@ int choose_difficulty()
                                 selectedItem--;
                                 if (selectedItem < 0)
                                 {
-                                    selectedItem = 3;
+                                    selectedItem = 2;
                                 }
                             }
                             else if (ch == 'B')
                             { // down arrow
                                 selectedItem++;
-                                if (selectedItem > 3)
+                                if (selectedItem > 2)
                                 {
                                     selectedItem = 0;
                                 }
@@ -118,18 +120,16 @@ int choose_difficulty()
             { // Enter key
                 switch (selectedItem)
                 {
-                case 0: // Easy
-                    cout << "Easy" << endl;
-                    main_menu();
+                case 0: // First slot
+                    color_print("\n\n\n\n              No save file found!", bold_red);
+                    std::this_thread::sleep_for(std::chrono::milliseconds(1000));
                     break;
-                case 1: // Normal
-                    cout << "Normal" << endl;
-                    // TODO: Add code to load game
+                case 1: // Second slot
+                    confirm_delete(player_name);
+                    player_manager.load_players("saves.sav");
+                    done = true;
                     break;
-                case 2: // Hard
-                    cout << "Hard" << endl;
-                    break;
-                case 3: // Back
+                case 2: // Third Slot
                     done = true;
                     break;
                 }

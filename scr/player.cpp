@@ -1,4 +1,4 @@
-//player.cpp
+// player.cpp
 
 #include "../header/player.h"
 #include <iostream>
@@ -13,48 +13,73 @@
 
 using namespace std;
 
-
-void PlayerManager::add_player(const PlayerInfo& player_info) {
+void PlayerManager::add_player(const PlayerInfo &player_info)
+{
     players[player_info.user_id] = player_info;
 }
 
-void PlayerManager::update_player(const PlayerInfo& player_info) {
+void PlayerManager::update_player(const PlayerInfo &player_info)
+{
     players[player_info.user_id] = player_info;
 }
 
-PlayerInfo PlayerManager::get_player(const std::string& user_id) const {
+PlayerInfo PlayerManager::get_player(const std::string &user_id) const
+{
     auto it = players.find(user_id);
-    if (it == players.end()) {
+    if (it == players.end())
+    {
         throw std::runtime_error("Player with user ID " + user_id + " does not exist");
     }
     return it->second;
 }
 
-
-std::vector<PlayerInfo> PlayerManager::get_all_players() const {
+std::vector<PlayerInfo> PlayerManager::get_all_players() const
+{
     std::vector<PlayerInfo> all_players;
-    for (const auto& player : players) {
+    for (const auto &player : players)
+    {
         all_players.push_back(player.second);
     }
     return all_players;
 }
 
-void PlayerManager::load_players(const std::string& filename) {
+void PlayerManager::delete_player(const std::string &user_id)
+{
+    auto it = players.find(user_id);
+    if (it == players.end())
+    {
+        throw std::runtime_error("Player with user ID " + user_id + " does not exist");
+    }
+    players.erase(it);
+    PlayerManager::save_players("saves.sav");
+}
+
+void PlayerManager::load_players(const std::string &filename)
+{
     std::ifstream file(filename);
-    if (!file.is_open()) {
+    if (!file.is_open())
+    {
         throw std::runtime_error("Unable to open file " + filename);
     }
     std::string line;
     PlayerInfo player_info;
-    while (std::getline(file, line)) {
-        if (line == "end_player") {
+    while (std::getline(file, line))
+    {
+        if (line == "end_player")
+        {
             add_player(player_info);
             player_info = PlayerInfo();
-        } else if (line.substr(0, 5) == "item:") {
+        }
+        else if (line.substr(0, 5) == "item:")
+        {
             player_info.items.push_back(line.substr(5));
-        } else if (line.substr(0, 9) == "location:") {
+        }
+        else if (line.substr(0, 9) == "location:")
+        {
             player_info.location = line.substr(9);
-        } else {
+        }
+        else
+        {
             std::istringstream iss(line);
             std::getline(iss, player_info.user_id, ',');
             std::getline(iss, player_info.user_name, ',');
@@ -65,17 +90,21 @@ void PlayerManager::load_players(const std::string& filename) {
     file.close();
 }
 
-void PlayerManager::save_players(const std::string& filename) const {
+void PlayerManager::save_players(const std::string &filename) const
+{
     std::ofstream file(filename);
-    if (!file.is_open()) {
+    if (!file.is_open())
+    {
         throw std::runtime_error("Unable to open file " + filename);
     }
-    for (auto it = players.begin(); it != players.end(); ++it) {
-        const std::string& user_id = it->first;
-        const PlayerInfo& player_info = it->second;
+    for (auto it = players.begin(); it != players.end(); ++it)
+    {
+        const std::string &user_id = it->first;
+        const PlayerInfo &player_info = it->second;
 
         file << user_id << "," << player_info.user_name << "," << player_info.difficulty << "," << player_info.hp << "\n";
-        for (const auto& item : player_info.items) {
+        for (const auto &item : player_info.items)
+        {
             file << "item:" << item << "\n"; // write each item on a separate line
         }
         file << "location:" << player_info.location << "\n";
@@ -84,12 +113,17 @@ void PlayerManager::save_players(const std::string& filename) const {
     file.close();
 }
 
+// int main(){
+//     PlayerManager player_manager;
+//     player_manager.load_players("saves.sav");
+//     player_manager.delete_player("marcus");
+//     cout << "Player deleted" << endl;
+// }
 
 // int mainn() {
 //     PlayerManager player_manager;
 
 //     player_manager.load_players("saves.sav");
-
 
 //     PlayerInfo new_player;
 //     new_player.user_id = "player3";
@@ -119,7 +153,6 @@ void PlayerManager::save_players(const std::string& filename) const {
 //     return 0;
 // }
 
-
 // void print_all_players(const PlayerManager& player_manager) {
 //     try {
 //         for (const auto& player : player_manager.get_all_players()) {
@@ -132,7 +165,7 @@ void PlayerManager::save_players(const std::string& filename) const {
 //                 cout << item << ", ";
 //             }
 //             cout << "]\n";
-//             cout << "Location: " << player.location << "\n\n";
+//             cout << "Check point: " << player.location << "\n\n";
 //         }
 //     } catch (const runtime_error& ex) {
 //         cerr << "Error: " << ex.what() << "\n";
@@ -155,12 +188,12 @@ void PlayerManager::save_players(const std::string& filename) const {
 //     //     cerr << "Error: " << ex.what() << "\n";
 //     //     return 1;
 //     // }
-//     // return 0; 
+//     // return 0;
 // }
 
 // // int get_playerinfo_name(){
 // //     PlayerManager player_manager;
 // //     player_manager.load_players("players.txt");
-    
+
 // //     return 0;
 // // }
