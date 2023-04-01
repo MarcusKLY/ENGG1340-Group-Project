@@ -12,5 +12,7 @@ Group 1
 
 ## Install & Run
 `make` to build the program
+
 `./program` to run the program after `make`
+
 `make love` to make the program and run it directly
