@@ -90,8 +90,7 @@ int main_menu() {
                     case 0: // New Game
                         choose_difficulty();
                         break;
-                    case 1:
-                        cout << "Loading game..." << endl;
+                    case 1: // Load Game
                         load_game_menu();
                         break;
                     case 2:

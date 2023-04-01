@@ -8,5 +8,6 @@ using namespace std;
 
 int char_typewriter(string s, ColorOption colorOptions);
 int line_typewriter(string s, ColorOption colorOptions);
+int color_print(string s, ColorOption colorOptions);
 
 #endif

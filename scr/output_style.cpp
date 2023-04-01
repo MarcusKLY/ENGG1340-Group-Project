@@ -34,3 +34,10 @@ int line_typewriter(string s, ColorOption colorOptions) {
     cout << "\033[0m" << endl; // Reset color to default
     return 0;
 }
+
+int color_print(string s, ColorOption colorOptions) {
+    cout << colorOptions.code;
+    cout << s << flush;
+    cout << "\033[0m" << endl; // Reset color to default
+    return 0;
+}

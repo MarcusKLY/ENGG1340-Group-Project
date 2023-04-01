@@ -10,7 +10,7 @@ using namespace std;
 
 int main() {
     // mainn();
-    g_name();
+    // g_name();
     main_menu();
     return 0;
 }

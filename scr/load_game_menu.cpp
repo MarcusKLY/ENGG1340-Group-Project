@@ -4,6 +4,8 @@
 #include "../header/main_menu.h"
 #include "../header/load_game_menu.h"
 #include "../header/player.h"
+#include "../header/output_style.h"
+#include "../header/word_style.h"
 #include <iostream>
 #include <cstdio>
 #include <termios.h>
@@ -64,7 +66,6 @@ void drawMenuL(int selectedItem) {
     cout << "\033[" << windowY + 1 << ";" << titleX << "H"; // move cursor to title position
     cout << title << endl;
 
-    // string items[4] = {"Easy", "Normal", "Hard", "Back"};
     for (int i = 0; i < static_cast<int>(player_names.size()); i++) {
         cout << "\033[" << windowY + 3 + i << ";" << windowX + 2 << "H"; // move cursor to left side of menu item
         if (i == selectedItem) {
@@ -111,16 +112,24 @@ int load_game_menu() {
                 }
             } else if (ch == '\n') { // Enter key
                 switch (selectedItem) {
-                    case 0: // Easy
-                        cout << "Easy" << endl;
-                        main_menu();
+                    case 0: // First slot
+                        if (player_names [0] == "Empty Slot"){
+                            color_print("\n\n\n\n              No save file found!", bold_red);
+                            std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+                        }
                         break;
-                    case 1: // Normal
-                        cout << "Normal" << endl;
+                    case 1: // Second slot
+                        if (player_names [1] == "Empty Slot"){
+                            color_print("\n\n\n\n              No save file found!", bold_red);
+                            std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+                        }
                         // TODO: Add code to load game
                         break;
-                    case 2: // Hard
-                        cout << "Hard" << endl;
+                    case 2: // Third Slot
+                        if (player_names [2] == "Empty Slot"){
+                            color_print("\n\n\n\n              No save file found!", bold_red);
+                            std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+                        }
                         break;
                     case 3: // Back
                         done = true;
