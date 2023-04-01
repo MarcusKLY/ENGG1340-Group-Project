@@ -36,9 +36,9 @@ void drawMenuCD(int selectedItem)
     int windowY = 1;                       // center the window vertically
     drawWindowCD(windowX, windowY, WINDOW_WIDTH, WINDOW_HEIGHT);
 
-    string title = "Confirm Delete?";
-    int titleX = windowX + 5;                           // move title 10 characters to the left
-    cout << "\033[" << windowY << ";" << titleX << "H"; // move cursor to title position
+    string title = "Comfirm Delete?";
+    int titleX = windowX + 5;                                   // move title 10 characters to the left
+    cout << "\033[" << windowY + 1 << ";" << titleX - 1 << "H"; // move cursor to title position
     cout << title << endl;
 
     string items[3] = {"Confirm Delete!", "Noooooo!"};

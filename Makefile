@@ -1,7 +1,7 @@
 CXX = g++
 CPPFLAGS = -std=c++11 -Wall -Wextra -pedantic
 
-SRCDIR = scr
+SRCDIR = src
 INCDIR = header
 
 SRCS = $(wildcard $(SRCDIR)/*.cpp)
