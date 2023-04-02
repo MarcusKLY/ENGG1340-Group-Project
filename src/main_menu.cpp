@@ -71,12 +71,7 @@ int main_menu()
     tcsetattr(STDIN_FILENO, TCSANOW, &newt); // apply new terminal settings
     PlayerManager player_manager;
     player_manager.load_players("saves.sav");
-    int i = 0;
-    for (const auto &player : player_manager.get_all_players())
-    {
-        i++;
-    }
-
+    int i = player_manager.get_all_players().size();
     int selectedItem = 0;
     bool done = false;
     while (!done)
@@ -123,9 +118,11 @@ int main_menu()
                     {
                         color_print("You have reached the maximum number of save!", bold_red);
                         this_thread::sleep_for(chrono::seconds(1));
-                        main_menu();
                     }
-                    choose_difficulty();
+                    else
+                    {
+                        choose_difficulty();
+                    }
                     break;
                 case 1: // Load Game
                     while (true)

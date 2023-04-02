@@ -2,6 +2,7 @@
 
 #include "../header/choose_difficulty.h"
 #include "../header/main_menu.h"
+#include "../header/story_background.h"
 #include <iostream>
 #include <cstdio>
 #include <termios.h>
@@ -119,15 +120,16 @@ int choose_difficulty()
                 switch (selectedItem)
                 {
                 case 0: // Easy
-                    cout << "Easy" << endl;
-                    main_menu();
+                    story_background("Easy");
+                    done = true;
                     break;
                 case 1: // Normal
-                    cout << "Normal" << endl;
-                    // TODO: Add code to load game
+                    story_background("Normal");
+                    done = true;
                     break;
                 case 2: // Hard
-                    cout << "Hard" << endl;
+                    story_background("Hard");
+                    done = true;
                     break;
                 case 3: // Back
                     done = true;
