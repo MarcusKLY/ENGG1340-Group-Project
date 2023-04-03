@@ -1,14 +1,12 @@
+hfgbnfg,hfgbnfg,Easy,80
+checkpoint:Story Background
+end_player
 marcus,marcus,difficult,80
 item:item1
 item:item2
-location:earch
+checkpoint:earch
 end_player
 Johnnnnn,Johnnnnn,easy,100
 item:sword
-location:castle
+checkpoint:castle
 end_player
-Johnnnnn,Johnnnnn,easy,100
-item:sword
-location:castle
-end_player
-

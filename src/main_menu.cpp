@@ -121,6 +121,8 @@ int main_menu()
                     }
                     else
                     {
+                        done = true;
+                        tcsetattr(STDIN_FILENO, TCSANOW, &oldt); // restore terminal settings
                         choose_difficulty();
                     }
                     break;
@@ -130,6 +132,8 @@ int main_menu()
                         temp = load_game_menu();
                         if (temp == 0)
                         {
+                            done = true;
+                            tcsetattr(STDIN_FILENO, TCSANOW, &oldt); // restore terminal settings
                             main_menu();
                         }
                     }

@@ -4,6 +4,8 @@
 #define STORY_BACKGROUND_H
 #include <string>
 
-int story_background(std::string difficulty);
+using namespace std;
+
+int story_background(string player_name);
 
 #endif

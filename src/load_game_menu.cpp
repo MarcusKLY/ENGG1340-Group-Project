@@ -145,10 +145,10 @@ int load_game_menu()
                     }
                     else
                     {
+                        done = true;
                         save_detail(player_names[0]);
                         player_manager.load_players("saves.sav");
                     }
-                    done = true;
                     return 1;
                     break;
                 case 1: // Second slot
@@ -156,14 +156,14 @@ int load_game_menu()
                     {
                         color_print("              No save file found!", bold_red);
                         std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-                        continue;
                     }
                     else
                     {
+                        done = true;
+                        tcsetattr(STDIN_FILENO, TCSANOW, &oldt); // restore terminal settings
                         save_detail(player_names[1]);
                         player_manager.load_players("saves.sav");
                     }
-                    done = true;
                     return 1;
                     break;
                 case 2: // Third Slot
@@ -174,14 +174,16 @@ int load_game_menu()
                     }
                     else
                     {
+                        done = true;
+                        tcsetattr(STDIN_FILENO, TCSANOW, &oldt); // restore terminal settings
                         save_detail(player_names[2]);
                         player_manager.load_players("saves.sav");
                     }
-                    done = true;
                     return 1;
                     break;
                 case 3: // Back
                     done = true;
+                    tcsetattr(STDIN_FILENO, TCSANOW, &oldt); // restore terminal settings
                     break;
                 }
             }

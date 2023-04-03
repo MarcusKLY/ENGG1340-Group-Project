@@ -74,9 +74,9 @@ void PlayerManager::load_players(const std::string &filename)
         {
             player_info.items.push_back(line.substr(5));
         }
-        else if (line.substr(0, 9) == "location:")
+        else if (line.substr(0, 9) == "checkpoint:")
         {
-            player_info.location = line.substr(9);
+            player_info.checkpoint = line.substr(9);
         }
         else
         {
@@ -107,7 +107,7 @@ void PlayerManager::save_players(const std::string &filename) const
         {
             file << "item:" << item << "\n"; // write each item on a separate line
         }
-        file << "location:" << player_info.location << "\n";
+        file << "checkpoint:" << player_info.checkpoint << "\n";
         file << "end_player\n";
     }
     file.close();
@@ -131,7 +131,7 @@ void PlayerManager::save_players(const std::string &filename) const
 //     new_player.difficulty = "easy";
 //     new_player.hp = 100;
 //     new_player.items.push_back("sword");
-//     new_player.location = "castle";
+//     new_player.checkpoint = "castle";
 //     player_manager.add_player(new_player);
 
 //     PlayerInfo new_player1;
@@ -141,7 +141,7 @@ void PlayerManager::save_players(const std::string &filename) const
 //     new_player1.hp = 80;
 //     new_player1.items.push_back("item1");
 //     new_player1.items.push_back("item2");
-//     new_player1.location = "earch";
+//     new_player1.checkpoint = "earch";
 //     player_manager.add_player(new_player1);
 
 //     // PlayerInfo existing_player = player_manager.get_player("player3");
@@ -165,7 +165,7 @@ void PlayerManager::save_players(const std::string &filename) const
 //                 cout << item << ", ";
 //             }
 //             cout << "]\n";
-//             cout << "Check point: " << player.location << "\n\n";
+//             cout << "Check point: " << player.checkpoint << "\n\n";
 //         }
 //     } catch (const runtime_error& ex) {
 //         cerr << "Error: " << ex.what() << "\n";

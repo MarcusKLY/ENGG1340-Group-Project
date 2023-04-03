@@ -20,7 +20,7 @@ struct PlayerInfo
     std::string difficulty;
     int hp;
     std::vector<std::string> items;
-    std::string location;
+    std::string checkpoint;
 };
 
 class PlayerManager

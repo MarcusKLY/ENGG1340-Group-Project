@@ -111,11 +111,13 @@ int confirm_delete(string player_name)
                 switch (selectedItem)
                 {
                 case 0: // Delete
-                    pm.delete_player(player_name);
                     done = true;
+                    tcsetattr(STDIN_FILENO, TCSANOW, &oldt); // restore terminal settings
+                    pm.delete_player(player_name);
                     break;
                 case 1: // Back
                     done = true;
+                    tcsetattr(STDIN_FILENO, TCSANOW, &oldt); // restore terminal settings
                     break;
                 }
             }

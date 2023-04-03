@@ -5,6 +5,8 @@
 #include "../header/output_style.h"
 #include "../header/word_style.h"
 #include "../header/confirm_delete.h"
+#include "../header/load_checkpoint.h"
+
 #include <iostream>
 #include <cstdio>
 #include <termios.h>
@@ -51,7 +53,7 @@ void drawMenuSD(int selectedItem, string player_name)
     int titleX = windowX + 5;                               // move title 10 characters to the left
     cout << "\033[" << windowY + 1 << ";" << titleX << "H"; // move cursor to title position
     cout << title;
-    cout << "\n\n|            Difficulty: " << player_info.difficulty << "\n|            Save Location: " << player_info.location << endl;
+    cout << "\n\n|            Difficulty: " << player_info.difficulty << "\n|            Save checkpoint: " << player_info.checkpoint << endl;
     cout << endl;
 
     string items[3] = {"Load Game", "Delete", "Back"};
@@ -121,8 +123,8 @@ int save_detail(string player_name)
                 switch (selectedItem)
                 {
                 case 0: // First slot
-                    color_print("\n\n\n\n              No save file found!", bold_red);
-                    std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+                    done = true;
+                    load_checkpoint(player_name);
                     break;
                 case 1: // Second slot
                     confirm_delete(player_name);

@@ -1,4 +1,4 @@
-//word_style.h
+// word_style.h
 
 #ifndef WORD_STYLE_H
 #define WORD_STYLE_H
@@ -6,15 +6,16 @@
 #include <string>
 #include <vector>
 
-//struct for color options
-struct ColorOption { 
+// struct for color options
+struct ColorOption
+{
     std::string name;
     std::string code;
 };
 
-//extern for color options
-extern ColorOption red; 
-extern ColorOption green; 
+// extern for color options
+extern ColorOption red;
+extern ColorOption green;
 extern ColorOption blue;
 extern ColorOption yellow;
 extern ColorOption magenta;
@@ -60,6 +61,30 @@ extern ColorOption bold_background_yellow;
 extern ColorOption bold_background_magenta;
 extern ColorOption bold_background_cyan;
 extern ColorOption bold_background_white;
+
+extern ColorOption background_italic_red;
+extern ColorOption background_italic_green;
+extern ColorOption background_italic_blue;
+extern ColorOption background_italic_yellow;
+extern ColorOption background_italic_magenta;
+extern ColorOption background_italic_cyan;
+extern ColorOption background_italic_white;
+
+extern ColorOption bold_background_italic_red;
+extern ColorOption bold_background_italic_green;
+extern ColorOption bold_background_italic_blue;
+extern ColorOption bold_background_italic_yellow;
+extern ColorOption bold_background_italic_magenta;
+extern ColorOption bold_background_italic_cyan;
+extern ColorOption bold_background_italic_white;
+
+extern ColorOption italic_red;
+extern ColorOption italic_green;
+extern ColorOption italic_blue;
+extern ColorOption italic_yellow;
+extern ColorOption italic_magenta;
+extern ColorOption italic_cyan;
+extern ColorOption italic_white;
 
 extern std::vector<ColorOption> colorOptions;
 

@@ -120,16 +120,19 @@ int choose_difficulty()
                 switch (selectedItem)
                 {
                 case 0: // Easy
-                    story_background("Easy");
                     done = true;
+                    tcsetattr(STDIN_FILENO, TCSANOW, &oldt); // restore terminal settings
+                    story_background("Easy");
                     break;
                 case 1: // Normal
-                    story_background("Normal");
                     done = true;
+                    tcsetattr(STDIN_FILENO, TCSANOW, &oldt); // restore terminal settings
+                    story_background("Normal");
                     break;
                 case 2: // Hard
-                    story_background("Hard");
                     done = true;
+                    tcsetattr(STDIN_FILENO, TCSANOW, &oldt); // restore terminal settings
+                    story_background("Hard");
                     break;
                 case 3: // Back
                     done = true;

@@ -1,5 +1,5 @@
-//word_style.cpp
-//file for storing all the color options
+// word_style.cpp
+// file for storing all the color options
 
 #include "../header/word_style.h"
 #include <string>
@@ -54,4 +54,34 @@ ColorOption bold_background_magenta = {"bold_background_magenta", "\033[1;45m"};
 ColorOption bold_background_cyan = {"bold_background_cyan", "\033[1;46m"};
 ColorOption bold_background_white = {"bold_background_white", "\033[1;47m"};
 
+ColorOption background_italic_red = {"background_italic_red", "\033[3;41m"};
+ColorOption background_italic_green = {"background_italic_green", "\033[3;42m"};
+ColorOption background_italic_yellow = {"background_italic_yellow", "\033[3;43m"};
+ColorOption background_italic_blue = {"background_italic_blue", "\033[3;44m"};
+ColorOption background_italic_magenta = {"background_italic_magenta", "\033[3;45m"};
+ColorOption background_italic_cyan = {"background_italic_cyan", "\033[3;46m"};
+ColorOption background_italic_white = {"background_italic_white", "\033[3;47m"};
 
+ColorOption bold_background_italic_red = {"bold_background_italic_red", "\033[1;3;41m"};
+ColorOption bold_background_italic_green = {"bold_background_italic_green", "\033[1;3;42m"};
+ColorOption bold_background_italic_yellow = {"bold_background_italic_yellow", "\033[1;3;43m"};
+ColorOption bold_background_italic_blue = {"bold_background_italic_blue", "\033[1;3;44m"};
+ColorOption bold_background_italic_magenta = {"bold_background_italic_magenta", "\033[1;3;45m"};
+ColorOption bold_background_italic_cyan = {"bold_background_italic_cyan", "\033[1;3;46m"};
+ColorOption bold_background_italic_white = {"bold_background_italic_white", "\033[1;3;47m"};
+
+ColorOption italic_red = {"italic_red", "\033[3;31m"};
+ColorOption italic_green = {"italic_green", "\033[3;32m"};
+ColorOption italic_yellow = {"italic_yellow", "\033[3;33m"};
+ColorOption italic_blue = {"italic_blue", "\033[3;34m"};
+ColorOption italic_magenta = {"italic_magenta", "\033[3;35m"};
+ColorOption italic_cyan = {"italic_cyan", "\033[3;36m"};
+ColorOption italic_white = {"italic_white", "\033[3;37m"};
+
+ColorOption bold_italic_red = {"bold_italic_red", "\033[1;3;31m"};
+ColorOption bold_italic_green = {"bold_italic_green", "\033[1;3;32m"};
+ColorOption bold_italic_yellow = {"bold_italic_yellow", "\033[1;3;33m"};
+ColorOption bold_italic_blue = {"bold_italic_blue", "\033[1;3;34m"};
+ColorOption bold_italic_magenta = {"bold_italic_magenta", "\033[1;3;35m"};
+ColorOption bold_italic_cyan = {"bold_italic_cyan", "\033[1;3;36m"};
+ColorOption bold_italic_white = {"bold_italic_white", "\033[1;3;37m"};
