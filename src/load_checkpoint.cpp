@@ -9,8 +9,10 @@
 
 using namespace std;
 
+// load the checkpoint of the player
 void load_checkpoint(string player_name)
 {
+    cout << "\033[2J\033[1;1H"; // clear screen and move cursor to top-left corner
     PlayerInfo player_info;
     PlayerManager player_manager;
     player_manager.load_players("saves.sav");

@@ -20,6 +20,7 @@ using namespace std;
 const int WINDOW_WIDTH = 50;
 const int WINDOW_HEIGHT = 10;
 
+// draw a window with the given dimensions for main menu
 void drawWindowM(int x, int y, int width, int height)
 {
     cout << "\033[" << y << ";" << x << "H"; // move cursor to top-left corner of window
@@ -32,6 +33,7 @@ void drawWindowM(int x, int y, int width, int height)
     cout << "+" << string(width - 2, '-') << "+" << endl; // bottom border
 }
 
+// draw the main menu
 void drawMenuM(int selectedItem)
 {
     cout << "\033[2J\033[1;1H"; // clear screen and move cursor to top-left corner
@@ -62,6 +64,7 @@ void drawMenuM(int selectedItem)
     cout << "\n\n\n\n\n*Use arrow keys to navigate, enter to select" << endl;
 }
 
+// main menu
 int main_menu()
 {
     struct termios oldt, newt;

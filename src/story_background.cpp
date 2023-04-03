@@ -11,6 +11,7 @@
 
 using namespace std;
 
+// Print the story background
 int story_background(string player_name)
 {
     char_typewriter("Background:", bold_background_italic_cyan);

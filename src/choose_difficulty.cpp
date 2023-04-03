@@ -3,6 +3,7 @@
 #include "../header/choose_difficulty.h"
 #include "../header/main_menu.h"
 #include "../header/story_background.h"
+#include "../header/create_player.h"
 #include <iostream>
 #include <cstdio>
 #include <termios.h>
@@ -16,6 +17,7 @@ using namespace std;
 const int WINDOW_WIDTH = 50;
 const int WINDOW_HEIGHT = 10;
 
+// draw a window with the given dimensions for difficulty menu
 void drawWindowD(int x, int y, int width, int height)
 {
     cout << "\033[" << y << ";" << x << "H"; // move cursor to top-left corner of window
@@ -28,6 +30,7 @@ void drawWindowD(int x, int y, int width, int height)
     cout << "+" << string(width - 2, '-') << "+" << endl; // bottom border
 }
 
+// draw the difficulty menu
 void drawMenuD(int selectedItem)
 {
     cout << "\033[2J\033[1;1H"; // clear screen and move cursor to top-left corner
@@ -71,6 +74,7 @@ void drawMenuD(int selectedItem)
     cout << "\n\n\n\n*Use arrow keys to navigate, enter to select" << endl;
 }
 
+// choose difficulty level
 int choose_difficulty()
 {
     struct termios oldt, newt;
@@ -122,17 +126,17 @@ int choose_difficulty()
                 case 0: // Easy
                     done = true;
                     tcsetattr(STDIN_FILENO, TCSANOW, &oldt); // restore terminal settings
-                    story_background("Easy");
+                    create_player("Easy");
                     break;
                 case 1: // Normal
                     done = true;
                     tcsetattr(STDIN_FILENO, TCSANOW, &oldt); // restore terminal settings
-                    story_background("Normal");
+                    create_player("Normal");
                     break;
                 case 2: // Hard
                     done = true;
                     tcsetattr(STDIN_FILENO, TCSANOW, &oldt); // restore terminal settings
-                    story_background("Hard");
+                    create_player("Hard");
                     break;
                 case 3: // Back
                     done = true;

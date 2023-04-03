@@ -1,4 +1,4 @@
-//game_name.cpp
+// game_name.cpp
 
 #include "../header/game_name.h"
 #include "../header/output_style.h"
@@ -8,7 +8,9 @@
 
 using namespace std;
 
-void g_name(){
+// print the game name
+void g_name()
+{
     cout << "\033[2J\033[1;1H"; // clear screen and move cursor to top-left corner
     line_typewriter("┋======================================┋", bold_red);
     line_typewriter("┋      ___ ___  ____  __.____ ___      ┋", bold_red);

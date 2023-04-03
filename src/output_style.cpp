@@ -38,6 +38,7 @@ int line_typewriter(string s, ColorOption colorOptions)
     return 0;
 }
 
+// cout function which print the string with color
 int color_print(string s, ColorOption colorOptions)
 {
     cout << colorOptions.code;
@@ -46,6 +47,7 @@ int color_print(string s, ColorOption colorOptions)
     return 0;
 }
 
+// cout function which print the string with color without new line
 int color_print_no_newline(string s, ColorOption colorOptions)
 {
     cout << colorOptions.code;
@@ -54,6 +56,7 @@ int color_print_no_newline(string s, ColorOption colorOptions)
     return 0;
 }
 
+// clear the previous n lines
 void clear_previous_lines(int n)
 {
     cout << "\033[" << n << "A"; // Move cursor up n lines

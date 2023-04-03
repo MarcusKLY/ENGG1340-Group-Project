@@ -13,16 +13,19 @@
 
 using namespace std;
 
+// function to add a new player
 void PlayerManager::add_player(const PlayerInfo &player_info)
 {
     players[player_info.user_id] = player_info;
 }
 
+// function to update the player's information
 void PlayerManager::update_player(const PlayerInfo &player_info)
 {
     players[player_info.user_id] = player_info;
 }
 
+// function to load the player's information
 PlayerInfo PlayerManager::get_player(const std::string &user_id) const
 {
     auto it = players.find(user_id);
@@ -33,6 +36,7 @@ PlayerInfo PlayerManager::get_player(const std::string &user_id) const
     return it->second;
 }
 
+// function to get all the players' information
 std::vector<PlayerInfo> PlayerManager::get_all_players() const
 {
     std::vector<PlayerInfo> all_players;
@@ -43,6 +47,7 @@ std::vector<PlayerInfo> PlayerManager::get_all_players() const
     return all_players;
 }
 
+// function to delete the player's information
 void PlayerManager::delete_player(const std::string &user_id)
 {
     auto it = players.find(user_id);
@@ -54,6 +59,7 @@ void PlayerManager::delete_player(const std::string &user_id)
     PlayerManager::save_players("saves.sav");
 }
 
+// function to load the player's information from the file
 void PlayerManager::load_players(const std::string &filename)
 {
     std::ifstream file(filename);
@@ -74,9 +80,9 @@ void PlayerManager::load_players(const std::string &filename)
         {
             player_info.items.push_back(line.substr(5));
         }
-        else if (line.substr(0, 9) == "checkpoint:")
+        else if (line.substr(0, 11) == "checkpoint:")
         {
-            player_info.checkpoint = line.substr(9);
+            player_info.checkpoint = line.substr(11);
         }
         else
         {
@@ -90,6 +96,7 @@ void PlayerManager::load_players(const std::string &filename)
     file.close();
 }
 
+// function to save the player's information to the file
 void PlayerManager::save_players(const std::string &filename) const
 {
     std::ofstream file(filename);
@@ -120,7 +127,8 @@ void PlayerManager::save_players(const std::string &filename) const
 //     cout << "Player deleted" << endl;
 // }
 
-// int mainn() {
+// int main()
+// {
 //     PlayerManager player_manager;
 
 //     player_manager.load_players("saves.sav");
@@ -153,42 +161,54 @@ void PlayerManager::save_players(const std::string &filename) const
 //     return 0;
 // }
 
-// void print_all_players(const PlayerManager& player_manager) {
-//     try {
-//         for (const auto& player : player_manager.get_all_players()) {
+// void print_all_players(const PlayerManager &player_manager)
+// {
+//     try
+//     {
+//         for (const auto &player : player_manager.get_all_players())
+//         {
 //             cout << "User ID: " << player.user_id << "\n";
 //             cout << "User Name: " << player.user_name << "\n";
 //             cout << "Difficulty: " << player.difficulty << "\n";
 //             cout << "HP: " << player.hp << "\n";
 //             cout << "Items: [";
-//             for (const auto& item : player.items) {
+//             for (const auto &item : player.items)
+//             {
 //                 cout << item << ", ";
 //             }
 //             cout << "]\n";
 //             cout << "Check point: " << player.checkpoint << "\n\n";
 //         }
-//     } catch (const runtime_error& ex) {
+//     }
+//     catch (const runtime_error &ex)
+//     {
 //         cerr << "Error: " << ex.what() << "\n";
 //     }
 // }
 
-// int main() {
+// int main()
+// {
 //     PlayerManager player_manager;
 //     player_manager.load_players("saves.sav");
-//     PlayerInfo player_info = player_manager.get_player("player2");
-//     // for (int i=0; i<player_info.items.size(); i++) {
-//     //     cout << player_info.items[i] << "\n";
-//     // }
+//     PlayerInfo player_info;
+//     // player_info = player_manager.get_player("player2");
+//     for (int i = 0; i < player_info.items.size(); i++)
+//     {
+//         cout << player_info.items[i] << "\n";
+//     }
 
-//     // try {
-//     //     PlayerManager player_manager;
-//     //     player_manager.load_players("players.txt");
-//     //     print_all_players(player_manager);
-//     // } catch (const runtime_error& ex) {
-//     //     cerr << "Error: " << ex.what() << "\n";
-//     //     return 1;
-//     // }
-//     // return 0;
+//     try
+//     {
+//         PlayerManager player_manager;
+//         player_manager.load_players("saves.sav");
+//         print_all_players(player_manager);
+//     }
+//     catch (const runtime_error &ex)
+//     {
+//         cerr << "Error: " << ex.what() << "\n";
+//         return 1;
+//     }
+//     return 0;
 // }
 
 // // int get_playerinfo_name(){

@@ -20,6 +20,7 @@
 using namespace std;
 vector<string> player_names;
 
+// load the player names from the save file
 void load_player_names()
 {
     player_names.clear();
@@ -87,6 +88,7 @@ void drawMenuL(int selectedItem)
     cout << "\n\n\n\n*Use arrow keys to navigate, enter to select" << endl;
 }
 
+// load the game menu
 int load_game_menu()
 {
     struct termios oldt, newt;

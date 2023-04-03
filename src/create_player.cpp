@@ -4,6 +4,7 @@
 #include "../header/player.h"
 #include "../header/output_style.h"
 #include "../header/word_style.h"
+#include "../header/story_background.h"
 
 #include <chrono>
 #include <iostream>
@@ -43,4 +44,5 @@ int create_player(string difficulty) //
     player_manager.add_player(player_info);
     player_manager.save_players("saves.sav");
     system("clear"); // clear screen
+    story_background(user_name);
 }

@@ -9,6 +9,7 @@
 
 using namespace std;
 
+// Function to get arrow key input
 int getKeyPress()
 {
     struct termios oldt, newt;
@@ -40,6 +41,7 @@ int getKeyPress()
     return ch;
 }
 
+// Function to print menu and handle arrow key input
 int choose_event(vector<string> options, string question)
 {
     // Set up menu window
