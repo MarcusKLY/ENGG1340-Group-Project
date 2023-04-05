@@ -21,8 +21,44 @@ int create_player(string difficulty) //
     player_manager.load_players("saves.sav");
     PlayerInfo player_info;
     string user_name;
-    color_print("Please enter your name: ", bold_blue);
-    getline(cin, user_name);
+    vector<string> player_names;
+    // load the player names from the save file
+    int i = 0;
+    for (const auto &player : player_manager.get_all_players())
+    {
+        player_names.push_back(player.user_name);
+        i++;
+    }
+    // check for repeated or empty names
+    bool allow = false;
+    while (!allow)
+    {
+        color_print("Please enter your name: ", bold_blue);
+        getline(cin, user_name);
+        if (user_name == "")
+        {
+            color_print("Please enter a valid name!", bold_red);
+            this_thread::sleep_for(chrono::seconds(1));
+            system("clear"); // clear screen
+        }
+        else
+        {
+            for (int i = 0; i < player_names.size(); i++)
+            {
+                if (user_name == player_names[i])
+                {
+                    color_print("This name has been used. Please enter another name!", bold_red);
+                    this_thread::sleep_for(chrono::seconds(1));
+                    system("clear"); // clear screen
+                    break;
+                }
+                else if (i == player_names.size() - 1)
+                {
+                    allow = true;
+                }
+            }
+        }
+    }
     player_info.user_name = user_name;
     player_info.user_id = user_name;
     if (difficulty == "Easy")
