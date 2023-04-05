@@ -9,6 +9,7 @@
 #include <iostream>
 #include <thread>
 #include <chrono>
+//#include "../header/battle.h"
 
 using namespace std;
 
@@ -16,5 +17,6 @@ int main()
 {
     // g_name();
     main_menu();
+    //call_sample_battle();
     return 0;
 }
