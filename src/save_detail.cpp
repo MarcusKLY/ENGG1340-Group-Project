@@ -6,6 +6,7 @@
 #include "../header/word_style.h"
 #include "../header/confirm_delete.h"
 #include "../header/load_checkpoint.h"
+#include "../header/draw_window.h"
 #include <iostream>
 #include <cstdio>
 #include <termios.h>
@@ -21,19 +22,6 @@ using namespace std;
 const int WINDOW_WIDTH = 50;
 const int WINDOW_HEIGHT = 10;
 
-// draw a window with the given dimensions for load game menu
-void drawWindowSD(int x, int y, int width, int height)
-{
-    cout << "\033[" << y << ";" << x << "H"; // move cursor to top-left corner of window
-    cout << endl;
-    cout << "+" << string(width - 2, '-') << "+" << endl; // top border
-    for (int i = 0; i < height - 2; i++)
-    {
-        cout << "|" << string(width - 2, ' ') << "|" << endl; // sides
-    }
-    cout << "+" << string(width - 2, '-') << "+" << endl; // bottom border
-}
-
 // draw the load game menu
 void drawMenuSD(int selectedItem, string player_name)
 {
@@ -46,7 +34,7 @@ void drawMenuSD(int selectedItem, string player_name)
 
     int windowX = (80 - WINDOW_WIDTH) / 2; // center the window horizontally
     int windowY = 1;                       // center the window vertically
-    drawWindowSD(windowX, windowY, WINDOW_WIDTH, WINDOW_HEIGHT);
+    draw_window(windowX, windowY, WINDOW_WIDTH, WINDOW_HEIGHT);
 
     string title = "Save Detail";
     int titleX = windowX + 5;                               // move title 10 characters to the left

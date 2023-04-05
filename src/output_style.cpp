@@ -12,14 +12,14 @@ using namespace std;
 // animated cout function which print the string character by character
 int char_typewriter(string s, ColorOption colorOptions)
 {
-    chrono::milliseconds timespan(200);
+    chrono::milliseconds timespan(1); // 200
     this_thread::sleep_for(timespan);
     string word = s;
     cout << colorOptions.code;
     for (char c : word)
     {
         cout << c << flush;
-        chrono::milliseconds timespan(5);
+        chrono::milliseconds timespan(1); // 200
         this_thread::sleep_for(timespan);
     }
     cout << "\033[0m" << endl; // Reset color to default

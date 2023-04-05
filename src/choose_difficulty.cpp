@@ -4,6 +4,7 @@
 #include "../header/main_menu.h"
 #include "../header/story_background.h"
 #include "../header/create_player.h"
+#include "../header/draw_window.h"
 #include <iostream>
 #include <cstdio>
 #include <termios.h>
@@ -17,19 +18,6 @@ using namespace std;
 const int WINDOW_WIDTH = 50;
 const int WINDOW_HEIGHT = 10;
 
-// draw a window with the given dimensions for difficulty menu
-void drawWindowD(int x, int y, int width, int height)
-{
-    cout << "\033[" << y << ";" << x << "H"; // move cursor to top-left corner of window
-    cout << endl;
-    cout << "+" << string(width - 2, '-') << "+" << endl; // top border
-    for (int i = 0; i < height - 2; i++)
-    {
-        cout << "|" << string(width - 2, ' ') << "|" << endl; // sides
-    }
-    cout << "+" << string(width - 2, '-') << "+" << endl; // bottom border
-}
-
 // draw the difficulty menu
 void drawMenuD(int selectedItem)
 {
@@ -37,7 +25,7 @@ void drawMenuD(int selectedItem)
 
     int windowX = (80 - WINDOW_WIDTH) / 2; // center the window horizontally
     int windowY = 1;                       // center the window vertically
-    drawWindowD(windowX, windowY, WINDOW_WIDTH, WINDOW_HEIGHT);
+    draw_window(windowX, windowY, WINDOW_WIDTH, WINDOW_HEIGHT);
 
     string title = "Difficulty";
     int titleX = windowX + 5;                               // move title 10 characters to the left

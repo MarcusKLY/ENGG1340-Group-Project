@@ -5,6 +5,11 @@
 #include "../header/word_style.h"
 #include "../header/player.h"
 #include "../header/choose_event.h"
+#include "../header/password.h"
+#include "../header/main_menu.h"
+#include "../header/CYM.h"
+#include "../header/Knowles.h"
+#include "../header/choose_event_clear_screen.h"
 #include <chrono>
 #include <iostream>
 #include <string>
@@ -86,6 +91,7 @@ int story_background(string player_name)
     char_typewriter(" Knowles Building ➡ ", bold_background_cyan);
     cout << endl;
     is_valid = false;
+    string choose_building;
     while (!is_valid)
     {
         vector<string> items;
@@ -96,15 +102,55 @@ int story_background(string player_name)
         switch (choice)
         {
         case 0:
-            char_typewriter("\nYou put the drink in your inventory", italic_green);
-            player_info.items.push_back("Energy Drink");
+            // turn left
+            char_typewriter("\nYou walk to the left...", italic_green);
+            choose_building = "CYM";
             is_valid = true;
             break;
         case 1:
-            // code to handle "Continue staying without leaving" option
-            char_typewriter("\n...................Nothing happens", italic_green);
+            // turn right
+            char_typewriter("\nYou walk to the right...", italic_green);
+            choose_building = "Knowles";
             is_valid = true;
             break;
         }
     }
+    char_typewriter("There is door locked with english vocabulary that is {passwordLength} characters long 🔒\nYou have to guess the password in {passwordAttempt} goes or less, or else the password would be reset\nA correct letter turns green\nA correct letter in the wrong place turns yellow\nAn incorrect letter turns grey", italic_green);
+    bool pass = false;
+    while (!pass)
+    {
+        pass = password(player_info.difficulty);
+    }
+    char_typewriter("You open the door and walk into the building\n", italic_green);
+    player_info.checkpoint = choose_building;
+    player_manager.update_player(player_info);
+    player_manager.save_players("saves.sav");
+    is_valid = false;
+    while (!is_valid)
+    {
+        vector<string> items1;
+        items1.push_back("Continue");
+        items1.push_back("Return to main menu");
+        int choice = choose_event(items1, ("Game saved at checkpoint " + choose_building + ". Do you want to continue?"));
+        items1.clear(); // Clear the vector
+        switch (choice)
+        {
+        case 0:
+            if (choose_building == "CYM")
+            {
+                CYM(player_name);
+            }
+            else if (choose_building == "Knowles")
+            {
+                Knowles(player_name);
+            }
+            is_valid = true;
+            break;
+        case 1:
+            main_menu();
+            is_valid = true;
+            break;
+        }
+    }
+    return 0;
 }

@@ -18,26 +18,17 @@ int getKeyPress()
     newt = oldt;
     newt.c_lflag &= ~(ICANON | ECHO);
     tcsetattr(STDIN_FILENO, TCSANOW, &newt);
-    ch = getchar();
-    if (ch == 27)
-    {
-        // Read the next two characters to get the arrow key code
-        ch = getchar();
-        if (ch == 91)
-        {
-            ch = getchar();
-            switch (ch)
-            {
-            case 65: // Up arrow
-                ch = 65;
-                break;
-            case 66: // Down arrow
-                ch = 66;
-                break;
-            }
-        }
-    }
+    char buf[1];
+    ssize_t n = read(STDIN_FILENO, buf, 1);
     tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
+    if (n == 1)
+    {
+        ch = buf[0];
+    }
+    else
+    {
+        ch = -1;
+    }
     return ch;
 }
 
@@ -45,7 +36,8 @@ int getKeyPress()
 int choose_event(vector<string> options, string question)
 {
     // Set up menu window
-    color_print((question + " (Use arrow and enter key to control)"), bold_background_blue);
+    string new_question = question + " (Use arrow and enter key to control)";
+    color_print(new_question, bold_background_blue);
     for (int i = 0; i < options.size(); i++)
     {
         if (i == 0)
@@ -81,7 +73,8 @@ int choose_event(vector<string> options, string question)
         }
         // Redraw menu with updated selection
         cout << "\033[" << options.size() + 1 << "A"; // Move cursor up to top of menu
-        color_print((question + " (Use arrow and enter key to control)"), bold_background_blue);
+        cout << "\033[" << new_question.length() << "D";
+        color_print(new_question, bold_background_blue);
         for (int i = 0; i < options.size(); i++)
         {
             if (i == selected_option)
