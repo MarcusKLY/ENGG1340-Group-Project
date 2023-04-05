@@ -19,6 +19,7 @@ using namespace std;
 // Print the story background
 int story_background(string player_name)
 {
+    system("clear"); // clear screen
     PlayerManager player_manager;
     player_manager.load_players("saves.sav");
     PlayerInfo player_info;
@@ -122,6 +123,8 @@ int story_background(string player_name)
         pass = password(player_info.difficulty);
     }
     char_typewriter("You open the door and walk into the building\n", italic_green);
+    walking_animation();
+    system("clear"); // clear screen
     player_info.checkpoint = choose_building;
     player_manager.update_player(player_info);
     player_manager.save_players("saves.sav");
@@ -131,7 +134,8 @@ int story_background(string player_name)
         vector<string> items1;
         items1.push_back("Continue");
         items1.push_back("Return to main menu");
-        int choice = choose_event(items1, ("Game saved at checkpoint " + choose_building + ". Do you want to continue?"));
+        string question = "Game saved at checkpoint " + choose_building + ". Do you want to continue?";
+        int choice = choose_event(items1, question);
         items1.clear(); // Clear the vector
         switch (choice)
         {

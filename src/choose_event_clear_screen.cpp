@@ -20,26 +20,17 @@ int getKeyPressCS()
     newt = oldt;
     newt.c_lflag &= ~(ICANON | ECHO);
     tcsetattr(STDIN_FILENO, TCSANOW, &newt);
-    ch = getchar();
-    if (ch == 27)
-    {
-        // Read the next two characters to get the arrow key code
-        ch = getchar();
-        if (ch == 91)
-        {
-            ch = getchar();
-            switch (ch)
-            {
-            case 65: // Up arrow
-                ch = 65;
-                break;
-            case 66: // Down arrow
-                ch = 66;
-                break;
-            }
-        }
-    }
+    char buf[1];
+    ssize_t n = read(STDIN_FILENO, buf, 1);
     tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
+    if (n == 1)
+    {
+        ch = buf[0];
+    }
+    else
+    {
+        ch = -1;
+    }
     return ch;
 }
 

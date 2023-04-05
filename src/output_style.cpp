@@ -5,6 +5,7 @@
 #include <iostream>
 #include <string>
 #include <thread>
+#include <chrono>
 #include <vector>
 
 using namespace std;
@@ -63,5 +64,58 @@ void clear_previous_lines(int n)
     for (int i = 0; i < n; i++)
     {
         cout << "\033[2K"; // Clear the line
+    }
+}
+
+// animation of walking
+#include <iostream>
+#include <chrono>
+#include <thread>
+
+void walking_animation()
+{
+    // Define animation frames
+    char frames[4][5][6] = {
+        {{" o   "},
+         {"-|-  "},
+         {"/ \\  "},
+         {"     "},
+         {"     "}},
+        {{" o   "},
+         {"-|-  "},
+         {" /\\  "},
+         {"     "},
+         {"     "}},
+        {{" o   "},
+         {"-|-  "},
+         {" /\\  "},
+         {"  |  "},
+         {"     "}},
+        {{" o   "},
+         {"-|-  "},
+         {" /\\  "},
+         {" | | "},
+         {"     "}}};
+
+    // Main animation loop
+    for (int i = 0; i < 20; i++)
+    {
+        if (i > 0)
+        {
+            // Clear previous frame
+            std::cout << "\033[5A\033[2K\033[2K\033[2K\033[2K\033[2K";
+        }
+        // Calculate current frame
+        int frame_index = i % 4;
+        char(*frame)[6] = frames[frame_index];
+
+        // Print walking character
+        for (int j = 0; j < 5; j++)
+        {
+            std::cout << std::string(i, ' ') << frame[j] << std::endl;
+        }
+
+        // Pause for a short time
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
     }
 }
