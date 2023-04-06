@@ -7,6 +7,7 @@
 #include "../header/choose_event.h"
 #include "../header/CYM_Toilet.h"
 #include "../header/main_menu.h"
+#include "../header/battle.h"
 #include <iostream>
 #include <string>
 #include <chrono>
@@ -64,6 +65,27 @@ int CYM(string player_name)
             char_typewriter("Her face was covered in blood, and her eyes were full of hatred, yet still smilingn 🤡", italic_green);
             char_typewriter("You🙎: Why... Why are you up there?", bold_magenta);
             char_typewriter("Chong🤡: Do you remember me? I am Chong Yuet Ming 🤡", bold_magenta);
+            items.push_back("Walk up the escalator");
+            items.push_back("Turn around and run away");
+            int run = choose_event(items, "Do you want to walk up the escalator or run away?");
+            items.clear(); // Clear the vector
+            if (run == 0)
+            {
+                char_typewriter("\nYou walk up cautiously with you leg shaking", italic_green);
+            }
+            else if (run == 1)
+            {
+                char_typewriter("\nYou immediately turn around and wanted to run away", italic_green);
+                char_typewriter("However, you see Chong standing down there and staring at you", italic_green);
+                char_typewriter("Chong🤡: Why are you trying to run away!?", bold_magenta);
+            }
+            char_typewriter("You🙎: Shouldn't you be ... dead?", bold_magenta);
+            char_typewriter("Chong🤡: You made me feel so pain...!", bold_magenta);
+            char_typewriter("You🙎: I am sorry, I didn't mean to...", bold_magenta);
+            char_typewriter("Chong🤡: It's no use saying sorry now!!!", bold_magenta);
+            char_typewriter("Chong🤡: I guess there is no choice but to kill you for revenge!", bold_magenta);
+            char_typewriter("You clench your fists and ready to fight 👊\n", italic_green);
+            // callBattle();
         }
         else if (help == 1)
         {
