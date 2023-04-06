@@ -9,6 +9,7 @@
 #include <chrono>
 #include <iostream>
 #include <string>
+#include <vector>
 
 using namespace std;
 
@@ -29,36 +30,59 @@ int create_player(string difficulty) //
         player_names.push_back(player.user_name);
         i++;
     }
-    // check for repeated or empty names
-    bool allow = false;
-    while (!allow)
+    if (player_names.empty() == true)
     {
-        color_print("Please enter your name: ", bold_blue);
-        getline(cin, user_name);
-        if (user_name == "")
+        bool allow = false;
+        while (!allow)
         {
-            color_print("Please enter a valid name!", bold_red);
-            this_thread::sleep_for(chrono::seconds(1));
-            system("clear"); // clear screen
-        }
-        else
-        {
-            for (int i = 0; i < player_names.size(); i++)
+            color_print("Please enter your name: ", bold_blue);
+            getline(cin, user_name);
+            if (user_name == "")
             {
-                if (user_name == player_names[i])
+                color_print("Please enter a valid name!", bold_red);
+                this_thread::sleep_for(chrono::seconds(1));
+                system("clear"); // clear screen
+            }
+            else
+            {
+                allow = true;
+            }
+        }
+    }
+    else
+    {
+        // check for repeated or empty names
+        bool allow = false;
+        while (!allow)
+        {
+            color_print("Please enter your name: ", bold_blue);
+            getline(cin, user_name);
+            if (user_name == "")
+            {
+                color_print("Please enter a valid name!", bold_red);
+                this_thread::sleep_for(chrono::seconds(1));
+                system("clear"); // clear screen
+            }
+            else
+            {
+                for (int i = 0; i < player_names.size(); i++)
                 {
-                    color_print("This name has been used. Please enter another name!", bold_red);
-                    this_thread::sleep_for(chrono::seconds(1));
-                    system("clear"); // clear screen
-                    break;
-                }
-                else if (i == player_names.size() - 1)
-                {
-                    allow = true;
+                    if (user_name == player_names[i])
+                    {
+                        color_print("This name has been used. Please enter another name!", bold_red);
+                        this_thread::sleep_for(chrono::seconds(1));
+                        system("clear"); // clear screen
+                        break;
+                    }
+                    else if (i == player_names.size() - 1)
+                    {
+                        allow = true;
+                    }
                 }
             }
         }
     }
+
     player_info.user_name = user_name;
     player_info.user_id = user_name;
     if (difficulty == "Easy")
