@@ -56,6 +56,14 @@ int CYM(string player_name)
             char_typewriter("The wheelchair fell down and the old lady fell down with it", italic_green);
             char_typewriter("You look down immediately, but you can only see the wheelchair, not the old lady", italic_green);
             char_typewriter("Old Lady👵: ARRRRRRRRR! It HURTS!", bold_magenta);
+            char_typewriter("The lady disappeared, but you could still hear her screams echoing through the building.", italic_green);
+            char_typewriter("You🙎: Are you ok...? Where are you...?", bold_magenta);
+            char_typewriter("You asked in a panic, but there was no response", italic_green);
+            char_typewriter("You try to find the old lady", italic_green);
+            char_typewriter("When you turn around, you see her standing on the esclator looking down at you", italic_green);
+            char_typewriter("Her face was covered in blood, and her eyes were full of hatred, yet still smilingn 🤡", italic_green);
+            char_typewriter("You🙎: Why... Why are you up there?", bold_magenta);
+            char_typewriter("Chong🤡: Do you remember me? I am Chong Yuet Ming 🤡", bold_magenta);
         }
         else if (help == 1)
         {

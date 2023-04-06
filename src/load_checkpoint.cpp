@@ -3,6 +3,8 @@
 #include "../header/load_checkpoint.h"
 #include "../header/player.h"
 #include "../header/story_background.h"
+#include "../header/CYM.h"
+#include "../header/CYM_Toilet.h"
 
 #include <iostream>
 #include <string>
@@ -22,5 +24,13 @@ void load_checkpoint(string player_name)
     if (checkpoint == "Story Background")
     {
         story_background(user_name);
+    }
+    else if (checkpoint == "CYM")
+    {
+        CYM(user_name);
+    }
+    else if (checkpoint == "CYM Toilet")
+    {
+        CYM_Toilet(user_name);
     }
 }
