@@ -13,14 +13,14 @@ using namespace std;
 // animated cout function which print the string character by character
 int char_typewriter(string s, ColorOption colorOptions)
 {
-    chrono::milliseconds timespan(1); // 200
+    chrono::milliseconds timespan(2); // 200
     this_thread::sleep_for(timespan);
     string word = s;
     cout << colorOptions.code;
     for (char c : word)
     {
         cout << c << flush;
-        chrono::milliseconds timespan(1); // 200
+        chrono::milliseconds timespan(2); // 200
         this_thread::sleep_for(timespan);
     }
     cout << "\033[0m" << endl; // Reset color to default
@@ -30,7 +30,7 @@ int char_typewriter(string s, ColorOption colorOptions)
 // animated cout function which print the string line with waiting time
 int line_typewriter(string s, ColorOption colorOptions)
 {
-    chrono::milliseconds timespan(200);
+    chrono::milliseconds timespan(2);
     this_thread::sleep_for(timespan);
     string word = s;
     cout << colorOptions.code;
@@ -118,4 +118,30 @@ void walking_animation()
         // Pause for a short time
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
     }
+}
+
+// Function that blinks a string in the console.
+// text: the text that will blink
+// bTime: the time in milliseconds between each blink
+void blinkOnce(string text, int bTime, ColorOption colorOptions)
+{
+    cout << colorOptions.code;
+    cout << "\r" << text;
+    cout << "\033[0m" << endl;                           // Reset color to default                         // print the text in the terminal
+    this_thread::sleep_for(chrono::milliseconds(bTime)); // time between each blink
+    cout << "\r" << string(text.length(), ' ');          // remove the text from the terminal
+    this_thread::sleep_for(chrono::milliseconds(bTime)); // time between each line
+}
+
+// Function that blinks a string multiple times in the console.
+// number: the number of times the text will blink
+// text: the text that will blink
+// bTime: the time in milliseconds between each blink
+void blink(int number, string text, int bTime, ColorOption colorOptions)
+{
+    for (int x = 0; x < number; x++)
+    {
+        blinkOnce(text, bTime, colorOptions);
+    }
+    cout << endl;
 }

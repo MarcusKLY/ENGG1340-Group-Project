@@ -12,5 +12,7 @@ int color_print(string s, ColorOption colorOptions);
 int color_print_no_newline(string s, ColorOption colorOptions);
 void clear_previous_lines(int n);
 void walking_animation();
+void blinkOnce(string text, int bTime, ColorOption colorOptions);
+void blink(int number, string text, int bTime, ColorOption colorOptions);
 
 #endif
