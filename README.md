@@ -7,7 +7,7 @@ Group 1
 - Chan Yat Kwan, Simon (3036066517)
 - Wong Chun Hei (3036067066)
 - Lam Chuck Yu, Chuck
-- Diao Mao Chiu, Stream
+- Diao Mao Chiu, Stream (3036067327)
 
 
 ## Install & Run
