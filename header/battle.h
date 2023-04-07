@@ -11,4 +11,6 @@ int callBattle(string& p_name, int& p_hp, int p_atk[2], string& e_name, int& e_h
 
 int call_sample_battle();
 
+int call_new_battle(string& p_name, string& e_name, vector<string> items, int difficulty, int level);
+
 #endif

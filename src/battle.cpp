@@ -477,18 +477,91 @@ int callBattle(string& p_name, int& p_hp, int p_atk[2], string& e_name, int& e_h
     return -1;
 }
 
+//call this function to start a new battle where (p_name) is the player's name, (e_name) is the enemy's name, (items) is a vector of items that the player has, (difficulty) is the difficulty of the battle [0 for easy, 1 for noraml, 2 for difficult], and (level) is the level of the enemy[1-5 higher level is more stronger]
+int call_new_battle(string& p_name, string& e_name, vector<string> items, int difficulty, int level)
+{
+    int p_hp;
+    int p_atk[2];
+    int e_hp;
+    int e_atk[2];
+    bool item[6] = {false, false, false, false, false, false};
+    float time_allowed;
+    if(difficulty==0)
+    {
+        p_hp = 100;
+        p_atk[0] = 8;
+        p_atk[1] = 13;
+        e_hp = 30;
+        e_atk[0] = 3;
+        e_atk[1] = 6;
+        time_allowed = 30.0;
+    }
+    else if(difficulty==1)
+    {
+        p_hp = 50;
+        p_atk[0] = 5;
+        p_atk[1] = 8;
+        e_hp = 50;
+        e_atk[0] = 5;
+        e_atk[1] = 8;
+        time_allowed = 20.0;
+    }
+    else
+    {
+        p_hp = 50;
+        p_atk[0] = 3;
+        p_atk[1] = 8;
+        e_hp = 50;
+        e_atk[0] = 5;
+        e_atk[1] = 8;
+        time_allowed = 10.0;
+    }
 
+    e_hp*=(0.7+0.1*level);
+    e_atk[0]*=(0.7+0.1*level);
+    e_atk[1]*=(0.7+0.1*level);
+
+
+    for(int i=0; i<items.size(); i++)
+    {
+        if(items[i]=="energy drink")
+        {
+            item[0]=true;
+        }
+        if(items[i]=="half-eaten sXXway sandwich")
+        {
+            item[1]=true;
+        }
+        if(items[i]=="golden leaf")
+        {
+            item[2]=true;
+        }
+        if(items[i]=="Xphone phone case")
+        {
+            item[3]=true;
+        }
+        if(items[i]=="key")
+        {
+            item[4]=true;
+        }
+        if(items[i]=="one-time-use flashlight")
+        {
+            item[5]=true;
+        }
+    }
+
+    return callBattle(p_name, p_hp, p_atk, e_name, e_hp, e_atk, item, time_allowed);
+}
+
+//this call a sample battle with normal difficulty and a level3 enemy;
 int call_sample_battle()
 {
     string p_name = "Mr Hamburger";
-    int p_hp = 50;
-    int p_atk[2] = {5, 8};
     string e_name = "Flying Spaghetti Monster";
-    int e_hp = 30;
-    int e_atk[2] = {5, 8};
-    bool items[6] = {true, false, true,true, false, true};
-    float time_allowed = 20.0;
-
-    callBattle(p_name, p_hp, p_atk, e_name, e_hp, e_atk, items, time_allowed);
+    vector<string> items;
+    items.push_back("energy drink");
+    items.push_back("Xphone phone case");
+    items.push_back("golden leaf");
+    call_new_battle(p_name, e_name, items, 1, 3);
     return 0;
 }
