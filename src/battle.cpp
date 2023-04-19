@@ -2,6 +2,7 @@
 
 #include "../header/battle.h"
 #include "../header/choose_event.h"
+#include "../header/output_style.h"
 #include <iostream>
 #include <stdlib.h>
 #include <string>
@@ -16,14 +17,15 @@ using namespace std;
 bool dod(int t_blink)
     {
         int r=rand()%4;
-        cout << "direction to dodge will be shown in an instant,input correct direction to dodge successfully" << endl;
+        char_typewriter("direction to dodge will be shown in an instant,input correct direction to dodge successfully", italic_cyan);
         this_thread::sleep_for(chrono::milliseconds(3000));
         cout << endl;
         string o="";
-        o=((r==0) ? "        [ <= ]" : (r==1) ? "        [ >= ]" : (r==2) ? "        [ ⬆︎ ]" : "        [ ⬇︎ ]");
-        cout << o << endl;
+        o=((r==0) ? "        [ ← ]" : (r==1) ? "        [ → ]" : (r==2) ? "        [ ↑ ]" : "        [ ↓ ]");
+        color_print(o,bold_green);
         this_thread::sleep_for(chrono::milliseconds(t_blink));
-        system("clear");
+        clear_previous_lines(1);
+        //system("clear");
         vector<string> opt;
         opt.push_back("Left");
         opt.push_back("Right");
@@ -31,9 +33,10 @@ bool dod(int t_blink)
         opt.push_back("Down");
         int indir=choose_event(opt,"Which direction will you dodge?");
         opt.clear();
-        system("clear");
+        //system("clear");
         return (indir==r);
     }
+// [DO NOT CALL THIS FUNCTION DIRECTLY]
 // callBattle() is a function that takes in the player's name, hp, attack, enemy's name, hp, attack, items, and time allowed.
 // callBattle() returns 0 if the player wins, 1 if the player loses, and 2 if both lose.    if return -1, some magic happened and tmr will snow (•◡•)/.
 int callBattle(string& p_name, int& p_hp, int p_atk[2], string& e_name, int& e_hp, int e_atk[2], bool (&items)[6], float time_allowed)
@@ -53,13 +56,12 @@ int callBattle(string& p_name, int& p_hp, int p_atk[2], string& e_name, int& e_h
     int r=0;
     std::chrono::steady_clock::time_point start_time;
     float time_left;
-    cout.precision(1);
 
     /***battle intro***/
-    cout << "Here comes a new challenger!" << endl;
-    e_action = rand() % 5;
+    cout << endl ;
+    char_typewriter("Here comes a new challenger!",bold_blue);
+    e_action = rand() % 4;
     e_ultimate_cd = rand() % 3 + 4;
-
     /***battle loop***/
     while (true)
     {
@@ -72,32 +74,32 @@ int callBattle(string& p_name, int& p_hp, int p_atk[2], string& e_name, int& e_h
         {
             bool chosen = false;
             bool item_available = false;
-            cout << p_name << ": " << p_hp << " HP | " << e_name << ": " << e_hp << endl;
-            cout << "items available: " << endl;
+            color_print(p_name+": "+to_string(p_hp)+" HP | "+e_name+": "+to_string(e_hp),background_blue);
+            color_print("items available: ",background_green);
             for (int i=0; i<6; i++)
             {
                 if (items[i])
                 {
-                    cout << "| "<< i << ":" <<dict_item_detail[i] << " ";
+                    color_print_no_newline("| "+to_string(i)+":"+dict_item_detail[i]+" ",background_green);
                     item_available = true;
                 }
             }
             if(!item_available)
             {
-                cout << "| X";
+                color_print("| X",background_green);
             }
-            cout << " |" << endl << endl;
+            color_print(" |",background_green);
             if(first)
             {
                 //reset variable used for each round
-                this_thread::sleep_for(chrono::milliseconds(3000));
+                this_thread::sleep_for(chrono::milliseconds(2000));
                 start_time = std::chrono::steady_clock::now();
                 time_left = time_allowed;
                 e_frozen = false;
                 late = false;
                 first=false;
             }
-            cout << "select action [ i:use item | p:punch | k:kick | b:block | d:dodge ]" << endl;
+            //cout << "select action [ i:use item | p:punch | k:kick | b:block | d:dodge ]" << endl;
 
             /***input action loop***/
             while (true)
@@ -105,7 +107,9 @@ int callBattle(string& p_name, int& p_hp, int p_atk[2], string& e_name, int& e_h
                 //input action and count time
                 int pin;
                 time_left = time_allowed - std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - start_time).count()/1000.0;
-                cout << "You have " << fixed << time_left << " left in this round" << endl;
+                cout<<endl;
+                string o = to_string(time_left);
+                color_print("You have "+((o.find('.')==string::npos)?o:o.substr(0,o.find('.')+2))+"s left in this round",bold_blue);
                 vector<string> opt;
                 opt.push_back("use items");
                 opt.push_back("punch");
@@ -117,7 +121,7 @@ int callBattle(string& p_name, int& p_hp, int p_atk[2], string& e_name, int& e_h
                 //check time left
                 if(std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - start_time).count()/1000.0 >= time_allowed)
                 {
-                    cout << "Your input is too late" << endl;
+                    char_typewriter("Your input is too late",italic_cyan);
                     late = true;
                     break;
                 }
@@ -130,14 +134,16 @@ int callBattle(string& p_name, int& p_hp, int p_atk[2], string& e_name, int& e_h
                             //if no item
                             if(count(begin(items), end(items), true)==0)
                             {
-                                cout << "You have no item" << endl;
+                                char_typewriter("You have no item",italic_cyan);
                             }
                             //if has item
                             else
                             {
                                 //input item choice and count time
                                 time_left = time_allowed - std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - start_time).count()/1000.0;
-                                cout << "You have " << fixed << time_left << " left in this round" << endl;
+                                cout<<endl;
+                                string o = to_string(time_left);
+                                color_print("You have "+((o.find('.')==string::npos)?o:o.substr(0,o.find('.')+2))+"s left in this round",bold_blue);
                                 vector<string> opt;
                                 vector<int> convert;
                                 opt.push_back("cancel");
@@ -153,11 +159,11 @@ int callBattle(string& p_name, int& p_hp, int p_atk[2], string& e_name, int& e_h
                                 pin=choose_event(opt,"Select your choice: ");
                                 opt.clear();
                                 //check time left
-                                if(std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - start_time).count()/1000.0 >= time_allowed)
+                                /*if(std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - start_time).count()/1000.0 >= time_allowed)
                                 {
                                     late = true;
                                     break;
-                                }
+                                }*/
                                 //if cancel use
                                 if(pin==0)
                                 {
@@ -170,45 +176,49 @@ int callBattle(string& p_name, int& p_hp, int p_atk[2], string& e_name, int& e_h
                                     p_atk[0] += 5;
                                     p_atk[1] += 5;
                                     p_effect[0] = 3;
-                                    cout << "[slurp slurp ... gulu]" << endl << "You used " << dict_item_detail[0] << endl;
+                                    char_typewriter("[slurp slurp ... gulu]",italic_cyan);
+                                    char_typewriter("You used "+dict_item_detail[0],italic_cyan);
                                     items[0] = false;
                                     break;
                                 }
                                 if(convert[pin]==1)//|heal|
                                 {
                                     p_hp+=10;
-                                    cout << "[Om Nom Nom ... Om Nom Nom]" << endl << "You used " << dict_item_detail[1] << endl;
+                                    char_typewriter("[Om Nom Nom ... Om Nom Nom]",italic_cyan);
+                                    char_typewriter("You used "+dict_item_detail[1],italic_cyan);
                                     items[1] = false;
                                     break;
                                 }
                                 if(convert[pin]==2)//|regen|
                                 {
                                     p_effect[2] = 3;
-                                    cout << "[Sulu Sulu...]" << endl << "You used " << dict_item_detail[2] << endl;
+                                    char_typewriter("[Sulu Sulu...]",italic_cyan);
+                                    char_typewriter("You used "+dict_item_detail[2],italic_cyan);
                                     items[2] = false;
                                     break;
                                 }
                                 if(convert[pin]==3)//|block|
                                 {
                                     p_effect[3] = 1000;
-                                    cout << "You used " << dict_item_detail[3] << endl;
+                                    char_typewriter("You used "+dict_item_detail[3],italic_cyan);
                                     items[3] = false;
                                     break;
                                 }
                                 if(convert[pin]==4)//|hurt enemy|
                                 {
                                     e_hp-=10;
-                                    cout << "[Weeeeeeeee]" << endl << "You used " << dict_item_detail[2] << endl << e_name << "-10HP" << endl;
+                                    char_typewriter("[Weeeeeeeee]",italic_cyan);
+                                    char_typewriter("You used "+dict_item_detail[2],italic_cyan);
                                     r=rand()%4;
-                                    cout << e_name << ": " << (r == 0 ? "Ouch!" : r == 1 ? "No!" : r == 2 ? "Stop!" : "Ah!") << endl;
+                                    char_typewriter(e_name+": "+(r == 0 ? "Ouch!" : r == 1 ? "No!" : r == 2 ? "Stop!" : "Ah!"),bold_red);
                                     items[4] = false;
                                     break;
                                 }
                                 if(convert[pin]==5)//|freeze enemy|
                                 {
                                     e_frozen = true;
-                                    cout << "You used " << dict_item_detail[2] << endl;
-                                    cout << "Strong light is flashed towards " << e_name << endl;
+                                    char_typewriter("You used ",italic_cyan);
+                                    char_typewriter("Strong light is flashed towards "+e_name,italic_cyan);
                                     items[5] = false;
                                     break;
                                 }
@@ -225,6 +235,13 @@ int callBattle(string& p_name, int& p_hp, int p_atk[2], string& e_name, int& e_h
                         //stop input action loop
                         break;
                     }
+                    //check time left
+                if(std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - start_time).count()/1000.0 >= time_allowed)
+                {
+                    char_typewriter("Your input is too late",italic_cyan);
+                    late = true;
+                    break;
+                }
             }
             //check if enemy is dead
             if(e_hp<=0)
@@ -242,24 +259,22 @@ int callBattle(string& p_name, int& p_hp, int p_atk[2], string& e_name, int& e_h
         /***fight start***/
         //|action advantage:(punch->dodge, kick->block, dodge->kick, block->punch, block/dodge->ultimate)|
         //|dodge atk with random chance, block receive lower damage|
-        system("clear");
+        //system("clear");
         int ori_p_hp = p_hp;
         int ori_e_hp = e_hp;
         //if late input and enemy is flashed
         if(late && e_frozen)
         {
-            cout << "Your input is too late" << endl;
-            cout << e_name << " is blinded" << endl;
-            cout << p_name << " cannot decide what to do" << endl;
+            char_typewriter("Your input is too late",italic_cyan);
+            char_typewriter(e_name+" is blinded",italic_cyan);
+            char_typewriter(p_name+" cannot decide what to do",italic_cyan);
             p_effect[3] = 1;
-            this_thread::sleep_for(chrono::milliseconds(3000));
         }
         //if not late input and enemy is flashed
         if(!late && e_frozen)
         {
-            cout << e_name << " is blinded" << endl;
-            cout << p_name << " used " << dict_action[p_action]<< endl;
-            this_thread::sleep_for(chrono::milliseconds(3000));
+            char_typewriter(e_name+" is blinded",italic_cyan);
+            char_typewriter(p_name+" used "+dict_action[p_action],italic_cyan);
             if(p_action==0)
             {
                 e_hp -= p_atk[0]+(rand() % (p_atk[1]-p_atk[0]+1));
@@ -272,14 +287,13 @@ int callBattle(string& p_name, int& p_hp, int p_atk[2], string& e_name, int& e_h
         //if late input and enemy is not flashed
         if(late && !e_frozen)
         {
-            cout << "Your input is too late" << endl;
+            char_typewriter("Your input is too late",italic_cyan);
             if(e_action==0||e_action==1||e_action==4)
             {
-                cout << e_name << (rand() % 3 == 0 ? ": Hahah! Too slow!" : rand() % 3 == 1 ? ": You are so slow!" : ": Just stay there and shiver!") << endl;
+                char_typewriter(e_name+(rand() % 3 == 0 ? ": Hahah! Too slow!" : rand() % 3 == 1 ? ": You are so slow!" : ": Just stay there and shiver!"),bold_red);
             }
-            cout << p_name << " cannot decide what to do" << endl;
-            cout << e_name << " used " << dict_action[e_action]<< endl;
-            this_thread::sleep_for(chrono::milliseconds(3000));
+            char_typewriter(p_name+" cannot decide what to do",italic_cyan);
+            char_typewriter(e_name+" used "+dict_action[e_action],italic_cyan);
             if(e_action==0)
             {
                 p_hp -= e_atk[0]+(rand() % (e_atk[1]-e_atk[0]+1));
@@ -288,136 +302,151 @@ int callBattle(string& p_name, int& p_hp, int p_atk[2], string& e_name, int& e_h
             {
                 p_hp -= (e_atk[0]+(rand() % (e_atk[1]-e_atk[0]+1)))/1.5;
             }
+            if(e_action==4)
+            {
+                p_hp -= (e_atk[0]+(rand() % (e_atk[1]-e_atk[0]+1)))*1.5;
+            }
         }
         //if not late input and enemy is not flashed
         if(!late && !e_frozen)
         {
-            cout << p_name << " used " << dict_action[p_action]<< " , " << e_name << " used " << dict_action[e_action] << endl;
-            this_thread::sleep_for(chrono::milliseconds(3000));
-            if(p_action==0 && e_action==0)
+            char_typewriter(p_name+" used "+dict_action[p_action]+" , "+e_name+" used "+dict_action[e_action],italic_cyan);
+            if(p_action==0)
             {
-                p_hp -= e_atk[0]+(rand() % (e_atk[1]-e_atk[0]+1));
-                e_hp -= p_atk[0]+(rand() % (p_atk[1]-p_atk[0]+1));
-            }
-            if(p_action==0 && e_action==1)
-            {
-                p_hp -= (p_atk[0]+rand() % (p_atk[1]-p_atk[0]+1))/1.5;
-                e_hp -= p_atk[0]+(rand() % (p_atk[1]-p_atk[0]+1));
-            }
-            if(p_action==0 && e_action==2)
-            {
-                e_hp -= p_atk[0]+(rand() % (p_atk[1]-p_atk[0]+1))/4;
-            }
-            if(p_action==0 && e_action==3)
-            {
-                cout << e_name << " failed to dodge" << endl;
-                e_hp -= p_atk[0]+(rand() % (p_atk[1]-p_atk[0]+1));
-            }
-            if(p_action==0 && e_action==4)
-            {
-                p_hp -= (e_atk[0]+(rand() % (e_atk[1]-e_atk[0]+1)))*1.5;
-                e_hp -= p_atk[0]+(rand() % (p_atk[1]-p_atk[0]+1));
-            }
-            if(p_action==1 && e_action==0)
-            {
-                p_hp -= e_atk[0]+(rand() % (e_atk[1]-e_atk[0]+1));
-                e_hp -= (p_atk[0]+(rand() % (p_atk[1]-p_atk[0]+1)))/1.5;
-            }
-            if(p_action==1 && e_action==1)
-            {
-                p_hp -= (p_atk[0]+(rand() % (p_atk[1]-p_atk[0]+1)))/1.5;
-                e_hp -= (p_atk[0]+(rand() % (p_atk[1]-p_atk[0]+1)))/1.5;
-            }
-            if(p_action==1 && e_action==2)
-            {
-                e_hp -= p_atk[0]+(rand() % (p_atk[1]-p_atk[0]+1));
-            }
-            if(p_action==1 && e_action==3)
-            {
-                if(rand()%10>=0.7)
+                if(e_action==0)
                 {
-                    cout << e_name << " failed to dodge" << endl;
+                    p_hp -= e_atk[0]+(rand() % (e_atk[1]-e_atk[0]+1));
+                    e_hp -= p_atk[0]+(rand() % (p_atk[1]-p_atk[0]+1));
+                }
+                if(e_action==1)
+                {
+                    p_hp -= (p_atk[0]+rand() % (p_atk[1]-p_atk[0]+1))/1.5;
+                    e_hp -= p_atk[0]+(rand() % (p_atk[1]-p_atk[0]+1));
+                }
+                if(e_action==2)
+                {
+                    e_hp -= p_atk[0]+(rand() % (p_atk[1]-p_atk[0]+1))/4;
+                }
+                if(e_action==3)
+                {
+                    char_typewriter(e_name+" failed to dodge",italic_cyan);
+                    e_hp -= p_atk[0]+(rand() % (p_atk[1]-p_atk[0]+1));
+                }
+                if(e_action==4)
+                {
+                    p_hp -= (e_atk[0]+(rand() % (e_atk[1]-e_atk[0]+1)))*1.5;
+                    e_hp -= p_atk[0]+(rand() % (p_atk[1]-p_atk[0]+1));
+                }
+            }
+            if(p_action==1)
+            {
+                if(p_action==1 && e_action==0)
+                {
+                    p_hp -= e_atk[0]+(rand() % (e_atk[1]-e_atk[0]+1));
                     e_hp -= (p_atk[0]+(rand() % (p_atk[1]-p_atk[0]+1)))/1.5;
                 }
-                else
+                if(p_action==1 && e_action==1)
                 {
-                    cout << e_name << " dodged successfully" << endl;
+                    p_hp -= (p_atk[0]+(rand() % (p_atk[1]-p_atk[0]+1)))/1.5;
+                    e_hp -= (p_atk[0]+(rand() % (p_atk[1]-p_atk[0]+1)))/1.5;
                 }
-            }
-            if(p_action==1 && e_action==4)
-            {
-                p_hp -= (e_atk[0]+(rand() % (e_atk[1]-e_atk[0]+1)))*1.5;
-                e_hp -= (p_atk[0]+(rand() % (p_atk[1]-p_atk[0]+1)))/1.5;
-            }
-            if(p_action==2 && e_action==0)
-            {
-                p_hp -= (e_atk[0]+(rand() % (e_atk[1]-e_atk[0]+1)))/4;
-            }
-            if(p_action==2 && e_action==1)
-            {
-                p_hp -= p_atk[0]+(rand() % (p_atk[1]-p_atk[0]+1));
-            }
-            if(p_action==2 && e_action==4)
-            {
-                p_hp -= (e_atk[0]+(rand() % (e_atk[1]-e_atk[0]+1)));
-            }
-            if(p_action==3 && e_action==0)
-            {
-                if(dod(300))
+                if(p_action==1 && e_action==2)
                 {
-                    cout << p_name << " dodged successfully" << endl;
+                    e_hp -= p_atk[0]+(rand() % (p_atk[1]-p_atk[0]+1));
                 }
-                else
+                if(p_action==1 && e_action==3)
                 {
-                    cout << p_name << " failed to dodge" << endl;
-                    p_hp -= e_atk[0]+(rand() % (e_atk[1]-e_atk[0]+1));
+                    if(rand()%10>=0.7)
+                    {
+                        char_typewriter(e_name+" failed to dodge",italic_cyan);
+                        e_hp -= (p_atk[0]+(rand() % (p_atk[1]-p_atk[0]+1)))/1.5;
+                    }
+                    else
+                    {
+                        char_typewriter(e_name+" dodged successfully",italic_cyan);
+                    }
                 }
-            }
-            if(p_action==3 && e_action==1)
-            {
-                if(dod(600))
+                if(p_action==1 && e_action==4)
                 {
-                    cout << p_name << " dodged successfully" << endl;
-                }
-                else
-                {
-                    cout << p_name << " failed to dodge" << endl;
-                    p_hp -= (e_atk[0]+(rand() % (e_atk[1]-e_atk[0]+1)))/1.5;
-                }                
-            }
-            if(p_action==3 && e_action==4)
-            {
-                if(dod(200))
-                {
-                    cout << p_name << " dodged successfully" << endl;
-                }
-                else
-                {
-                    cout << p_name << " failed to dodge" << endl;
                     p_hp -= (e_atk[0]+(rand() % (e_atk[1]-e_atk[0]+1)))*1.5;
+                    e_hp -= (p_atk[0]+(rand() % (p_atk[1]-p_atk[0]+1)))/1.5;
                 }
             }
-            
+            if(p_action==2)
+            {
+                if(p_action==2 && e_action==0)
+                {
+                    p_hp -= (e_atk[0]+(rand() % (e_atk[1]-e_atk[0]+1)))/4;
+                }
+                if(p_action==2 && e_action==1)
+                {
+                    p_hp -= p_atk[0]+(rand() % (p_atk[1]-p_atk[0]+1));
+                }
+                if(p_action==2 && e_action==4)
+                {
+                    p_hp -= (e_atk[0]+(rand() % (e_atk[1]-e_atk[0]+1)));
+                }
+            }
+            if(p_action==3)
+            {
+                if(p_action==3 && e_action==0)
+                {
+                    if(dod((int)time_allowed*15))
+                    {
+                        char_typewriter(p_name+" dodged successfully",italic_cyan);
+                    }
+                    else
+                    {
+                        char_typewriter(p_name+" failed to dodge",italic_cyan);
+                        p_hp -= e_atk[0]+(rand() % (e_atk[1]-e_atk[0]+1));
+                    }
+                }
+                if(p_action==3 && e_action==1)
+                {
+                    if(dod((int)time_allowed*30))
+                    {
+                    char_typewriter(p_name+" dodged successfully",italic_cyan);
+                    }
+                    else
+                    {
+                        char_typewriter(p_name+" failed to dodge",italic_cyan);
+                        p_hp -= (e_atk[0]+(rand() % (e_atk[1]-e_atk[0]+1)))/1.5;
+                    }                
+                }
+                if(p_action==3 && e_action==4)
+                {
+                    if(dod((int)time_allowed*10))
+                    {
+                        char_typewriter(p_name+" dodged successfully",italic_cyan);
+                    }
+                    else
+                    {
+                        char_typewriter(p_name+" failed to dodge",italic_cyan);
+                        p_hp -= (e_atk[0]+(rand() % (e_atk[1]-e_atk[0]+1)))*1.5;
+                    }
+                }
+            }
             if(p_hp!=ori_p_hp && p_effect[2]>=0)
             {
-                cout << "Xphone case protected " << p_name << " and shattered" << endl;
+                char_typewriter("Xphone case protected "+p_name+" and shattered",italic_cyan);
                 p_hp=ori_p_hp;
                 p_effect[2]=-1;
             }
         }
         /***conclude round***/
         //show fight result
+        this_thread::sleep_for(chrono::milliseconds(2000));
         cout<<endl;
         if(ori_p_hp!=p_hp)
         {
-            cout << p_name << ": " << p_hp-ori_p_hp << endl;
+            color_print(p_name+": "+to_string(p_hp-ori_p_hp),background_blue);
         }
         if(ori_e_hp!=e_hp)
         {
-            cout << e_name << ": " << e_hp-ori_e_hp << endl;
+            color_print(e_name+": "+to_string(e_hp-ori_e_hp),background_blue);
             //enemy response if hurt
             r=rand()%5;
-            cout << (r==0 ? "Ouch!" : r==1 ? "No!" : r==2 ? "Stop!" : r==3 ? "Ah!" : "How dare you!" ) << endl;
+            char_typewriter(e_name+": "+(r==0 ? "Ouch!" : r==1 ? "No!" : r==2 ? "Stop!" : r==3 ? "Ah!" : "How dare you!"),bold_red);
         }
         //check win/loss
         if(p_hp<=0 && e_hp<=0)
@@ -435,26 +464,26 @@ int callBattle(string& p_name, int& p_hp, int p_atk[2], string& e_name, int& e_h
         {
             e_action=4;
             e_ultimate_cd = rand()%3+4;
-            cout << e_name << ": Omae wa mou shindeiru!(You are dead!)" << endl;
+            char_typewriter(e_name+": Omae wa mou shindeiru!(You are dead!)",bold_red);
+            
         }
         //random show speech
         else if(rand()%10>=3)
         {
-            cout << e_name << ": ";
             r=rand()%2;
             switch(e_action)
             {
                 case 0:
-                    cout << (r==0 ? "I will punch you!" : "Come at me again and eat my punch!") << endl;
+                    char_typewriter(e_name+": "+(r==0 ? "I will punch you!" : "Come at me again and eat my punch!"),bold_red);
                     break;
                 case 1:
-                    cout << (r==0 ? "I will kick you!" : "Try again and eat my kick!") << endl;
+                    char_typewriter(e_name+": "+(r==0 ? "I will kick you!" : "Try again and eat my kick!"),bold_red);
                     break;
                 case 2:
-                    cout << (r==0 ? "Don't hurt me!" : "Stop hurting me!") << endl;
+                    char_typewriter(e_name+": "+(r==0 ? "Don't hurt me!" : "Stop hurting me!"),bold_red);
                     break;
                 case 3:
-                    cout << (r==0 ? "You can't hurt me!" : "You will not hit me!") << endl;
+                    char_typewriter(e_name+": "+(r==0 ? "You can't hurt me!" : "You will not hit me!"),bold_red);
                     break;
                 default:
                     break;
@@ -464,7 +493,7 @@ int callBattle(string& p_name, int& p_hp, int p_atk[2], string& e_name, int& e_h
         if(p_effect[0]>0)
         {
             p_hp+=5;
-            cout << p_name << " restored 5HP" << endl;
+            char_typewriter(p_name+" restored 5HP",italic_cyan);
         }
         if(p_effect[1]==0)
         {
@@ -472,12 +501,14 @@ int callBattle(string& p_name, int& p_hp, int p_atk[2], string& e_name, int& e_h
             p_atk[1]-=5;
         }
         p_effect[0]-=1;p_effect[1]-=1;p_effect[2]-=1;
+        this_thread::sleep_for(chrono::milliseconds(2000));
     }
 
     return -1;
 }
 
 //call this function to start a new battle where (p_name) is the player's name, (e_name) is the enemy's name, (items) is a vector of items that the player has, (difficulty) is the difficulty of the battle [0 for easy, 1 for noraml, 2 for difficult], and (level) is the level of the enemy[1-5 higher level is more stronger]
+// returns 0 if the player wins, 1 if the player loses, and 2 if both lose.    if return -1, some magic happened and tmr will snow (•◡•)/.
 int call_new_battle(string& p_name, string& e_name, vector<string> items, int difficulty, int level)
 {
     int p_hp;
@@ -554,6 +585,7 @@ int call_new_battle(string& p_name, string& e_name, vector<string> items, int di
 }
 
 //this call a sample battle with normal difficulty and a level3 enemy;
+// returns 0 if the player wins, 1 if the player loses, and 2 if both lose.    if return -1, some magic happened and tmr will snow (•◡•)/.
 int call_sample_battle()
 {
     string p_name = "Mr Hamburger";
