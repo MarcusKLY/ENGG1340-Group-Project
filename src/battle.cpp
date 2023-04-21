@@ -507,9 +507,9 @@ int callBattle(const string p_name, int& p_hp, int p_atk[2], const string e_name
     return -1;
 }
 
-//call this function to start a new battle where (p_name) is the player's name, (e_name) is the enemy's name, (items) is a vector of items that the player has, (difficulty) is the difficulty of the battle [Easy, Medium, Hard], and (level) is the level of the enemy[1-5 higher level is more stronger]
+//call this function to start a new battle where (p_name) is the player's name, (e_name) is the enemy's name, (items) is a vector of items that the player has, (difficulty) is the difficulty of the battle [Easy, Medium, Hard], (level) is the level of the enemy[1-5 higher level is more stronger], (p_atk_offset) is the change to player attack damage if you desire
 // returns 0 if the player wins, 1 if the player loses, and 2 if both lose.    if return -1, some magic happened and tmr will snow (•◡•)/.
-int call_new_battle(const string p_name, const string e_name, vector<string> items, string difficulty, int level)
+int call_new_battle(const string p_name, const string e_name, vector<string> items, string difficulty, int level, int p_atk_offset)
 {
     int p_hp;
     int p_atk[2];
@@ -548,6 +548,10 @@ int call_new_battle(const string p_name, const string e_name, vector<string> ite
         time_allowed = 10.0;
     }
 
+    p_atk[0]+=p_atk_offset;
+    p_atk[1]+=p_atk_offset;
+    p_atk[0]=p_atk[0]<1?1:p_atk[0];
+    p_atk[1]=p_atk[1]<2?2:p_atk[1];
     e_hp*=(0.7+0.1*level);
     e_atk[0]*=(0.7+0.1*level);
     e_atk[1]*=(0.7+0.1*level);
@@ -594,6 +598,6 @@ int call_sample_battle()
     items.push_back("energy drink");
     items.push_back("Xphone phone case");
     items.push_back("golden leaf");
-    call_new_battle(p_name, e_name, items, "Medium", 3);
+    call_new_battle(p_name, e_name, items, "Medium", 3, 1);
     return 0;
 }

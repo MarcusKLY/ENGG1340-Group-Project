@@ -11,6 +11,6 @@ int callBattle(const string p_name, int& p_hp, int p_atk[2], const string e_name
 
 int call_sample_battle();
 
-int call_new_battle(const string p_name, const string e_name, vector<string> items, string difficulty, int level);
+int call_new_battle(const string p_name, const string e_name, vector<string> items, string difficulty, int level, int p_atk_offset=0);
 
 #endif
