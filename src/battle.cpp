@@ -39,7 +39,7 @@ bool dod(int t_blink)
 // [DO NOT CALL THIS FUNCTION DIRECTLY]
 // callBattle() is a function that takes in the player's name, hp, attack, enemy's name, hp, attack, items, and time allowed.
 // callBattle() returns 0 if the player wins, 1 if the player loses, and 2 if both lose.    if return -1, some magic happened and tmr will snow (•◡•)/.
-int callBattle(string& p_name, int& p_hp, int p_atk[2], string& e_name, int& e_hp, int e_atk[2], bool (&items)[6], float time_allowed)
+int callBattle(const string p_name, int& p_hp, int p_atk[2], const string e_name, int& e_hp, int e_atk[2], bool (&items)[6], float time_allowed)
 {
     srand(time(NULL)); //seed random number generator
     /***declare variables used in each round***/
@@ -507,9 +507,9 @@ int callBattle(string& p_name, int& p_hp, int p_atk[2], string& e_name, int& e_h
     return -1;
 }
 
-//call this function to start a new battle where (p_name) is the player's name, (e_name) is the enemy's name, (items) is a vector of items that the player has, (difficulty) is the difficulty of the battle [0 for easy, 1 for noraml, 2 for difficult], and (level) is the level of the enemy[1-5 higher level is more stronger]
+//call this function to start a new battle where (p_name) is the player's name, (e_name) is the enemy's name, (items) is a vector of items that the player has, (difficulty) is the difficulty of the battle [Easy, Medium, Hard], and (level) is the level of the enemy[1-5 higher level is more stronger]
 // returns 0 if the player wins, 1 if the player loses, and 2 if both lose.    if return -1, some magic happened and tmr will snow (•◡•)/.
-int call_new_battle(string& p_name, string& e_name, vector<string> items, int difficulty, int level)
+int call_new_battle(const string p_name, const string e_name, vector<string> items, string difficulty, int level)
 {
     int p_hp;
     int p_atk[2];
@@ -517,7 +517,7 @@ int call_new_battle(string& p_name, string& e_name, vector<string> items, int di
     int e_atk[2];
     bool item[6] = {false, false, false, false, false, false};
     float time_allowed;
-    if(difficulty==0)
+    if(difficulty=="Easy")
     {
         p_hp = 100;
         p_atk[0] = 8;
@@ -527,7 +527,7 @@ int call_new_battle(string& p_name, string& e_name, vector<string> items, int di
         e_atk[1] = 6;
         time_allowed = 30.0;
     }
-    else if(difficulty==1)
+    else if(difficulty=="Medium")
     {
         p_hp = 50;
         p_atk[0] = 5;
@@ -584,7 +584,7 @@ int call_new_battle(string& p_name, string& e_name, vector<string> items, int di
     return callBattle(p_name, p_hp, p_atk, e_name, e_hp, e_atk, item, time_allowed);
 }
 
-//this call a sample battle with normal difficulty and a level3 enemy;
+//this call a sample battle with medium difficulty and a level3 enemy;
 // returns 0 if the player wins, 1 if the player loses, and 2 if both lose.    if return -1, some magic happened and tmr will snow (•◡•)/.
 int call_sample_battle()
 {
@@ -594,6 +594,6 @@ int call_sample_battle()
     items.push_back("energy drink");
     items.push_back("Xphone phone case");
     items.push_back("golden leaf");
-    call_new_battle(p_name, e_name, items, 1, 3);
+    call_new_battle(p_name, e_name, items, "Medium", 3);
     return 0;
 }
