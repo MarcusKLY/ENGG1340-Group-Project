@@ -8,6 +8,8 @@
 #include "../header/main_menu.h"
 #include "../header/battle.h"
 #include "../header/Happy_Park.h"
+#include "../header/save_game_checkpoint.h"
+#include "../header/gameover.h"
 
 #include <iostream>
 #include <string>
@@ -30,7 +32,7 @@ int Library(string player_name)
     char_typewriter("You🙎: Hello? Who are you?", bold_magenta);
     char_typewriter("???👀: Come to the library", bold_magenta);
     char_typewriter("Beep beep beep...", italic_green);
-    char_typewriter("The call got cut off", italic_green);
+    char_typewriter("The call got cut off\n", italic_green);
 
     vector<string> items;
     items.push_back("For sure");
@@ -77,7 +79,7 @@ int Library(string player_name)
     else if (go_library == 1)
     {
         char_typewriter("\nYou have a bad feeling going to the library", italic_green);
-        char_typewriter("You🙎: I may just explore other places instead 🤔", bold_magenta);
+        char_typewriter("You🙎: I may just explore other places instead 🤔\n", bold_magenta);
 
         player_info.checkpoint = "Happy Park";
         player_manager.update_player(player_info);

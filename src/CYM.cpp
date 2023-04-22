@@ -8,6 +8,8 @@
 #include "../header/CYM_Toilet.h"
 #include "../header/main_menu.h"
 #include "../header/battle.h"
+#include "../header/save_game_checkpoint.h"
+#include "../header/gameover.h"
 #include <iostream>
 #include <string>
 #include <chrono>

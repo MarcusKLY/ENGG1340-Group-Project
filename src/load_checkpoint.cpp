@@ -5,6 +5,7 @@
 #include "../header/story_background.h"
 #include "../header/CYM.h"
 #include "../header/CYM_Toilet.h"
+#include "../header/Knowles.h"
 #include "../header/Library.h"
 #include "../header/Happy_Park.h"
 #include "../header/Stairs.h"
@@ -37,6 +38,10 @@ void load_checkpoint(string player_name)
     else if (checkpoint == "CYM Toilet")
     {
         CYM_Toilet(user_name);
+    }
+    else if (checkpoint == "Knowles")
+    {
+        Knowles(user_name);
     }
     else if (checkpoint == "Library")
     {

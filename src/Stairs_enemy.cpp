@@ -5,6 +5,8 @@
 #include "../header/output_style.h"
 #include "../header/word_style.h"
 #include "../header/battle.h"
+#include "../header/save_game_checkpoint.h"
+#include "../header/gameover.h"
 
 #include <iostream>
 #include <string>

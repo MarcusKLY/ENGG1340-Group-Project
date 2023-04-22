@@ -7,7 +7,8 @@
 #include "../header/word_style.h"
 #include "../header/main_menu.h"
 #include "../header/Final_Boss.h"
-
+#include "../header/save_game_checkpoint.h"
+#include "../header/gameover.h"
 
 #include <iostream>
 #include <string>

@@ -8,6 +8,8 @@
 #include "../header/main_menu.h"
 #include "../header/battle.h"
 #include "../header/Library.h"
+#include "../header/save_game_checkpoint.h"
+#include "../header/gameover.h"
 #include <iostream>
 #include <string>
 #include <chrono>
@@ -98,7 +100,35 @@ int Knowles(string player_name)
         {
             is_valid = true;
             char_typewriter("Old security guard👮: You will pay for your disrespectfulness! 😡", bold_magenta);
-            //call_new_battle(player_name, "Old security guard👮", player_info.items, player_info.difficulty, 1, 0);
+            int win = call_new_battle(player_name, "Old security guard👮", player_info.items, player_info.difficulty, 1, 0);
+            if (win == 0)
+            {
+                char_typewriter("\nThe old man starts to disappear in the air with his voice fading out...", italic_green);
+                char_typewriter("Old security guard👮: AARGHHHH! My key is still missing! I cannot die here!!!", bold_magenta);
+                char_typewriter("Old security guard👮: I will be back... to search for my key... AND TO TAKE REVENGE ON YOU!!!", bold_magenta);
+                char_typewriter("You🙎: Well... that doesn't sound good", bold_magenta);
+                char_typewriter("The old man's scream echoes through the building", italic_green);
+                char_typewriter("You🙎: I am not staying here any longer! 😨", bold_magenta);
+                char_typewriter("You decide to leave the building", italic_green);
+                walking_animation();
+                save_game("Library", player_name);
+                return 0;
+            }
+            else if (win == 1)
+            {
+                char_typewriter("You slowly lose you consciousness in a pool of blood while feeling extremely painful... 😣", italic_green);
+                char_typewriter("Old security guard👮: GO TO HELLLLLL", bold_magenta);
+                char_typewriter("Old security guard👮: HAHAHAHAHA. This is what you get for disrespecting me! 😈", bold_magenta);
+                gameover("Knowles", player_name);
+                return 0;
+            }
+            else if (win == 2)
+            {
+                char_typewriter("You all fell in a pool of blood and heard each other screaming in pain...", italic_green);
+                char_typewriter("Old security guard👮: Let's meet again in HELLLLLL 😈", bold_magenta);
+                gameover("Knowles", player_name);
+                return 0;
+            }
         }
 
         if (give_key == 1)
@@ -112,7 +142,36 @@ int Knowles(string player_name)
             this_thread::sleep_for(chrono::milliseconds(500));
             char_typewriter("Old security guard👮: HAHA! Got you!", bold_magenta);
             char_typewriter("Old security guard👮: You will pay for your unkindness! 😡", bold_magenta);
-            //call battle() & save
+
+            int win = call_new_battle(player_name, "Old security guard👮", player_info.items, player_info.difficulty, 1, 0);
+            if (win == 0)
+            {
+                char_typewriter("\nThe old man starts to vanish in the air with his voice fading out...", italic_green);
+                char_typewriter("Old security guard👮: AARGHHHH! My key is still missing! I cannot die here!!!", bold_magenta);
+                char_typewriter("Old security guard👮: I will be back... to search for my key... AND TO TAKE REVENGE ON YOU!!!", bold_magenta);
+                char_typewriter("You🙎: Well... that doesn't sound good", bold_magenta);
+                char_typewriter("The old man's scream echoes through the building", italic_green);
+                char_typewriter("You🙎: I am not staying here any longer! 😨", bold_magenta);
+                char_typewriter("You decide to leave the building", italic_green);
+                walking_animation();
+                save_game("Library", player_name);
+                return 0;
+            }
+            else if (win == 1)
+            {
+                char_typewriter("You slowly lose you consciousness in a pool of blood while feeling extremely painful... 😣", italic_green);
+                char_typewriter("Old security guard👮: GO TO HELLLLLL", bold_magenta);
+                char_typewriter("Old security guard👮: HAHAHAHAHA. This is what you get for not helping me! 😈", bold_magenta);
+                gameover("Knowles", player_name);
+                return 0;
+            }
+            else if (win == 2)
+            {
+                char_typewriter("You all fell in a pool of blood and heard each other screaming in pain...", italic_green);
+                char_typewriter("Old security guard👮: Let's meet again in HELLLLLL 😈", bold_magenta);
+                gameover("Knowles", player_name);
+                return 0;
+            }
         }
 
         if (give_key == 2)
@@ -139,7 +198,36 @@ int Knowles(string player_name)
             this_thread::sleep_for(chrono::milliseconds(500));
             char_typewriter("Old security guard👮: HAHA! Got you.", bold_magenta);
             char_typewriter("Old security guard👮: You will pay for your disrespectfulness! 😡", bold_magenta);
-            //call battle() & save
+            
+            int win = call_new_battle(player_name, "Old security guard👮", player_info.items, player_info.difficulty, 1, 0);
+            if (win == 0)
+            {
+                char_typewriter("\nThe old man starts to disappear in the air with his voice fading out...", italic_green);
+                char_typewriter("Old security guard👮: AARGHHHH! My key is still missing! I cannot die here!!!", bold_magenta);
+                char_typewriter("Old security guard👮: I will be back... to search for my key... AND TO TAKE REVENGE ON YOU!!!", bold_magenta);
+                char_typewriter("You🙎: Well... that doesn't sound good", bold_magenta);
+                char_typewriter("The old man's scream echoes through the building", italic_green);
+                char_typewriter("You🙎: I am not staying here any longer! 😨", bold_magenta);
+                char_typewriter("You decide to leave the building", italic_green);
+                walking_animation();
+                save_game("Library", player_name);
+                return 0;
+            }
+            else if (win == 1)
+            {
+                char_typewriter("You slowly lose you consciousness in a pool of blood while feeling extremely painful... 😣", italic_green);
+                char_typewriter("Old security guard👮: GO TO HELLLLLL", bold_magenta);
+                char_typewriter("Old security guard👮: HAHAHAHAHA. This is what you get for disrespecting me! 😈", bold_magenta);
+                gameover("Knowles", player_name);
+                return 0;
+            }
+            else if (win == 2)
+            {
+                char_typewriter("You all fell in a pool of blood and heard each other screaming in pain...", italic_green);
+                char_typewriter("Old security guard👮: Let's meet again in HELLLLLL 😈", bold_magenta);
+                gameover("Knowles", player_name);
+                return 0;
+            }
         }
 
         if (give_key == 3)

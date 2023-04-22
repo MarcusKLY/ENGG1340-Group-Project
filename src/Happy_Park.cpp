@@ -29,7 +29,7 @@ int Happy_Park(string player_name)
     walking_animation();
     char_typewriter("There is a sign in front of you:", italic_green);
     char_typewriter("  ←  Stairs   ", bold_background_cyan);
-    char_typewriter("  escalators ➡ ", bold_background_cyan);
+    char_typewriter("  Escalators ➡ \n", bold_background_cyan);
 
     vector<string> items;
     items.push_back("Left");
@@ -39,6 +39,7 @@ int Happy_Park(string player_name)
 
     if (choice == 0)
     {
+        char_typewriter("\nYou head to the stairs\n", italic_green);
         player_info.checkpoint = "Stairs";
         player_manager.update_player(player_info);
         player_manager.save_players("saves.sav");
@@ -60,12 +61,13 @@ int Happy_Park(string player_name)
     }
     else if (choice == 1)
     {
+        char_typewriter("\nYou head to the escalators\n", italic_green);
         player_info.checkpoint = "Escalator";
         player_manager.update_player(player_info);
         player_manager.save_players("saves.sav");
         items.push_back("Continue");
         items.push_back("Return to main menu");
-        string question = "Game saved at checkpoint Escalator. Do you want to continue?";
+        string question = "\nGame saved at checkpoint Escalator. Do you want to continue?";
         int cgame = choose_event(items, question);
         items.clear(); // Clear the vector
         if (cgame == 0)
