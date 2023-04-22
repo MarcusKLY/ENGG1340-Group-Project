@@ -208,7 +208,7 @@ int callBattle(const string p_name, int& p_hp, int p_atk[2], const string e_name
                                 {
                                     e_hp-=10;
                                     char_typewriter("[Weeeeeeeee]",italic_cyan);
-                                    char_typewriter("You used "+dict_item_detail[2],italic_cyan);
+                                    char_typewriter("You used "+dict_item_detail[4],italic_cyan);
                                     r=rand()%4;
                                     char_typewriter(e_name+": "+(r == 0 ? "Ouch!" : r == 1 ? "No!" : r == 2 ? "Stop!" : "Ah!"),bold_red);
                                     items[4] = false;

@@ -18,9 +18,9 @@ using namespace std;
 
 int main()
 {
-    Knowles("a");
+    //Knowles("a");
     // g_name();
-    //main_menu();
+    main_menu();
     //call_sample_battle();
     return 0;
 }

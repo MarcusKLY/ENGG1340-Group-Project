@@ -99,7 +99,14 @@ int Knowles(string player_name)
         else if (give_key == 0 && ignore_count == 2)
         {
             is_valid = true;
-            char_typewriter("Old security guard👮: You will pay for your disrespectfulness! 😡", bold_magenta);
+            char_typewriter("\nOld security guard👮: You will pay for your disrespectfulness! 😡", bold_magenta);
+            cout << "                                                                                                       " << endl;
+            cout << "                                                                                                       " << endl;
+            cout << "                                                                                                       " << endl;
+            cout << "                                                                                                       " << endl;
+            cout << "                                                                                                       " << endl;
+            cout << "                                                                                                       " << endl;
+            cout << "                                                                                                       " << endl;
             int win = call_new_battle(player_name, "Old security guard👮", player_info.items, player_info.difficulty, 1, 0);
             if (win == 0)
             {
