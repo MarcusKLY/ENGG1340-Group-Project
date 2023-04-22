@@ -2,3 +2,8 @@ Story Background
 CYM
 CYM_Toilet
 Knowles
+Library
+Happy Park
+Stairs
+Escalator
+Final Boss
