@@ -27,7 +27,7 @@ int Escalator(string player_name)
     player_info = player_manager.get_player(player_name);
 
     char_typewriter("You go to take the escalators", italic_green);
-    char_typewriter("When the escalators are going up, you suddenly notice a little boy standing next to you", italic_green);
+    char_typewriter("When the escalators are going up, you suddenly notice a little boy standing next to you\n", italic_green);
 
     vector<string> items;
     items.push_back("Ask questions about him");
@@ -54,7 +54,7 @@ int Escalator(string player_name)
     }
 
     char_typewriter("You look closely at the little boy", italic_green);
-    char_typewriter("Suprisingly, he is wearing a clown mask 🤡 and holding a balloon in his hand 🎈", italic_green);
+    char_typewriter("Suprisingly, he is wearing a clown mask 🤡 and holding a balloon in his hand 🎈\n", italic_green);
 
     items.push_back("Ask if he needs help");
     items.push_back("Interrogate him");

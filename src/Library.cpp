@@ -47,7 +47,7 @@ int Library(string player_name)
         char_typewriter("Ensuring nothing is weird around, you decide to go in", italic_green);
         char_typewriter("Biiiiii", italic_green);
         char_typewriter("You pass the entrance with a tap of your student ID card", italic_green);
-        char_typewriter("The first thing you see is a half-eaten sXXway sandwich on the ground 🥪", italic_green);
+        char_typewriter("The first thing you see is a half-eaten sXXway sandwich on the ground 🥪\n", italic_green);
 
         items.push_back("Yes please, I haven't eaten anything for hours");
         items.push_back("Mum tells me not to eat things picked on the ground");

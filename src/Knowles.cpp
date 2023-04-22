@@ -123,7 +123,7 @@ int Knowles(string player_name)
             }
             else if (win == 1)
             {
-                char_typewriter("You slowly lose you consciousness in a pool of blood while feeling extremely painful... 😣", italic_green);
+                char_typewriter("\nYou slowly lose you consciousness in a pool of blood while feeling extremely painful... 😣", italic_green);
                 char_typewriter("Old security guard👮: GO TO HELLLLLL", bold_magenta);
                 char_typewriter("Old security guard👮: HAHAHAHAHA. This is what you get for disrespecting me! 😈", bold_magenta);
                 gameover("Knowles", player_name);
@@ -131,7 +131,7 @@ int Knowles(string player_name)
             }
             else if (win == 2)
             {
-                char_typewriter("You all fell in a pool of blood and heard each other screaming in pain...", italic_green);
+                char_typewriter("\nYou all fell in a pool of blood and heard each other screaming in pain...", italic_green);
                 char_typewriter("Old security guard👮: Let's meet again in HELLLLLL 😈", bold_magenta);
                 gameover("Knowles", player_name);
                 return 0;
@@ -166,7 +166,7 @@ int Knowles(string player_name)
             }
             else if (win == 1)
             {
-                char_typewriter("You slowly lose you consciousness in a pool of blood while feeling extremely painful... 😣", italic_green);
+                char_typewriter("\nYou slowly lose you consciousness in a pool of blood while feeling extremely painful... 😣", italic_green);
                 char_typewriter("Old security guard👮: GO TO HELLLLLL", bold_magenta);
                 char_typewriter("Old security guard👮: HAHAHAHAHA. This is what you get for not helping me! 😈", bold_magenta);
                 gameover("Knowles", player_name);
@@ -174,7 +174,7 @@ int Knowles(string player_name)
             }
             else if (win == 2)
             {
-                char_typewriter("You all fell in a pool of blood and heard each other screaming in pain...", italic_green);
+                char_typewriter("\nYou all fell in a pool of blood and heard each other screaming in pain...", italic_green);
                 char_typewriter("Old security guard👮: Let's meet again in HELLLLLL 😈", bold_magenta);
                 gameover("Knowles", player_name);
                 return 0;
@@ -222,7 +222,7 @@ int Knowles(string player_name)
             }
             else if (win == 1)
             {
-                char_typewriter("You slowly lose you consciousness in a pool of blood while feeling extremely painful... 😣", italic_green);
+                char_typewriter("\nYou slowly lose you consciousness in a pool of blood while feeling extremely painful... 😣", italic_green);
                 char_typewriter("Old security guard👮: GO TO HELLLLLL", bold_magenta);
                 char_typewriter("Old security guard👮: HAHAHAHAHA. This is what you get for disrespecting me! 😈", bold_magenta);
                 gameover("Knowles", player_name);
@@ -230,7 +230,7 @@ int Knowles(string player_name)
             }
             else if (win == 2)
             {
-                char_typewriter("You all fell in a pool of blood and heard each other screaming in pain...", italic_green);
+                char_typewriter("\nYou all fell in a pool of blood and heard each other screaming in pain...", italic_green);
                 char_typewriter("Old security guard👮: Let's meet again in HELLLLLL 😈", bold_magenta);
                 gameover("Knowles", player_name);
                 return 0;
