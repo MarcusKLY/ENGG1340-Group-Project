@@ -84,8 +84,8 @@ int Knowles(string player_name)
             char_typewriter("\nYou🙎: ......", bold_magenta);
             char_typewriter("You turn around and walk away pretending nothing happens", italic_green);
             walking_animation();
-            char_typewriter("Old security guard👮: Hmm...hello?", bold_magenta); 
-            clear_previous_lines(14); 
+            char_typewriter("Old security guard👮: Hmm...hello? (Choose your resonse again)", bold_magenta);
+            clear_previous_lines(14);
         }
         else if (give_key == 0 && ignore_count == 1)
         {
@@ -93,7 +93,7 @@ int Knowles(string player_name)
             char_typewriter("\nYou🙎: ......", bold_magenta);
             char_typewriter("You keep ignoring the old security guard", italic_green);
             walking_animation();
-            char_typewriter("Old security guard👮: I AM ABOUT TO GET MAD 😡", bold_magenta);
+            char_typewriter("Old security guard👮: I AM ABOUT TO GET MAD 😡 (Choose your resonse again)", bold_magenta);
             clear_previous_lines(14);
         }
         else if (give_key == 0 && ignore_count == 2)
@@ -191,21 +191,25 @@ int Knowles(string player_name)
             walking_animation();
             clear_previous_lines(4);
             clear_previous_lines(1);
-            cout<<endl<<endl;
+            cout << endl
+                 << endl;
             clear_previous_lines(1);
-            cout<<endl<<endl;
+            cout << endl
+                 << endl;
             clear_previous_lines(1);
-            cout<<endl<<endl;
+            cout << endl
+                 << endl;
             clear_previous_lines(1);
-            cout<<endl<<endl;
+            cout << endl
+                 << endl;
             clear_previous_lines(1);
-            cout<<endl;
+            cout << endl;
             char_typewriter("However, no matter how far you run, he can always catch up in the blink of an eye", italic_green);
             char_typewriter("The moment you stop...", italic_green);
             this_thread::sleep_for(chrono::milliseconds(500));
             char_typewriter("Old security guard👮: HAHA! Got you.", bold_magenta);
             char_typewriter("Old security guard👮: You will pay for your disrespectfulness! 😡", bold_magenta);
-            
+
             int win = call_new_battle(player_name, "Old security guard👮", player_info.items, player_info.difficulty, 1, 0);
             if (win == 0)
             {
@@ -266,7 +270,7 @@ int Knowles(string player_name)
                 items.clear(); // Clear the vector
                 if (cgame == 0)
                 {
-                    Library(player_name); 
+                    Library(player_name);
                     return 0;
                 }
                 if (cgame == 1)
@@ -274,13 +278,12 @@ int Knowles(string player_name)
                     main_menu();
                     return 0;
                 }
-            }   
+            }
             else
             {
                 char_typewriter("\nYou don't have the key in your inventory", bold_red);
                 clear_previous_lines(7);
             }
-            
         }
     }
 

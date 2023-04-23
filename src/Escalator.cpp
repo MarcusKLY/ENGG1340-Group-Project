@@ -76,7 +76,7 @@ int Escalator(string player_name)
         char_typewriter("You feel like you are losing power, your attack has decreased", italic_green);
         char_typewriter("The little boy vanishes after cursing you", italic_green);
         char_typewriter("You🙎: Well... I did not mean that", bold_magenta);
-        char_typewriter("You🙎: It is what it is 🤷‍♂️, I should just keep going I guess", bold_magenta);
+        char_typewriter("You🙎: It is what it is 🤷, I should just keep going I guess", bold_magenta);
 
         int attack_buff = -1;
     }
@@ -133,7 +133,7 @@ int Escalator(string player_name)
     items.clear(); // Clear the vector
     if (cgame == 0)
     {
-        Final_Boss(player_name); //buff
+        Final_Boss(player_name); // buff
         return 0;
     }
     if (cgame == 1)
