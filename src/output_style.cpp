@@ -125,12 +125,19 @@ void walking_animation()
 // bTime: the time in milliseconds between each blink
 void blinkOnce(string text, int bTime, ColorOption colorOptions)
 {
-    cout << colorOptions.code;
-    cout << "\r" << text;
-    cout << "\033[0m" << endl;                           // Reset color to default                         // print the text in the terminal
-    this_thread::sleep_for(chrono::milliseconds(bTime)); // time between each blink
-    cout << "\r" << string(text.length(), ' ');          // remove the text from the terminal
-    this_thread::sleep_for(chrono::milliseconds(bTime)); // time between each line
+    // Print the text in the specified color
+    cout << colorOptions.code << text << flush;
+    // Reset color to default
+    cout << "\033[0m";
+    // Wait for bTime milliseconds
+    this_thread::sleep_for(chrono::milliseconds(bTime));
+
+    // Erase the text by moving the cursor to the beginning of the line and printing spaces
+    cout << "\r" << string(text.length(), ' ') << flush;
+    std::cout << "\033[2K\r";
+
+    // Wait for bTime milliseconds
+    this_thread::sleep_for(chrono::milliseconds(bTime));
 }
 
 // Function that blinks a string multiple times in the console.

@@ -19,6 +19,7 @@ struct PlayerInfo
     std::string user_name;
     std::string difficulty;
     int hp;
+    int buff;
     std::vector<std::string> items;
     std::string checkpoint;
 };

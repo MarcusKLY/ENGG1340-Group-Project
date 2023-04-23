@@ -91,6 +91,7 @@ void PlayerManager::load_players(const std::string &filename)
             std::getline(iss, player_info.user_name, ',');
             std::getline(iss, player_info.difficulty, ',');
             iss >> player_info.hp;
+            iss >> player_info.buff;
         }
     }
     file.close();
@@ -109,7 +110,7 @@ void PlayerManager::save_players(const std::string &filename) const
         const std::string &user_id = it->first;
         const PlayerInfo &player_info = it->second;
 
-        file << user_id << "," << player_info.user_name << "," << player_info.difficulty << "," << player_info.hp << "\n";
+        file << user_id << "," << player_info.user_name << "," << player_info.difficulty << "," << player_info.hp << "," << player_info.buff << "\n";
         for (const auto &item : player_info.items)
         {
             file << "item:" << item << "\n"; // write each item on a separate line
@@ -171,6 +172,7 @@ void PlayerManager::save_players(const std::string &filename) const
 //             cout << "User Name: " << player.user_name << "\n";
 //             cout << "Difficulty: " << player.difficulty << "\n";
 //             cout << "HP: " << player.hp << "\n";
+//             cout << "Buff: " << player.buff << "\n";
 //             cout << "Items: [";
 //             for (const auto &item : player.items)
 //             {
@@ -211,9 +213,9 @@ void PlayerManager::save_players(const std::string &filename) const
 //     return 0;
 // }
 
-// // int get_playerinfo_name(){
-// //     PlayerManager player_manager;
-// //     player_manager.load_players("players.txt");
+// int get_playerinfo_name(){
+//     PlayerManager player_manager;
+//     player_manager.load_players("players.txt");
 
-// //     return 0;
-// // }
+//     return 0;
+// }
