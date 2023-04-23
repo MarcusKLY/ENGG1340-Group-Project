@@ -9,6 +9,7 @@
 #include "../header/Final_Boss.h"
 #include "../header/save_game_checkpoint.h"
 #include "../header/gameover.h"
+#include "../header/Stairs_enemy.h"
 
 #include <iostream>
 #include <string>
@@ -89,13 +90,14 @@ int Stairs(string player_name)
         }
         else if (look_back_again == 1)
         {
-            //
-
+            Stairs_Enemy(player_name);
+            return 0;
         }
     }
     else if (look_back == 1)
     {
-        //
+        Stairs_Enemy(player_name);
+        return 0;
     }
 
     return 0;
