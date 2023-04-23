@@ -120,7 +120,7 @@ int Escalator(string player_name)
             int attack_buff = -1;
             char_typewriter("The little boy vanishes after cursing you", italic_green);
             char_typewriter("You🙎: Well... say it earlier and maybe I will help", bold_magenta);
-            char_typewriter("You🙎: It is what it is 🤷‍♂️, I should just keep going I guess\n", bold_magenta);
+            char_typewriter("You🙎: It is what it is 🤷, I should just keep going I guess\n", bold_magenta);
         }
     }
     player_info.checkpoint = "Final Boss";
