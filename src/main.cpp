@@ -9,8 +9,8 @@
 #include <iostream>
 #include <thread>
 #include <chrono>
-//#include "../header/battle.h"
-//idk
+// #include "../header/battle.h"
+// idk
 
 #include "../header/Knowles.h"
 
@@ -18,9 +18,10 @@ using namespace std;
 
 int main()
 {
-    //Knowles("a");
-    // g_name();
+    // blink(30, "Welcome to the game", 10, italic_blue);
+    //   Knowles("a");
+    //    g_name();
     main_menu();
-    //call_sample_battle();
+    // call_sample_battle();
     return 0;
 }
