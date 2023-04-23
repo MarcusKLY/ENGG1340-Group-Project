@@ -10,6 +10,7 @@
 #include "../header/Happy_Park.h"
 #include "../header/save_game_checkpoint.h"
 #include "../header/gameover.h"
+#include "../header/Library_escape.h"
 
 #include <iostream>
 #include <string>
@@ -64,7 +65,70 @@ int Library(string player_name)
             char_typewriter("You🙎: I didn't. It... it is not...", bold_magenta);
             char_typewriter("Librarian 👩‍🏫: I am an experienced librarian. I ain't that stupid to get fooled by you!", bold_magenta);
             char_typewriter("Librarian 👩‍🏫: How dare you eat here. I should punish you 🤬", bold_magenta);
-            //escape
+            int escape = Library_escape(player_name);
+            while (escape == 0)
+            {
+                char_typewriter("The librarian loses track of you", italic_green);
+                char_typewriter("You sneak back to the entrance and try to unlock the door", italic_green);
+                char_typewriter("You have to win the tic tac toe in order to unlock it\n", italic_green);
+                //tic tac toe
+                break; // 
+            }
+            if (escape == 1)
+            {
+                char_typewriter("You get caught by the librarian and dragged back to the entrance", italic_green);
+                char_typewriter("Librarian 👩‍🏫: You little rat!", bold_magenta);
+                char_typewriter("Librarian 👩‍🏫: Clean the place or wait for your punishment 😡\n", bold_magenta);
+
+                items.push_back("Okay... I will clean the place");
+                items.push_back("No! I did nothing wrong");
+                int clean_library = choose_event(items, "What's your decision");
+                items.clear(); // Clear the vector
+
+                if (clean_library == 0)
+                {
+                    char_typewriter("\nLibrarian 👩‍🏫: That's a smart choice. Clean it and I will let you go", bold_magenta);
+                    char_typewriter("After spending 30 minutes to clean the place, the librarian finally approves you to leave", italic_green);
+                    char_typewriter("You leave the library feeling extremely exhausted", italic_green);
+                    walking_animation();
+                    char_typewriter("You🙎: The guy who asked me to come here must be trolling 🙄\n", bold_magenta);
+                    save_game("Happy Park", player_name);
+                    return 0;
+                }
+                else if (clean_library == 1)
+                {
+                    char_typewriter("\nLibrarian 👩‍🏫: Such a naughty kid! I must punish you\n", bold_magenta);
+                    int win = call_new_battle(player_name, "Librarian 👩‍🏫", player_info.items, player_info.difficulty, 3, 0);
+                    if (win == 0)
+                    {
+                        char_typewriter("\nLibrarian 👩‍🏫: AARGHHHH", bold_magenta);
+                        char_typewriter("The scream is so scary and deafening that you have to cover your ears", italic_green);
+                        char_typewriter("Librarian 👩‍🏫: You are extremely lucky this time...", bold_magenta);
+                        char_typewriter("Librarian 👩‍🏫: If you dare to eat here once more, I WILL BE BACK TO KILL YOU", bold_magenta);
+                        char_typewriter("The dying librarian slowly disappears", italic_green);
+                        walking_animation();
+                        char_typewriter("You rush out of the library without a doubt", italic_green);
+                        char_typewriter("You🙎: The guy who called me must be trolling 🙄\n", bold_magenta);
+                        save_game("Happy Park", player_name);
+                        return 0;
+                    }
+                    else if (win == 1)
+                    {
+                        char_typewriter("\nYou slowly lose you consciousness in a pool of blood while feeling extremely painful... 😣", italic_green);
+                        char_typewriter("Librarian 👩‍🏫: GO TO HELLLLLL", bold_magenta);
+                        char_typewriter("Librarian 👩‍🏫: HAHAHAHAHA. This is what you get for disrespecting this holy place! 😈", bold_magenta);
+                        gameover("Library", player_name);
+                        return 0;
+                    }
+                    else if (win == 2)
+                    {
+                        char_typewriter("\nYou all fell in a pool of blood and heard each other screaming in pain...", italic_green);
+                        char_typewriter("Librarian 👩‍🏫: Let's meet again in HELLLLLL 😈", bold_magenta);
+                        gameover("Library", player_name);
+                        return 0;
+                    }
+                }
+            }
         }
         else if (pick_sandwich == 1)
         {

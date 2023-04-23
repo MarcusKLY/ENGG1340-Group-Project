@@ -76,7 +76,7 @@ int Escalator(string player_name)
         char_typewriter("You feel like you are losing power, your attack has decreased", italic_green);
         char_typewriter("The little boy vanishes after cursing you", italic_green);
         char_typewriter("You🙎: Well... I did not mean that", bold_magenta);
-        char_typewriter("You🙎: It is what it is 🤷, I should just keep going I guess", bold_magenta);
+        char_typewriter("You🙎: It is what it is 🤷, I should just keep going I guess\n", bold_magenta);
 
         int attack_buff = -1;
     }
@@ -108,7 +108,7 @@ int Escalator(string player_name)
             char_typewriter("After giving you the Xphone phone case, the little boy vanishes", italic_green);
             player_info.items.push_back("Xphone phone case");
             char_typewriter("You🙎: Wait... Why a phone case though?", bold_magenta);
-            char_typewriter("You will not find the explanation...", italic_green);
+            char_typewriter("You will not find the explanation...\n", italic_green);
         }
         else if (talk_option_3 == 1)
         {
@@ -120,7 +120,7 @@ int Escalator(string player_name)
             int attack_buff = -1;
             char_typewriter("The little boy vanishes after cursing you", italic_green);
             char_typewriter("You🙎: Well... say it earlier and maybe I will help", bold_magenta);
-            char_typewriter("You🙎: It is what it is 🤷‍♂️, I should just keep going I guess", bold_magenta);
+            char_typewriter("You🙎: It is what it is 🤷‍♂️, I should just keep going I guess\n", bold_magenta);
         }
     }
     player_info.checkpoint = "Final Boss";
