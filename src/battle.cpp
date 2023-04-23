@@ -86,7 +86,7 @@ int callBattle(const string p_name, int& p_hp, int p_atk[2], const string e_name
             }
             if(!item_available)
             {
-                color_print("| X",background_green);
+                color_print_no_newline("| X",background_green);
             }
             color_print(" |",background_green);
             if(first)
