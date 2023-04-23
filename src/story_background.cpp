@@ -47,18 +47,18 @@ int story_background(string player_name)
         {
         case 0:
             // code to handle "Continue sleeping" option
-            char_typewriter("\nYou've slept too long, you can't sleep again!        ", italic_green);
+            char_typewriter("\nYou've slept too long, you can't sleep again! (choose again)        ", italic_green);
             clear_previous_lines(6);
             continue;
         case 1:
             // code to handle "Continue staying without leaving" option
-            char_typewriter("\n...................Nothing happens             ", italic_green);
+            char_typewriter("\n...................Nothing happens (choose again)              ", italic_green);
             clear_previous_lines(6);
             continue;
             ;
         case 2:
             // code to handle "Take the elevator and leave" option
-            char_typewriter("\nYou stand up and ready to leave               ", italic_green);
+            char_typewriter("\nYou stand up and ready to leave                ", italic_green);
             is_valid = true;
             break;
         }
