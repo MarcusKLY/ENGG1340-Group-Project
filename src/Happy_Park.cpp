@@ -28,7 +28,7 @@ int Happy_Park(string player_name)
     char_typewriter("You then walk to the Happy Park", italic_green);
     walking_animation();
     char_typewriter("There is a sign in front of you:", italic_green);
-    char_typewriter("  ←  Stairs   ", bold_background_cyan);
+    char_typewriter("  ←  Stairs    ", bold_background_cyan);
     char_typewriter("  Escalators ➡ \n", bold_background_cyan);
 
     vector<string> items;
@@ -72,7 +72,7 @@ int Happy_Park(string player_name)
         items.clear(); // Clear the vector
         if (cgame == 0)
         {
-            Escalator(player_name); 
+            Escalator(player_name);
             return 0;
         }
         if (cgame == 1)
