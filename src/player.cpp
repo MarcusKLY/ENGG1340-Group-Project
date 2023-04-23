@@ -162,56 +162,56 @@ void PlayerManager::save_players(const std::string &filename) const
 //     return 0;
 // }
 
-void print_all_players(const PlayerManager &player_manager)
-{
-    try
-    {
-        for (const auto &player : player_manager.get_all_players())
-        {
-            cout << "User ID: " << player.user_id << "\n";
-            cout << "User Name: " << player.user_name << "\n";
-            cout << "Difficulty: " << player.difficulty << "\n";
-            cout << "HP: " << player.hp << "\n";
-            cout << "Buff: " << player.buff << "\n";
-            cout << "Items: [";
-            for (const auto &item : player.items)
-            {
-                cout << item << ", ";
-            }
-            cout << "]\n";
-            cout << "Check point: " << player.checkpoint << "\n\n";
-        }
-    }
-    catch (const runtime_error &ex)
-    {
-        cerr << "Error: " << ex.what() << "\n";
-    }
-}
+// void print_all_players(const PlayerManager &player_manager)
+// {
+//     try
+//     {
+//         for (const auto &player : player_manager.get_all_players())
+//         {
+//             cout << "User ID: " << player.user_id << "\n";
+//             cout << "User Name: " << player.user_name << "\n";
+//             cout << "Difficulty: " << player.difficulty << "\n";
+//             cout << "HP: " << player.hp << "\n";
+//             cout << "Buff: " << player.buff << "\n";
+//             cout << "Items: [";
+//             for (const auto &item : player.items)
+//             {
+//                 cout << item << ", ";
+//             }
+//             cout << "]\n";
+//             cout << "Check point: " << player.checkpoint << "\n\n";
+//         }
+//     }
+//     catch (const runtime_error &ex)
+//     {
+//         cerr << "Error: " << ex.what() << "\n";
+//     }
+// }
 
-int main()
-{
-    PlayerManager player_manager;
-    player_manager.load_players("saves.sav");
-    PlayerInfo player_info;
-    // player_info = player_manager.get_player("player2");
-    for (int i = 0; i < player_info.items.size(); i++)
-    {
-        cout << player_info.items[i] << "\n";
-    }
+// int main()
+// {
+//     PlayerManager player_manager;
+//     player_manager.load_players("saves.sav");
+//     PlayerInfo player_info;
+//     // player_info = player_manager.get_player("player2");
+//     for (int i = 0; i < player_info.items.size(); i++)
+//     {
+//         cout << player_info.items[i] << "\n";
+//     }
 
-    try
-    {
-        PlayerManager player_manager;
-        player_manager.load_players("saves.sav");
-        print_all_players(player_manager);
-    }
-    catch (const runtime_error &ex)
-    {
-        cerr << "Error: " << ex.what() << "\n";
-        return 1;
-    }
-    return 0;
-}
+//     try
+//     {
+//         PlayerManager player_manager;
+//         player_manager.load_players("saves.sav");
+//         print_all_players(player_manager);
+//     }
+//     catch (const runtime_error &ex)
+//     {
+//         cerr << "Error: " << ex.what() << "\n";
+//         return 1;
+//     }
+//     return 0;
+// }
 
 // int get_playerinfo_name(){
 //     PlayerManager player_manager;
