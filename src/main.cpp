@@ -12,10 +12,13 @@
 //#include "../header/battle.h"
 //idk
 
+#include "../header/Knowles.h"
+
 using namespace std;
 
 int main()
 {
+    //Knowles("a");
     // g_name();
     main_menu();
     //call_sample_battle();

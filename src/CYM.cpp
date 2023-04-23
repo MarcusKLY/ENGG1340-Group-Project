@@ -8,6 +8,8 @@
 #include "../header/CYM_Toilet.h"
 #include "../header/main_menu.h"
 #include "../header/battle.h"
+#include "../header/save_game_checkpoint.h"
+#include "../header/gameover.h"
 #include <iostream>
 #include <string>
 #include <chrono>
@@ -62,9 +64,9 @@ int CYM(string player_name)
             char_typewriter("You asked in a panic, but there was no response", italic_green);
             char_typewriter("You try to find the old lady", italic_green);
             char_typewriter("When you turn around, you see her standing on the esclator looking down at you", italic_green);
-            char_typewriter("Her face was covered in blood, and her eyes were full of hatred, yet still smilingn 🤡", italic_green);
+            char_typewriter("Her face was covered in blood, and her eyes were full of hatred, yet still smiling 🤡", italic_green);
             char_typewriter("You🙎: Why... Why are you up there?", bold_magenta);
-            char_typewriter("Chong🤡: Do you remember me? I am Chong Yuet Ming 🤡", bold_magenta);
+            char_typewriter("Chong🤡: Do you remember me? I am Chong Yuet Ming 🤡\n", bold_magenta);
             items.push_back("Walk up the escalator");
             items.push_back("Turn around and run away");
             int run = choose_event(items, "Do you want to walk up the escalator or run away?");
@@ -85,7 +87,33 @@ int CYM(string player_name)
             char_typewriter("Chong🤡: It's no use saying sorry now!!!", bold_magenta);
             char_typewriter("Chong🤡: I guess there is no choice but to kill you for revenge!", bold_magenta);
             char_typewriter("You clench your fists and ready to fight 👊\n", italic_green);
-            // callBattle();
+            
+            int win = call_new_battle(player_name, "Chong🤡", player_info.items, player_info.difficulty, 1, 0);
+            if (win == 0)
+            {
+                char_typewriter("\nYou see Chong slowly dissapearing...", italic_green);
+                char_typewriter("Chong🤡: Why!!!", bold_magenta);
+                char_typewriter("Chong🤡: I will come back and revenge!!!", bold_magenta);
+                char_typewriter("You walk away with extreme fatigue...", italic_green);
+                walking_animation();
+                save_game("Library", player_name);
+                return 0;
+            }
+            else if (win == 1)
+            {
+                char_typewriter("\nYou slowly lose you consciousness in a pool of blood while feeliong extremely pain...", italic_green);
+                char_typewriter("Chong🤡: GO TO HELLLLLL", bold_magenta);
+                char_typewriter("Chong🤡: HAHAHAHAHA\n", bold_magenta);
+                gameover("CYM", player_name);
+                return 0;
+            }
+            else if (win == 2)
+            {
+                char_typewriter("\nYou all fell in a pool of blood and heard each other screaming in pain...", italic_green);
+                char_typewriter("Chong🤡: Let's meet again in HELLLLLL\n", bold_magenta);
+                gameover("CYM", player_name);
+                return 0;
+            }
         }
         else if (help == 1)
         {
