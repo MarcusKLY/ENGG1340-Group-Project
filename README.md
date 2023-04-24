@@ -15,9 +15,9 @@ Group 1
 * [Storyline](#Storyline)
 * [Gameplay](#Gameplay)
 * [Combat](#Combat)
-* [Coding Features](#Coding Features)
-* [Game State Design](#Game State Design)
-* [Installation & Run](#Installation & Run)
+* [Coding Features](#Coding-Features)
+* [Game State Design](#Game-State-Design)
+* [Installation & Run](#Installation-&-Run)
 
 
 ## Storyline
