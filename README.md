@@ -13,7 +13,11 @@ Group 1
 
 ## Documentation
 * [Storyline](#Storyline)
-* [Gameplay](#GG)
+* [Gameplay](#Gameplay)
+* [Combat](#Combat)
+* [Coding Features](#Coding Features)
+* [Game State Design](#Game State Design)
+* [Installation & Run](#Installation & Run)
 
 
 ## Storyline
@@ -39,7 +43,7 @@ The game is a text-based game.
 ## Game State Design
 
 
-## Install & Run
+## Installation & Run
 `make` to build the program
 
 `./program` to run the program after `make`
