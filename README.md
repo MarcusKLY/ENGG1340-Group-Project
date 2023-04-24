@@ -11,6 +11,10 @@ Group 1
 - Diao Mo Chiu, Stream (3036067327)
 
 
+## Documentation
+* [Storyline](#Storyline)
+
+
 ## Storyline
 You are an ordinary HKU student. As an HKU student, it is normal to have a lot of homework to complete. One day, you were stuck in the KKL building and fell asleep while working on a deadline for the next day.
 
