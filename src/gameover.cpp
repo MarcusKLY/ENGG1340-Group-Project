@@ -75,7 +75,7 @@ int gameover(string checkpoint, string player_name)
         }
         else if (checkpoint == "Final Boss")
         {
-            Final_Boss(player_name); //buff
+            Final_Boss(player_name);
         }
         return 0;
     }
