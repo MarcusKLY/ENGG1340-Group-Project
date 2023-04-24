@@ -17,7 +17,7 @@ Group 1
 * [Combat](#Combat)
 * [Coding Features](#Coding-Features)
 * [Game State Design](#Game-State-Design)
-* [Installation & Run](#Installation-\&-Run)
+* [Installation & Run](#Installation--Run)
 
 
 ## Storyline
