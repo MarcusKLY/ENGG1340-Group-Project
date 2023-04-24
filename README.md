@@ -13,6 +13,7 @@ Group 1
 
 ## Documentation
 * [Storyline](#Storyline)
+* [Gameplay](#GG)
 
 
 ## Storyline
