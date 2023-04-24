@@ -7,3 +7,4 @@ Happy Park
 Stairs
 Escalator
 Final Boss
+Time Tunnel

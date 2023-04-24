@@ -20,7 +20,6 @@ using namespace std;
 int Escalator(string player_name)
 {
     system("clear");
-    this_thread::sleep_for(chrono::seconds(2));
     PlayerManager player_manager;
     player_manager.load_players("saves.sav");
     PlayerInfo player_info;
@@ -77,8 +76,7 @@ int Escalator(string player_name)
         char_typewriter("The little boy vanishes after cursing you", italic_green);
         char_typewriter("You🙎: Well... I did not mean that", bold_magenta);
         char_typewriter("You🙎: It is what it is 🤷, I should just keep going I guess\n", bold_magenta);
-
-        int attack_buff = -1;
+        player_info.buff = -1;
     }
     else if (talk_option_2 == 2)
     {
@@ -104,7 +102,7 @@ int Escalator(string player_name)
             char_typewriter("Little boy🤡🎈: Thank you for your kindness. Wish you the best of luck on the journey", bold_magenta);
             char_typewriter("Little boy🤡🎈: May the force be with you", bold_magenta);
             char_typewriter("You can feel the power, your attack has increased", italic_green);
-            int attack_buff = 1;
+            player_info.buff = 1;
             char_typewriter("After giving you the Xphone phone case, the little boy vanishes", italic_green);
             player_info.items.push_back("Xphone phone case");
             char_typewriter("You🙎: Wait... Why a phone case though?", bold_magenta);
@@ -117,10 +115,10 @@ int Escalator(string player_name)
             char_typewriter("Little boy🤡🎈: You were the only one that can help me", bold_magenta);
             char_typewriter("Little boy🤡🎈: I will curse you for the rest of your journey 😡", bold_magenta);
             char_typewriter("You feel like you are losing power, your attack has decreased", italic_green);
-            int attack_buff = -1;
+            player_info.buff = -1;
             char_typewriter("The little boy vanishes after cursing you", italic_green);
             char_typewriter("You🙎: Well... say it earlier and maybe I will help", bold_magenta);
-            char_typewriter("You🙎: It is what it is 🤷‍♂️, I should just keep going I guess\n", bold_magenta);
+            char_typewriter("You🙎: It is what it is 🤷, I should just keep going I guess\n", bold_magenta);
         }
     }
     player_info.checkpoint = "Final Boss";
@@ -133,7 +131,7 @@ int Escalator(string player_name)
     items.clear(); // Clear the vector
     if (cgame == 0)
     {
-        Final_Boss(player_name); // buff
+        Final_Boss(player_name);
         return 0;
     }
     if (cgame == 1)

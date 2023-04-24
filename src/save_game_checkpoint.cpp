@@ -16,6 +16,7 @@
 #include "../header/Stairs.h"
 #include "../header/Escalator.h"
 #include "../header/Final_Boss.h"
+#include "../header/Time_Tunnel.h"
 
 
 #include <iostream>
@@ -75,7 +76,11 @@ int save_game(string reached_checkpoint, string player_name)
         }
         else if (reached_checkpoint == "Final Boss")
         {
-            Final_Boss(player_name); //buff
+            Final_Boss(player_name);
+        }
+        else if (reached_checkpoint == "Time Tunnel")
+        {
+            Time_Tunnel(player_name);
         }
         return 0;
     }

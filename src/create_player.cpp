@@ -101,6 +101,7 @@ int create_player(string difficulty) //
         player_info.hp = 60;
     }
     player_info.checkpoint = "Story Background";
+    player_info.buff = 0;
     player_manager.add_player(player_info);
     player_manager.save_players("saves.sav");
     system("clear"); // clear screen

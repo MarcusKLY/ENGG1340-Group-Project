@@ -7,6 +7,6 @@
 
 using namespace std;
 
-int Final_Boss(string player_name); //buff
+int Final_Boss(string player_name); 
 
 #endif
