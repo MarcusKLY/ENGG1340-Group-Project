@@ -49,13 +49,11 @@ int story_background(string player_name)
             // code to handle "Continue sleeping" option
             char_typewriter("\nYou've slept too long, you can't sleep again! (choose again)        ", italic_green);
             cout << endl;
-            // clear_previous_lines(6);
             continue;
         case 1:
             // code to handle "Continue staying without leaving" option
             char_typewriter("\n...................Nothing happens (choose again)              ", italic_green);
             cout << endl;
-            // clear_previous_lines(6);
             continue;
             ;
         case 2:
