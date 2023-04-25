@@ -39,6 +39,20 @@ The game is a text-based game.
 
 ## Coding Features
 
+- Generation of random game sets or events
+  -
+- Data structures for storing game status
+  - The game keep track of player through data structure like `Player`.
+- Dynamic memory management
+  - b
+  - a
+- File input/output
+  - Game data are stored in the `saves.sav` file for player to save and load game saves.
+  - The wordle's predefined words are stored in `?.txt`, and loaded during the game.
+- Program codes in multiple files
+  - PlayerInfo and ColorOption struct,  will be declared and defined in its own header and source files, which could be used in all other sourse file.
+  - Different word output styles in output_style.h could be used repeatedly.
+
 
 ## Game State Design
 
