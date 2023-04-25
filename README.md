@@ -42,7 +42,7 @@ The game is a text-based game.
 - Generation of random game sets or events
   -
 - Data structures for storing game status
-  - The game keep track of player through data structure like `Player`.
+  - The game keep track of player through data structure like `PlayerInfo`.
 - Dynamic memory management
   - b
   - a
@@ -51,7 +51,7 @@ The game is a text-based game.
   - The wordle's predefined words are stored in `?.txt`, and loaded during the game.
 - Program codes in multiple files
   - PlayerInfo and ColorOption struct,  will be declared and defined in its own header and source files, which could be used in all other sourse file.
-  - Different word output styles in output_style.h could be used repeatedly.
+  - Different word output styles in `output_style.h` could be used repeatedly.
 
 
 ## Game State Design
