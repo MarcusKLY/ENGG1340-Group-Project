@@ -14,18 +14,21 @@
 #include <algorithm>
 using namespace std;
 
+//this is the dodging minigame that take in number of millisecond direction will appear
+//return true if player dodge in correct direction
 bool dod(int t_blink)
     {
-        int r=rand()%4;
-        char_typewriter("direction to dodge will be shown in an instant,input correct direction to dodge successfully", italic_cyan);
+        char_typewriter("Direction to dodge will be shown in an instant, input correct direction to dodge successfully", italic_cyan);
         this_thread::sleep_for(chrono::milliseconds(3000));
         cout << endl;
+        //random direction and blink
+        int r=rand()%4;
         string o="";
         o=((r==0) ? "        [ ← ]" : (r==1) ? "        [ → ]" : (r==2) ? "        [ ↑ ]" : "        [ ↓ ]");
         color_print(o,bold_green);
         this_thread::sleep_for(chrono::milliseconds(t_blink));
         clear_previous_lines(1);
-        //system("clear");
+        //ask for direction
         vector<string> opt;
         opt.push_back("Left");
         opt.push_back("Right");
@@ -33,9 +36,9 @@ bool dod(int t_blink)
         opt.push_back("Down");
         int indir=choose_event(opt,"Which direction will you dodge?");
         opt.clear();
-        //system("clear");
         return (indir==r);
     }
+
 // [DO NOT CALL THIS FUNCTION DIRECTLY]
 // callBattle() is a function that takes in the player's name, hp, attack, enemy's name, hp, attack, items, and time allowed.
 // callBattle() returns 0 if the player wins, 1 if the player loses, and 2 if both lose.    if return -1, some magic happened and tmr will snow (•◡•)/.
@@ -48,8 +51,8 @@ int callBattle(const string p_name, int& p_hp, int p_atk[2], const string e_name
     int e_ultimate_cd=0;
     bool first=true;
     const string dict_item[6] = {"energy drink","half-eaten sXXway sandwich","golden leaf","Xphone phone case","key","one-time-use flashlight"};
-    const string dict_item_detail[6] = {"energy drink(+5atk in next 3round)","half-eaten sXXway sandwich(+10HP)","golden leaf(+5HP per next 3round)","Xphone phone case(neutralize all of next damage dealt by enemy)","key(throw at enemy to deal 10damage)","one-time-use flashlight(stop next enemy action)"};
-    const string dict_action[5] = {"Punch", "Kick", "Block", "Dodge", "Ars Blasto"};
+    const string dict_item_detail[6] = {"Energy drink(+5atk in next 3round)","Half-eaten sXXway sandwich(+10HP)","Golden leaf(+5HP per next 3round)","Xphone phone case(neutralize all of next damage dealt by enemy)","Key(throw at enemy to deal 10damage)","One-time-use flashlight(stop next enemy action)"};
+    const string dict_action[5] = {"punch", "kick", "block", "dodge", "ultimate ability"};
     int p_effect[3] = {-1,-1,-1};
     bool e_frozen=false;
     bool late=false;
@@ -74,19 +77,19 @@ int callBattle(const string p_name, int& p_hp, int p_atk[2], const string e_name
         {
             bool chosen = false;
             bool item_available = false;
-            color_print(p_name+": "+to_string(p_hp)+" HP | "+e_name+": "+to_string(e_hp),background_blue);
-            color_print("items available: ",background_green);
+            color_print(p_name+": "+to_string(p_hp)+" HP | "+e_name+": "+to_string(e_hp)+" HP",background_blue);
+            color_print("Items available: ",background_green);
             for (int i=0; i<6; i++)
             {
                 if (items[i])
                 {
-                    color_print_no_newline("| "+to_string(i)+":"+dict_item_detail[i]+" ",background_green);
+                    color_print_no_newline("| "+dict_item_detail[i]+" ",background_green);
                     item_available = true;
                 }
             }
             if(!item_available)
             {
-                color_print_no_newline("| X",background_green);
+                color_print_no_newline("| /",background_green);
             }
             color_print(" |",background_green);
             if(first)
@@ -99,7 +102,6 @@ int callBattle(const string p_name, int& p_hp, int p_atk[2], const string e_name
                 late = false;
                 first=false;
             }
-            //cout << "select action [ i:use item | p:punch | k:kick | b:block | d:dodge ]" << endl;
 
             /***input action loop***/
             while (true)
@@ -111,17 +113,16 @@ int callBattle(const string p_name, int& p_hp, int p_atk[2], const string e_name
                 string o = to_string(time_left);
                 color_print("You have "+((o.find('.')==string::npos)?o:o.substr(0,o.find('.')+2))+"s left in this round",bold_blue);
                 vector<string> opt;
-                opt.push_back("use items");
-                opt.push_back("punch");
-                opt.push_back("kick");
-                opt.push_back("block");
-                opt.push_back("dodge");
+                opt.push_back("Use items");
+                opt.push_back("Punch");
+                opt.push_back("Kick");
+                opt.push_back("Block");
+                opt.push_back("Dodge");
                 pin=choose_event(opt,"What action do you choose?");
                 opt.clear();
                 //check time left
                 if(std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - start_time).count()/1000.0 >= time_allowed)
                 {
-                    char_typewriter("Your input is too late",italic_cyan);
                     late = true;
                     break;
                 }
@@ -146,7 +147,7 @@ int callBattle(const string p_name, int& p_hp, int p_atk[2], const string e_name
                                 color_print("You have "+((o.find('.')==string::npos)?o:o.substr(0,o.find('.')+2))+"s left in this round",bold_blue);
                                 vector<string> opt;
                                 vector<int> convert;
-                                opt.push_back("cancel");
+                                opt.push_back("Cancel");
                                 convert.push_back(-1);
                                 for (int i = 0; i < (int)sizeof(items)/(int)sizeof(items[0]); i++)
                                 {
@@ -238,7 +239,6 @@ int callBattle(const string p_name, int& p_hp, int p_atk[2], const string e_name
                     //check time left
                 if(std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - start_time).count()/1000.0 >= time_allowed)
                 {
-                    char_typewriter("Your input is too late",italic_cyan);
                     late = true;
                     break;
                 }
@@ -310,7 +310,7 @@ int callBattle(const string p_name, int& p_hp, int p_atk[2], const string e_name
         //if not late input and enemy is not flashed
         if(!late && !e_frozen)
         {
-            char_typewriter(p_name+" used "+dict_action[p_action]+" , "+e_name+" used "+dict_action[e_action],italic_cyan);
+            char_typewriter(p_name+" used "+dict_action[p_action]+", "+e_name+" used "+dict_action[e_action],italic_cyan);
             if(p_action==0)
             {
                 if(e_action==0)
@@ -587,8 +587,8 @@ int call_new_battle(const string p_name, const string e_name, vector<string> ite
 
     return callBattle(p_name, p_hp, p_atk, e_name, e_hp, e_atk, item, time_allowed);
 }
-
-//this call a sample battle with medium difficulty and a level3 enemy;
+// [for testing only]
+// this call a sample battle with medium difficulty and a level3 enemy;
 // returns 0 if the player wins, 1 if the player loses, and 2 if both lose.    if return -1, some magic happened and tmr will snow (•◡•)/.
 int call_sample_battle()
 {
