@@ -60,7 +60,7 @@ Player playTicTacToe(){
     }
 
 }
-int main(){
+int tictactoe(){
     Player winner = playTicTacToe();
     return 0;
 }

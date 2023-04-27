@@ -4,6 +4,9 @@
 #define PASSWORD_H
 
 #include <string>
-bool password(std::string difficulty);
+
+using namespace std;
+
+bool password(string difficulty);
 
 #endif
