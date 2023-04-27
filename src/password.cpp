@@ -12,8 +12,12 @@
 #include "../header/output_style.h"
 #include "../header/word_style.h"
 #include "../header/player.h"
-#include "../header/choose_event.h"
+#include "../header/output_style.h"
+#include "../header/word_style.h"
 #include "../header/main_menu.h"
+#include "../header/battle.h"
+#include "../header/save_game_checkpoint.h"
+#include "../header/gameover.h"
 
 #include <iostream>
 #include <fstream>
@@ -22,42 +26,47 @@
 #include <ctime>
 #include <cstdlib>
 #include <algorithm>
+#include <chrono>
+#include <random>
 
 using namespace std;
 
 // function to generate a random password (randomly choose one from answer.txt)
 string generatePassword(int PwLength) {
-    // declare variables
-    string password;
-    string line;
-    int randomLine;
-    int lineCount=0;
     // open file
-    ifstream answerFile;
-    answerFile.open("answer.txt");
-    // count the number of lines in the file
-    while (getline(answerFile, line)) {
-        lineCount++;
+    ifstream file;
+    file.open("src/answer.txt");
+    // read the lines into a vector
+    vector<string> answerlist;
+    string ans;
+    while (getline(file, ans)) {
+        answerlist.push_back(ans);
     }
+    //while loop to check if the length of the password is correct
     // generate a random number
-    srand(time(NULL));
-    randomLine=rand()%lineCount;
-    // read the file again and choose the line with the random number
-    answerFile.clear();
-    answerFile.seekg(0, ios::beg);
-    for (int i=0; i<randomLine; i++) {
-        getline(answerFile, line);
+    while (true) {
+        // srand(time(NULL));
+        // int randomNumber=rand()%answerlist.size();
+
+        // seed the random number generator with a high-resolution time point
+        auto seed = chrono::high_resolution_clock::now().time_since_epoch().count();
+        mt19937 generator(seed);
+    
+        // generate a random number between 1 and 100
+        uniform_int_distribution<int> distribution(1, 100);
+        int randomNumber = distribution(generator);
+
+        // check if the length is correct
+        if (answerlist[randomNumber].length()==PwLength) {
+            // close file
+            file.close();
+            // return the password
+            transform (answerlist[randomNumber].begin(), answerlist[randomNumber].end(), answerlist[randomNumber].begin(), ::toupper);
+            return answerlist[randomNumber];
+        }else{
+            continue;
+        }
     }
-    // check if it is in correct length
-    while (line.length()!=PwLength) {
-        getline(answerFile, line);
-    }
-    password=line;
-    // close file
-    answerFile.close();
-    // return the password
-    transform (password.begin(), password.end(), password.begin(), ::toupper);
-    return password;
 }
 
 // function to check if the input is valid (1. check length 2. check if it is included in dictionary.txt 3. check if it is a previous attempt)
@@ -84,15 +93,15 @@ void checkInput(int PwLength, int trials, vector<string>& attempts, string passw
             cout << "Password must be " << PwLength << "-letter long! Please try again!" << endl;
             continue;
         } else {
-            ifstream dictionaryFile;
-            dictionaryFile.open("dictionary.txt");
-            while (getline(dictionaryFile, line)) {
+            ifstream dictionary;
+            dictionary.open("src/dictionary.txt");
+            while (getline(dictionary, line)) {
                 if (line==input) {
                     isWord=true;
                     break;
                 }
             }
-            dictionaryFile.close();
+            dictionary.close();
             if (!isWord) {
                 transform(input.begin(), input.end(), input.begin(), ::toupper);
                 cout << input << " is not a valid word! Please try again!" << endl;
@@ -195,9 +204,9 @@ bool password(string difficulty) {
     }
     }
     if (attempts.back()==password) {
-        return true;
+        return 1;
     }else{
         cout << "PASSWORD RESET IN PROGRESS..." << endl;
-        return false;
+        return 0;
     }
 }

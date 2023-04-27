@@ -117,10 +117,11 @@ int story_background(string player_name)
         }
     }
     char_typewriter("There is door locked with english vocabulary that is {passwordLength} characters long 🔒\nYou have to guess the password in {passwordAttempt} goes or less, or else the password would be reset\nA correct letter turns green\nA correct letter in the wrong place turns yellow\nAn incorrect letter turns grey", italic_green);
-    bool pass = false;
+    bool pass = 0;
     while (!pass)
     {
         pass = password(player_info.difficulty);
+
     }
     char_typewriter("You open the door and walk into the building\n", italic_green);
     walking_animation();
