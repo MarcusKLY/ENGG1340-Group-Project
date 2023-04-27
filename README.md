@@ -48,6 +48,7 @@ The game is a text-based game.
 - Dynamic memory management
   - b
   - a
+  - In battle, a dynamic int array with changing size is used to store id of items player have in each round
 - File input/output
   - Game data are stored in the `saves.sav` file for player to save and load game saves.
   - The wordle's predefined words are stored in `?.txt`, and loaded during the game.
