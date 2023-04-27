@@ -77,7 +77,7 @@ int story_background(string player_name)
         case 0:
             char_typewriter("\nYou put the drink in your inventory", italic_green);
             char_typewriter("You then walk to the elevator and head to ground floor", italic_green);
-            player_info.items.push_back("Energy Drink");
+            player_info.items.push_back("energy drink");
             is_valid = true;
             break;
         case 1:
