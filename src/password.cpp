@@ -1,8 +1,19 @@
 // password.cpp
 
+// implement a wordle word-guessing game
+// players need to input the correct word to unlock the next part of the game
+// number of trials and length of the password vary with the difficulty chosen
+// the password is randomly generated
+// letter that is wrong appears in red
+// letter that is correct but in wrong position appears in yellow
+// letter that is correct and in correct position appears in green
+
 #include "../header/password.h"
 #include "../header/output_style.h"
 #include "../header/word_style.h"
+#include "../header/player.h"
+#include "../header/choose_event.h"
+#include "../header/main_menu.h"
 
 #include <iostream>
 #include <fstream>
@@ -10,232 +21,183 @@
 #include <vector>
 #include <ctime>
 #include <cstdlib>
-
-using namespace std;
-
-// implement a wordle word game acting like an password input
-// users need to input the correct word to unlock the game
-// the number of tired and number of charaters are different for different difficulty
-// the word is randomly generated
-// the correct charather but not correct position appears in yellow
-// the wrong charather appears in red
-// the correct charather with correct position appears in green
-
 #include <algorithm>
 
 using namespace std;
 
-class LetterState {
-public:
-    char character;
-    bool is_in_word;
-    bool is_in_position;
-    LetterState(char c) : character(c), is_in_word(false), is_in_position(false) {}
-};
-
-class Wordle {
-public:
-    string secret;
-    vector<string> attempts;
-    static const char VOIDED_LETTER = '*';
-    Wordle(string s) : secret(s) {}
-
-    void attempt(string word) {
-        transform(word.begin(), word.end(), word.begin(), ::toupper);
-        attempts.push_back(word);
+// function to generate a random password (randomly choose one from answer.txt)
+string generatePassword(int PwLength) {
+    // declare variables
+    string password;
+    string line;
+    int randomLine;
+    int lineCount=0;
+    // open file
+    ifstream answerFile;
+    answerFile.open("answer.txt");
+    // count the number of lines in the file
+    while (getline(answerFile, line)) {
+        lineCount++;
     }
+    // generate a random number
+    srand(time(NULL));
+    randomLine=rand()%lineCount;
+    // read the file again and choose the line with the random number
+    answerFile.clear();
+    answerFile.seekg(0, ios::beg);
+    for (int i=0; i<randomLine; i++) {
+        getline(answerFile, line);
+    }
+    // check if it is in correct length
+    while (line.length()!=PwLength) {
+        getline(answerFile, line);
+    }
+    password=line;
+    // close file
+    answerFile.close();
+    // return the password
+    transform (password.begin(), password.end(), password.begin(), ::toupper);
+    return password;
+}
 
-    vector<LetterState> guess(string word) {
-        transform(word.begin(), word.end(), word.begin(), ::toupper);
-        vector<LetterState> result(word.size(), LetterState(' '));
-
-        // Initialize the results array with all GREY letters.
-        for (int i = 0; i < word.size(); i++) {
-            result[i] = LetterState(word[i]);
+// function to check if the input is valid (1. check length 2. check if it is included in dictionary.txt 3. check if it is a previous attempt)
+void checkInput(int PwLength, int trials, vector<string>& attempts, string password, string input) {
+    // declare variables
+    string line;
+    bool isWord=false;
+    bool isTried=false;
+    // loop until a valid input is entered
+    while (true) {
+        // markers could enter "reveal" to reveal the password
+        cout << "*** Markers could enter \"/reveal\" to bypass this ***" << endl;
+        // ask for user input
+        cout << "Please enter the password! >> ";
+        cin >> input;
+        // transform the input to lower case
+        transform(input.begin(), input.end(), input.begin(), ::tolower);
+        if (input=="/reveal") {
+            cout << "Shhh...please keep it a secret! The password is " << password << endl;
+            continue;
         }
-
-        // Make a copy of the secret so we can cross out 'used' letters.
-        string remaining_secret = secret;
-
-        // First, check for GREEN letters.
-        for (int i = 0; i < word.size(); i++) {
-            LetterState& letter = result[i];
-            if (letter.character == remaining_secret[i]) {
-                letter.is_in_position = true;
-                remaining_secret[i] = VOIDED_LETTER;
-            }
-        }
-
-        // Loop again and check for YELLOW letters.
-        for (int i = 0; i < word.size(); i++) {
-            LetterState& letter = result[i];
-
-            // Skip this letter if it is already in the right place.
-            if (letter.is_in_position) {
-                continue;
-            }
-
-            // Otherwise, check if the letter is in the word, and void that index.
-            for (int j = 0; j < word.size(); j++) {
-                if (letter.character == remaining_secret[j]) {
-                    remaining_secret[j] = VOIDED_LETTER;
-                    letter.is_in_word = true;
+        // check if it is valid (1. check length 2. check if it is included in dictionary.txt 3. check if it is a previous attempt)
+        if (input.length()!=PwLength) {
+            cout << "Password must be " << PwLength << "-letter long! Please try again!" << endl;
+            continue;
+        } else {
+            ifstream dictionaryFile;
+            dictionaryFile.open("dictionary.txt");
+            while (getline(dictionaryFile, line)) {
+                if (line==input) {
+                    isWord=true;
                     break;
                 }
             }
+            dictionaryFile.close();
+            if (!isWord) {
+                transform(input.begin(), input.end(), input.begin(), ::toupper);
+                cout << input << " is not a valid word! Please try again!" << endl;
+                continue;
+            }
+
         }
-        return result;
-    }
-
-    bool is_solved() {
-        return !attempts.empty() && attempts.back() == secret;
-    }
-
-    int remaining_attempts(int passwordAttempt) {
-        return passwordAttempt - attempts.size();
-    }
-
-    bool can_attempt(int passwordAttempt) {
-        return remaining_attempts(passwordAttempt) > 0 && !is_solved();
-    }
-};
-
-bool display_results(Wordle& wordle, int passwordLength, int passwordAttempt) {
-    if (wordle.remaining_attempts(passwordAttempt) > 1 && !wordle.is_solved()) {
-        cout << "You have " << wordle.remaining_attempts(passwordAttempt) << " more chances until triggering the security system to reset its password!" << endl;
-    }
-    else if (wordle.remaining_attempts(passwordAttempt) == 1) {
-        cout << "You have ONE LAST CHANCE before triggering the security system to reset its password!" << endl;
-    }
-    vector<string> lines;
-
-    for (string word : wordle.attempts) {
-        vector<LetterState> result = wordle.guess(word);
-        string colored_result_str = "";
-        for (LetterState letter : result) {
-            if (letter.is_in_position) {
-                colored_result_str += "\033[32m" + string(1, letter.character) + "\033[0m ";
-            }
-            else if (letter.is_in_word) {
-                colored_result_str += "\033[33m" + string(1, letter.character) + "\033[0m ";
-            }
-            else {
-                colored_result_str += string(1, letter.character) + " ";
+        for (int i=0; i<attempts.size(); i++) {
+            if (input==attempts[i]) {
+                transform(input.begin(), input.end(), input.begin(), ::toupper);
+                cout << "You have tried " << input << " before! Please try again!" << endl;
+                isTried = true;
+                break;
             }
         }
-        lines.push_back(colored_result_str);
+        if (isTried) {
+            continue;
+        }else{
+            break;
+        }
     }
+    // add the valid input to the attempts vector
+    transform(input.begin(), input.end(), input.begin(), ::toupper);
+    attempts.push_back(input);
+}
 
-    for (int i = 0; i < wordle.remaining_attempts(passwordAttempt); i++) {
-        lines.push_back(string(passwordLength, '_'));
+// function to print the game board (display the current and all the previous attempts with colors everytime the player enter): red for wrong letter, yellow for correct letter but wrong position, green for correct letter and correct position)
+void printBoard(string password, vector<string> attempts) {
+    // declare variables
+    int PwLength = password.length();
+    // add a check for the size of the attempts vector before accessing its back element. If the vector is empty, then the back element does not exist.
+    if (attempts.size() == 0) {
+        return;
     }
-
-    int content_length = passwordLength + passwordLength - 1 + 2;
-    string top_border = "┌" + string(content_length, '─') + "┐";
-    string bottom_border = "└" + string(content_length, '─') + "┘";
-    string space = " ";
-    cout << top_border << endl;
-
-    for (string line : lines) {
-        cout << "│" << space << line << space << "│" << endl;
+    // store all attempts with colors in an array for printing all at once later
+    vector<string> coloredAttempts;
+    for (int i = 0; i < attempts.size(); i++) {
+        string attempt = attempts[i];
+        string color = "";
+        // check for correct letters in correct positions
+        for (int j = 0; j < PwLength; j++) {
+            if (attempt[j] == password[j]) {
+                color += "\033[32m"; // green color
+                color += attempt[j];
+                color += "\033[0m"; // reset color
+            }
+        // check for correct letters in wrong positions
+            else if (attempt[j] != password[j] && password.find(attempt[j]) != string::npos) {
+                color += "\033[33m"; // yellow color
+                color += attempt[j];
+                color += "\033[0m"; // reset color
+            }
+        // check for wrong letters
+            else if (attempt[j] != password[j] && password.find(attempt[j]) == string::npos) {
+                color += "\033[31m"; // red color
+                color += attempt[j];
+                color += "\033[0m"; // reset color
+            }
+        }
+        // add the colored attempt to the array
+        coloredAttempts.push_back(color);
     }
+    // print all attempts with colors
+    for (int i = 0; i < coloredAttempts.size(); i++) {
+        cout << coloredAttempts[i] << " ";
+    }
+    cout << endl;
+}
 
-    cout <<"│" << space << string(passwordLength, '_') << space << "│" << endl;
-    cout << bottom_border << endl;
-
-    if (wordle.is_solved()) {
-        cout << "Congratulations! You have successfully guessed the password: " << wordle.secret << endl;
+// main function to return the result
+bool password(string difficulty) {
+    // declare variables
+    int PwLength;
+    int trials;
+    string password;
+    string input;
+    vector<string> attempts;
+    // set the length and number of trials according to the difficulty
+    if (difficulty=="Easy") {
+        PwLength=4;
+        trials=10;
+    } else if (difficulty=="Normal") {
+        PwLength=5;
+        trials=7;
+    } else {
+        PwLength=6;
+        trials=5;
+    }
+    // generate a password
+    password=generatePassword(PwLength);
+    // start the game
+    cout << "Welcome to the wordle game!" << endl;
+    // loop for the game
+    while ((attempts.size()<trials)) {
+        printBoard(password, attempts);
+        checkInput(PwLength, trials, attempts, password, input);
+        if (attempts.back()==password) {
+            printBoard(password, attempts);
+            break;
+    }
+    }
+    if (attempts.back()==password) {
         return true;
-    }
-    else {
-        cout << "Sorry, you have exhausted all your attempts. The password was: " << wordle.secret << endl;
+    }else{
+        cout << "PASSWORD RESET IN PROGRESS..." << endl;
         return false;
     }
 }
-
-//Get a random password from answer.txt.
-string get_random_password() {
-ifstream file("answer.txt");
-if (!file.fail()) {
-    cout << "Unable to open file." << endl;
-}else{
-
-string password;
-int line_number = 0;
-string selected_line;
-while (getline(file, password)) {
-    //check if length of the password matches "passwordLenghth"
-    if (password.length() != passwordLength) {
-        continue;
-    }
-    if (rand() % ++line_number == 0) {
-        transform(password.begin(), password.end(), password.begin(), ::toupper);
-        selected_line = password;
-    }
-}
-
-return selected_line;
-}
-}
-
-bool play_password_game(int passwordLength, int passwordAttempt) {
-
-    // Initialize the game state.
-    Wordle wordle(password);
-
-    while (wordle.can_attempt(passwordAttempt)) {
-        cout << "Enter your guess (" << wordle.remaining_attempts(passwordAttempt) << " attempts left): ";
-        string guess;
-        cin >> guess;
-
-        // Check if the guess is valid.
-        if (guess.size() != passwordLength) {
-            cout << "Your guess must be " << passwordLength << " characters long." << endl;
-            continue;
-        }
-        if (count_if(guess.begin(), guess.end(), [](char c) { return !isalpha(c); }) > 0) {
-            cout << "Your guess must contain only alphabetic characters." << endl;
-            continue;
-        }
-        if (wordle.attempts.size() > 0 && find(wordle.attempts.begin(), wordle.attempts.end(), guess) != wordle.attempts.end()) {
-            cout << "You already guessed that word!" << endl;
-            continue;
-        }
-
-        // Add the guess to the game state.
-        wordle.attempt(guess);
-
-        // Display the game state.
-        if (display_results(wordle, passwordLength, passwordAttempt)) {
-            return true;
-        }
-    }
-    return false;
-}
-
-int main() {
-    if ( difficulty == "Easy" ) {
-        passwordLength = 4;
-        passwordAttempt = 10;
-    } else if ( difficulty == "Normal" ) {
-        passwordLength = 5;
-        passwordAttempt = 8;
-    } else if ( difficulty == "Hard" ) {
-        passwordLength = 6;
-        passwordAttempt = 4;
-    } else {
-        cout << "Invalid difficulty level. Please try again." << endl;
-        return 0;
-    }
-    int passwordLength = 5;
-    int passwordAttempt = 10;
-    bool won = play_password_game(passwordLength, passwordAttempt);
-    if (won) {
-        cout << "You won!" << endl;
-    }
-    else {
-        cout << "You lost!" << endl;
-    }
-    return 0;
-}
-//bool password(std::string difficulty);
