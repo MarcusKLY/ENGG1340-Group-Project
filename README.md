@@ -40,18 +40,22 @@ The game is a text-based game.
 ## Coding Features
 
 - Generation of random game sets or events
+  - In battle, attack damage(p_atk,e_atk) is random integer within a range, enemy have random action(e_action) and random dialogue with player in each round.
   -
 - Data structures for storing game status
   - The game keep track of player through data structure like `PlayerInfo`.
+  - In battle, int is used to store player and enemy hp, and array of int is used to store remain numbers of rounds of special effect players have.
 - Dynamic memory management
   - b
   - a
+  - In battle, a dynamic int array with changing size is used to store id of items player have in each round
 - File input/output
   - Game data are stored in the `saves.sav` file for player to save and load game saves.
   - The wordle's predefined words are stored in `?.txt`, and loaded during the game.
 - Program codes in multiple files
   - `PlayerInfo` and `ColorOption` struct,  will be declared and defined in its own header and source files, which could be used in all other sourse file.
   - Different word output styles in `output_style.h` could be used repeatedly.
+  - From main game can call function `call_new_battle` in `battle.h` to start a new battle .
 
 
 ## Game State Design
