@@ -29,6 +29,7 @@
 #include <chrono>
 #include <random>
 
+
 using namespace std;
 
 // function to generate a random password (randomly choose one from answer.txt)
@@ -42,21 +43,19 @@ string generatePassword(int PwLength) {
     while (getline(file, ans)) {
         answerlist.push_back(ans);
     }
-    //while loop to check if the length of the password is correct
+    //while loop to check if the length of the password is valid
     // generate a random number
     while (true) {
-        // srand(time(NULL));
-        // int randomNumber=rand()%answerlist.size();
 
         // seed the random number generator with a high-resolution time point
         auto seed = chrono::high_resolution_clock::now().time_since_epoch().count();
         mt19937 generator(seed);
     
-        // generate a random number between 1 and 100
-        uniform_int_distribution<int> distribution(1, 100);
+        // generate a random number between 1 and the size of the vector
+        uniform_int_distribution<int> distribution(1, answerlist.size()-1);
         int randomNumber = distribution(generator);
 
-        // check if the length is correct
+        // check if the length is valid
         if (answerlist[randomNumber].length()==PwLength) {
             // close file
             file.close();
@@ -69,28 +68,35 @@ string generatePassword(int PwLength) {
     }
 }
 
-// function to check if the input is valid (1. check length 2. check if it is included in dictionary.txt 3. check if it is a previous attempt)
+// function to check if the player input is valid (1. check length 2. check if it is included in dictionary.txt 3. check if it is a previous attempt)
 void checkInput(int PwLength, int trials, vector<string>& attempts, string password, string input) {
-    // declare variables
     string line;
     bool isWord=false;
     bool isTried=false;
     // loop until a valid input is entered
     while (true) {
-        // markers could enter "reveal" to reveal the password
-        cout << "*** Markers could enter \"/reveal\" to bypass this ***" << endl;
         // ask for user input
-        cout << "Please enter the password! >> ";
+        color_print(" ⬇️ PLEASE ENTER THE PASSWORD 🔑 ⬇️ ", bold_background_magenta);
+        //print empty lines
+        cout << endl;
         cin >> input;
+        cout << endl;
         // transform the input to lower case
         transform(input.begin(), input.end(), input.begin(), ::tolower);
         if (input=="/reveal") {
-            cout << "Shhh...please keep it a secret! The password is " << password << endl;
+            //blink to show the password
+            cout << endl;
+            blink (2, "> > > 🤫 Shhh...please keep it a secret! 😎 The password is " + password + " < < <", 300, bold_yellow);
+            color_print(" > > > 🤫 Shhh...please keep it a secret! 😎 The password is " + password + " < < <", bold_yellow);
+            cout << endl;
             continue;
         }
         // check if it is valid (1. check length 2. check if it is included in dictionary.txt 3. check if it is a previous attempt)
         if (input.length()!=PwLength) {
-            cout << "Password must be " << PwLength << "-letter long! Please try again!" << endl;
+            cout << endl;
+            blink (2, "> > > 🤬 PASSWORD MUST BE " + to_string(PwLength) + "-LETTER LONG! PLEASE TRY AGAIN! < < <", 300, bold_red);
+            color_print("> > > 🤬 PASSWORD MUST BE " + to_string(PwLength) + "-LETTER LONG! PLEASE TRY AGAIN! < < <", bold_red);
+            cout << endl;
             continue;
         } else {
             ifstream dictionary;
@@ -104,7 +110,10 @@ void checkInput(int PwLength, int trials, vector<string>& attempts, string passw
             dictionary.close();
             if (!isWord) {
                 transform(input.begin(), input.end(), input.begin(), ::toupper);
-                cout << input << " is not a valid word! Please try again!" << endl;
+                cout << endl;
+                blink (2, "> > > 🤬 " + input + " IS NOT A VALID WORD! PLEASE TRY AGAIN! < < <", 300, bright_red);
+                color_print("> > > 🤬 " + input + " IS NOT A VALID WORD! PLEASE TRY AGAIN! < < <", bright_red);
+                cout << endl;
                 continue;
             }
 
@@ -112,7 +121,10 @@ void checkInput(int PwLength, int trials, vector<string>& attempts, string passw
         for (int i=0; i<attempts.size(); i++) {
             if (input==attempts[i]) {
                 transform(input.begin(), input.end(), input.begin(), ::toupper);
-                cout << "You have tried " << input << " before! Please try again!" << endl;
+                cout << endl;
+                blink (2, "> > > 🤬 YOU HAVE TRIED " + input + " BEFORE! PLEASE TRY AGAIN! < < <", 300, bright_red);
+                color_print("> > > 🤬 YOU HAVE TRIED " + input + " BEFORE! PLEASE TRY AGAIN! < < <", bright_red);
+                cout << endl;
                 isTried = true;
                 break;
             }
@@ -129,10 +141,11 @@ void checkInput(int PwLength, int trials, vector<string>& attempts, string passw
 }
 
 // function to print the game board (display the current and all the previous attempts with colors everytime the player enter): red for wrong letter, yellow for correct letter but wrong position, green for correct letter and correct position)
-void printBoard(string password, vector<string> attempts) {
+void printBoard(string password, vector<string> attempts, int trials) {
     // declare variables
     int PwLength = password.length();
     // add a check for the size of the attempts vector before accessing its back element. If the vector is empty, then the back element does not exist.
+    cout << endl;
     if (attempts.size() == 0) {
         return;
     }
@@ -144,29 +157,51 @@ void printBoard(string password, vector<string> attempts) {
         // check for correct letters in correct positions
         for (int j = 0; j < PwLength; j++) {
             if (attempt[j] == password[j]) {
-                color += "\033[32m"; // green color
+                //add letter spacing
+                color += "\033[1;32m"; // green color
+                color += " ";
                 color += attempt[j];
-                color += "\033[0m"; // reset color
+                color += " ";
+                color += "\033[1;32m"; // reset color
             }
         // check for correct letters in wrong positions
             else if (attempt[j] != password[j] && password.find(attempt[j]) != string::npos) {
-                color += "\033[33m"; // yellow color
+                color += "\033[1;33m"; // yellow color
+                //add letter spacing
+                color += " ";
                 color += attempt[j];
-                color += "\033[0m"; // reset color
+                color += " ";
+                color += "\033[1;33m"; // reset color
             }
         // check for wrong letters
             else if (attempt[j] != password[j] && password.find(attempt[j]) == string::npos) {
-                color += "\033[31m"; // red color
+                color += "\033[1;31m"; // red color
+                color += " ";
                 color += attempt[j];
-                color += "\033[0m"; // reset color
+                color += " ";
+                color += "\033[1;31m"; // reset color
             }
         }
         // add the colored attempt to the array
         coloredAttempts.push_back(color);
     }
-    // print all attempts with colors
+    //print all attempts with colors with book emojis
+    for (int i = 0; i < PwLength+5; i++) {
+        cout << "📚";
+    }
+    cout << "\n";
     for (int i = 0; i < coloredAttempts.size(); i++) {
-        cout << coloredAttempts[i] << " ";
+        cout << "📚 "+coloredAttempts[i]+" 📚 " << endl;
+    }
+    for (int i = 0; i < trials - coloredAttempts.size()-1; i++) {
+        cout << "📚 ";
+        for (int j = 0; j < PwLength; j++) {
+            cout << "\033[1;35m - \033[0m";
+        }
+        cout << " 📚 " << endl;
+    }
+    for (int i = 0; i < PwLength+5; i++) {
+        cout << "📚";
     }
     cout << endl;
 }
@@ -186,27 +221,30 @@ bool password(string difficulty) {
     } else if (difficulty=="Normal") {
         PwLength=5;
         trials=7;
-    } else {
+    } else if (difficulty=="Hard"){
         PwLength=6;
         trials=5;
     }
     // generate a password
     password=generatePassword(PwLength);
-    // start the game
-    cout << "Welcome to the wordle game!" << endl;
     // loop for the game
+    blink(3, "> > > 🥸  Markers could enter \"/reveal\" to crack this chapter 🥸  < < <", 500, bold_yellow);
+    color_print("> > > 🥸  Markers could enter \"/reveal\" to crack this chapter 🥸  < < <", bold_yellow);
     while ((attempts.size()<trials)) {
-        printBoard(password, attempts);
+        printBoard(password, attempts, trials);
+        // tell markers that they could enter "reveal" to reveal the password
+        cout << endl;
         checkInput(PwLength, trials, attempts, password, input);
         if (attempts.back()==password) {
-            printBoard(password, attempts);
+            printBoard(password, attempts ,trials);
             break;
     }
     }
     if (attempts.back()==password) {
         return 1;
     }else{
-        cout << "PASSWORD RESET IN PROGRESS..." << endl;
+        blink(3, "OH NO", 300, bold_background_red);
+        char_typewriter("PASSWORD RESET IN PROGRESS...", bold_background_red);
         return 0;
     }
 }
