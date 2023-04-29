@@ -18,6 +18,8 @@
 
 using namespace std;
 
+// input: player name
+// function for the story chapter "Stairs"
 int Stairs(string player_name)
 {
     system("clear");
@@ -51,6 +53,7 @@ int Stairs(string player_name)
     items.clear(); // Clear the vector
     if (look_back == 0)
     {
+        // option "Keep walking" chosen
         char_typewriter("\nYou believe in your sixth sense and decide not to look back", italic_green);
         char_typewriter("After several minutes, you have a strong feeling that you are reaching the end", italic_green);
         char_typewriter("However, your feet are so heavy that you can barely make a step\n", italic_green);
@@ -61,6 +64,7 @@ int Stairs(string player_name)
         items.clear(); // Clear the vector
         if (look_back_again == 0)
         {
+            // option "Keep walking, still" chosen
             char_typewriter("\nYou🙎: It is just a myth... It is fine...", bold_magenta);
             char_typewriter("You keep comforting yourself while trying your best to overcome the weights", italic_green);
             char_typewriter("And finally there is an end!", italic_green);
@@ -89,12 +93,14 @@ int Stairs(string player_name)
         }
         else if (look_back_again == 1)
         {
+            // option "I cannot resist looking back ANYMORE" chosen
             Stairs_Enemy(player_name);
             return 0;
         }
     }
     else if (look_back == 1)
     {
+        // option "Look back to see what is messing with you" chosen
         Stairs_Enemy(player_name);
         return 0;
     }

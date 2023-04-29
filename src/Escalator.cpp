@@ -17,6 +17,8 @@
 
 using namespace std;
 
+// input: player name
+// function for the story chapter "Escalator"
 int Escalator(string player_name)
 {
     system("clear");
@@ -36,11 +38,13 @@ int Escalator(string player_name)
     items.clear(); // Clear the vector
     if (talk_option == 0)
     {
+        // option "Ask questions about him" chosen
         char_typewriter("\nYou🙎: Who are you?", bold_magenta);
         char_typewriter("Little boy👦: Who I am doesn't matter", bold_magenta);
     }
     else if (talk_option == 1)
     {
+        // option "Shout at him" chosen
         char_typewriter("\nYou🙎: Stay away from me!", bold_magenta);
         char_typewriter("Little boy👦: Chill bro. Not like I am gonna hurt you", bold_magenta);
         char_typewriter("The little boy sounds a bit pissed", italic_green);
@@ -48,6 +52,7 @@ int Escalator(string player_name)
     }
     else if (talk_option == 2)
     {
+        // option "Stay silent" chosen
         char_typewriter("\nYou🙎: ...", bold_magenta);
         char_typewriter("Little boy👦: ...", bold_magenta);
     }
@@ -63,11 +68,13 @@ int Escalator(string player_name)
 
     if (talk_option_2 == 0)
     {
+        // option "Ask if he needs help" chosen
         char_typewriter("\nYou🙎: Are you okay? Why are you here alone", bold_magenta);
         char_typewriter("Little boy🤡🎈: Thanks for your kindness despite my weird appearance", bold_magenta);
     }
     else if (talk_option_2 == 1)
     {
+        // option "Interrogate him" chosen
         char_typewriter("\nYou🙎: I knew you are not normal! What you gonna do to me", bold_magenta);
         char_typewriter("Little boy🤡🎈: How rude! Just because of my appearance?", bold_magenta);
         char_typewriter("The little boy feels offended and starts crying 😭", italic_green);
@@ -76,10 +83,11 @@ int Escalator(string player_name)
         char_typewriter("The little boy vanishes after cursing you", italic_green);
         char_typewriter("You🙎: Well... I did not mean that", bold_magenta);
         char_typewriter("You🙎: It is what it is 🤷, I should just keep going I guess\n", bold_magenta);
-        player_info.buff = -1;
+        player_info.buff = -1; // add damage debuff to player
     }
     else if (talk_option_2 == 2)
     {
+        // option "Stay silent" chosen
         char_typewriter("\nYou🙎: ...", bold_magenta);
         char_typewriter("Little boy🤡🎈: ...", bold_magenta);
         char_typewriter("The little boy breaks the silence", italic_green);
@@ -87,6 +95,7 @@ int Escalator(string player_name)
 
     if (talk_option_2 == 0 or talk_option_2 == 2)
     {
+        // option "Ask if he needs help" or "Stay silent" chosen
         char_typewriter("Little boy🤡🎈: I am lost in the campus. Can you help me?", bold_magenta);
         items.push_back("For sure");
         items.push_back("No, I still have to deal with other things");
@@ -95,6 +104,7 @@ int Escalator(string player_name)
 
         if (talk_option_3 == 0)
         {
+            // option "For sure" chosen
             char_typewriter("\nYou🙎: Where are you going?", bold_magenta);
             char_typewriter("Little boy🤡🎈: Heaven", bold_magenta);
             char_typewriter("You🙎: Sorry where? What did you just say?", bold_magenta);
@@ -102,7 +112,7 @@ int Escalator(string player_name)
             char_typewriter("Little boy🤡🎈: Thank you for your kindness. Wish you the best of luck on the journey", bold_magenta);
             char_typewriter("Little boy🤡🎈: May the force be with you", bold_magenta);
             char_typewriter("You can feel the power, your attack has increased", italic_green);
-            player_info.buff = 1;
+            player_info.buff = 1; // add damage buff to player
             char_typewriter("After giving you the Xphone phone case, the little boy vanishes", italic_green);
             player_info.items.push_back("Xphone phone case");
             char_typewriter("You🙎: Wait... Why a phone case though?", bold_magenta);
@@ -110,12 +120,13 @@ int Escalator(string player_name)
         }
         else if (talk_option_3 == 1)
         {
+            // option "No, I still have to deal with other things" chosen
             char_typewriter("\nThe little boy starts crying 😭", italic_green);
             char_typewriter("Little boy🤡🎈: Why don't you help me... Is it because of my appearance?", bold_magenta);
             char_typewriter("Little boy🤡🎈: You were the only one that can help me", bold_magenta);
             char_typewriter("Little boy🤡🎈: I will curse you for the rest of your journey 😡", bold_magenta);
             char_typewriter("You feel like you are losing power, your attack has decreased", italic_green);
-            player_info.buff = -1;
+            player_info.buff = -1; // add damage debuff to player
             char_typewriter("The little boy vanishes after cursing you", italic_green);
             char_typewriter("You🙎: Well... say it earlier and maybe I will help", bold_magenta);
             char_typewriter("You🙎: It is what it is 🤷, I should just keep going I guess\n", bold_magenta);

@@ -12,6 +12,8 @@
 
 using namespace std;
 
+// input: player name
+// function for the story chapter "Time_Tunnel"
 int Time_Tunnel(string player_name)
 {
     system("clear");
@@ -49,6 +51,7 @@ int Time_Tunnel(string player_name)
     items.clear(); // Clear the vector
     if (response == 0)
     {
+        // option "Comfort him" chosen
         char_typewriter("\nYou🙎: It is normal to act like that under such situation...", bold_magenta);
         char_typewriter("You🙎: Lets leave together and go back to our normal lives", bold_magenta);
         char_typewriter("There is a portal appears behind You 🌀", italic_green);
@@ -65,6 +68,7 @@ int Time_Tunnel(string player_name)
     }
     else if (response == 1)
     {
+        // option "Agree with him" chosen
         char_typewriter("\nYou🙎: Yes! You deserve it! I think you should definitely stay here", bold_magenta);
         char_typewriter("You🙎: I think you should definitely stay here forever because of what you did", bold_magenta);
         char_typewriter("There is a portal appears behind You 🌀", italic_green);

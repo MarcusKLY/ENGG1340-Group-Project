@@ -12,6 +12,9 @@
 
 using namespace std;
 
+// input: player name
+// function for the story chapter "Library"
+// return 1 if the player failed to escape, otherwise return 0 if the player successfully escaped
 int Library_escape(string player_name)
 {
     PlayerManager player_manager;
@@ -19,6 +22,7 @@ int Library_escape(string player_name)
     PlayerInfo player_info;
     player_info = player_manager.get_player(player_name);
 
+    // set time_allowed based on difficulty
     float time_allowed;
     if (player_info.difficulty == "Easy")
     {

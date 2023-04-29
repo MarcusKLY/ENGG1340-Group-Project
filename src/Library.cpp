@@ -19,6 +19,8 @@
 
 using namespace std;
 
+// input: player name
+// function for the story chapter "Library"
 int Library(string player_name)
 {
     system("clear");
@@ -41,6 +43,7 @@ int Library(string player_name)
     items.clear(); // Clear the vector
     if (go_library == 0)
     {
+        // option "For sure" chosen
         char_typewriter("\nYou walk to the library", italic_green);
         walking_animation();
         char_typewriter("Peeking into the library from the entrance, there are the only lights on in the campus 💡", italic_green);
@@ -55,16 +58,18 @@ int Library(string player_name)
         items.clear(); // Clear the vector
         if (pick_sandwich == 0)
         {
+            // option "Yes please, I haven't eaten anything for hours" chosen
             char_typewriter("\nYou picked up the sandwich", italic_green);
-            player_info.items.push_back("half-eaten sXXway sandwich");
+            player_info.items.push_back("half-eaten sXXway sandwich"); // add item "half-eaten sXXway sandwich" to player's inventory
             char_typewriter("All of a sudden, all the lights are off and the entrance is locked", italic_green);
             char_typewriter("You🙎: I guess this is not a good sign...", bold_magenta);
             char_typewriter("???👀: Didn't your mum teach you not to eat in the library!?", bold_magenta);
             char_typewriter("There is a loud and angry voice yelling at you", italic_green);
             char_typewriter("You🙎: I didn't. It... it is not...", bold_magenta);
             char_typewriter("Librarian 👩‍🏫: I am an experienced librarian. I ain't that stupid to get fooled by you!", bold_magenta);
-            char_typewriter("Librarian 👩‍🏫: How dare you eat here. I should punish you 🤬", bold_magenta);
-            int escape = Library_escape(player_name);
+            char_typewriter("Librarian 👩‍🏫: How dare you eat here. I should punish you 🤬\n", bold_magenta);
+
+            int escape = Library_escape(player_name); // return 0 if player successfully escaped, return 1 if player failed
             while (escape == 0)
             {
                 char_typewriter("The librarian loses track of you", italic_green);
@@ -74,6 +79,7 @@ int Library(string player_name)
                 () win_tictactoe = 
                 if (win_tictactoe == )
                 {
+                    // if player lost tictactoe, player will have to escape again to get another chance to play tictactoe
                     char_typerwriter("\nThe librarian is coming back!\n", bold_red);
                     escape = Library_escape(player_name);
                 }
@@ -102,20 +108,23 @@ int Library(string player_name)
 
                 if (clean_library == 0)
                 {
+                    // option "Okay... I will clean the place" chosen
                     char_typewriter("\nLibrarian 👩‍🏫: That's a smart choice. Clean it and I will let you go", bold_magenta);
                     char_typewriter("After spending 30 minutes to clean the place, the librarian finally approves you to leave", italic_green);
                     char_typewriter("You leave the library feeling extremely exhausted", italic_green);
                     walking_animation();
                     char_typewriter("You🙎: The guy who asked me to come here must be trolling 🙄\n", bold_magenta);
-                    save_game("Happy Park", player_name);
+                    save_game("Happy Park", player_name); // "Happy Park" ended -> save game
                     return 0;
                 }
                 else if (clean_library == 1)
                 {
+                    // option "No! I did nothing wrong" chosen
                     char_typewriter("\nLibrarian 👩‍🏫: Such a naughty kid! I must punish you\n", bold_magenta);
-                    int win = call_new_battle(player_name, "Librarian 👩‍🏫", player_info.items, player_info.difficulty, 3, 0);
+                    int win = call_new_battle(player_name, "Librarian 👩‍🏫", player_info.items, player_info.difficulty, 3, 0); // call battle
                     if (win == 0)
                     {
+                        // player won the battle
                         char_typewriter("\nLibrarian 👩‍🏫: AARGHHHH", bold_magenta);
                         char_typewriter("The scream is so scary and deafening that you have to cover your ears", italic_green);
                         char_typewriter("Librarian 👩‍🏫: You are extremely lucky this time...", bold_magenta);
@@ -124,22 +133,24 @@ int Library(string player_name)
                         walking_animation();
                         char_typewriter("You rush out of the library without a doubt", italic_green);
                         char_typewriter("You🙎: The guy who called me must be trolling 🙄\n", bold_magenta);
-                        save_game("Happy Park", player_name);
+                        save_game("Happy Park", player_name); // "Happy Park" ended -> save game
                         return 0;
                     }
                     else if (win == 1)
                     {
+                        // player lost the battle
                         char_typewriter("\nYou slowly lose you consciousness in a pool of blood while feeling extremely painful... 😣", italic_green);
                         char_typewriter("Librarian 👩‍🏫: GO TO HELLLLLL", bold_magenta);
                         char_typewriter("Librarian 👩‍🏫: HAHAHAHAHA. This is what you get for disrespecting this holy place! 😈", bold_magenta);
-                        gameover("Library", player_name);
+                        gameover("Library", player_name); // gameover
                         return 0;
                     }
                     else if (win == 2)
                     {
+                        // both player and enemy died -> player lost the battle
                         char_typewriter("\nYou all fell in a pool of blood and heard each other screaming in pain...", italic_green);
                         char_typewriter("Librarian 👩‍🏫: Let's meet again in HELLLLLL 😈", bold_magenta);
-                        gameover("Library", player_name);
+                        gameover("Library", player_name); // gameover
                         return 0;
                     }
                 }
@@ -147,6 +158,7 @@ int Library(string player_name)
         }
         else if (pick_sandwich == 1)
         {
+            // option "Mum tells me not to eat things picked on the ground" chosen
             char_typewriter("\nYou feel disgusted eating a half-eaten sandwich and decide not to pick it up 🤢", italic_green);
             char_typewriter("Searching around in the library, there is nothing but silence", italic_green);
             char_typewriter("You🙎: This place is so weird. I should just leave 😰", bold_magenta);
@@ -157,6 +169,7 @@ int Library(string player_name)
             while (win_tictactoe == )
             {
                 char_typerwriter("\nYou failed to unlock! Please try again\n", bold_red);
+                // if player lost tictactoe, player will have to play again
                 win_tictactoe =
             }
             if (win_tictactoe == )

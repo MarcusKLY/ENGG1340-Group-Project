@@ -22,6 +22,8 @@
 
 using namespace std;
 
+// input: checkpoint name, player name
+// call the function of the story part where the player died if the player choose to continue, otherwise return to main menu
 int gameover(string checkpoint, string player_name)
 {
     char_typewriter(".", bold_red);
@@ -38,7 +40,7 @@ int gameover(string checkpoint, string player_name)
     string question = "Game saved at checkpoint " + checkpoint + ". Do you want to continue?";
     int cgame = choose_event(items, question);
     items.clear(); // Clear the vector
-    if (cgame == 0)
+    if (cgame == 0) // Continue
     {
         if (checkpoint == "Story Background")
         {
@@ -78,7 +80,7 @@ int gameover(string checkpoint, string player_name)
         }
         return 0;
     }
-    if (cgame == 1)
+    if (cgame == 1) // Return to main menu
     {
         main_menu();
         return 0;

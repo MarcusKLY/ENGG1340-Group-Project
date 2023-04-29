@@ -17,6 +17,8 @@
 
 using namespace std;
 
+// input: player name
+// function for the story chapter "Happy Park"
 int Happy_Park(string player_name)
 {
     system("clear");
@@ -39,6 +41,7 @@ int Happy_Park(string player_name)
 
     if (choice == 0)
     {
+        // option "Left" chosen
         char_typewriter("\nYou head to the stairs\n", italic_green);
         player_info.checkpoint = "Stairs";
         player_manager.update_player(player_info);
@@ -61,6 +64,7 @@ int Happy_Park(string player_name)
     }
     else if (choice == 1)
     {
+        // option "Right" chosen
         char_typewriter("\nYou head to the escalators\n", italic_green);
         player_info.checkpoint = "Escalator";
         player_manager.update_player(player_info);

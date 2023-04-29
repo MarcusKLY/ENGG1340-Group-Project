@@ -17,6 +17,8 @@
 
 using namespace std;
 
+// input: player name
+// function for the story chapter "CYM"
 int CYM(string player_name)
 {
     system("clear"); // clear screen
@@ -46,6 +48,7 @@ int CYM(string player_name)
         items.clear(); // Clear the vector
         if (help == 0)
         {
+            // code to handle "Yeah, sure!" option
             char_typewriter("\nOld Lady👵: Thank you! You are such a good guy! 😊", bold_magenta);
             char_typewriter("You🙎: No problem, I am just doing my job", bold_magenta);
             char_typewriter("Then you help her push the wheelchair up the escalator↗️", italic_green);
@@ -73,10 +76,12 @@ int CYM(string player_name)
             items.clear(); // Clear the vector
             if (run == 0)
             {
+                // code to handle "Walk up the escalator" option
                 char_typewriter("\nYou walk up cautiously with you leg shaking", italic_green);
             }
             else if (run == 1)
             {
+                // code to handle "Turn around and run away" option
                 char_typewriter("\nYou immediately turn around and wanted to run away", italic_green);
                 char_typewriter("However, you see Chong standing down there and staring at you", italic_green);
                 char_typewriter("Chong🤡: Why are you trying to run away!?", bold_magenta);
@@ -88,35 +93,39 @@ int CYM(string player_name)
             char_typewriter("Chong🤡: I guess there is no choice but to kill you for revenge!", bold_magenta);
             char_typewriter("You clench your fists and ready to fight 👊\n", italic_green);
 
-            int win = call_new_battle(player_name, "Chong🤡", player_info.items, player_info.difficulty, 1, 0);
+            int win = call_new_battle(player_name, "Chong🤡", player_info.items, player_info.difficulty, 1, 0); // call battle
             if (win == 0)
             {
+                // player won the battle
                 char_typewriter("\nYou see Chong slowly dissapearing...", italic_green);
                 char_typewriter("Chong🤡: Why!!!", bold_magenta);
                 char_typewriter("Chong🤡: I will come back and revenge!!!", bold_magenta);
                 char_typewriter("You walk away with extreme fatigue...", italic_green);
                 walking_animation();
-                save_game("Library", player_name);
+                save_game("Library", player_name); // "CYM" ended -> save game
                 return 0;
             }
             else if (win == 1)
             {
+                // player lost the battle
                 char_typewriter("\nYou slowly lose you consciousness in a pool of blood while feeliong extremely pain...", italic_green);
                 char_typewriter("Chong🤡: GO TO HELLLLLL", bold_magenta);
                 char_typewriter("Chong🤡: HAHAHAHAHA\n", bold_magenta);
-                gameover("CYM", player_name);
+                gameover("CYM", player_name); // gameover
                 return 0;
             }
             else if (win == 2)
             {
+                // both player and enemy died -> player lost the battle
                 char_typewriter("\nYou all fell in a pool of blood and heard each other screaming in pain...", italic_green);
                 char_typewriter("Chong🤡: Let's meet again in HELLLLLL\n", bold_magenta);
-                gameover("CYM", player_name);
+                gameover("CYM", player_name); // gameover
                 return 0;
             }
         }
         else if (help == 1)
         {
+            // code to handle "Help her" option
             char_typewriter("\nYou walk away and leave the old lady alone", italic_green);
             char_typewriter("You🙎: Sorry, I have to go now", bold_magenta);
             char_typewriter("Old Lady👵: ......", bold_magenta);
@@ -143,6 +152,7 @@ int CYM(string player_name)
 
     else if (leave == 1)
     {
+        // code to handle "Leave her alone" option
         char_typewriter("\nYou walk away and leave the old lady alone\n", italic_green);
         player_info.checkpoint = "CYM Toilet";
         player_manager.update_player(player_info);
