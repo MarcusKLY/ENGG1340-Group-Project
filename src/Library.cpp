@@ -189,24 +189,7 @@ int Library(string player_name)
         char_typewriter("\nYou have a bad feeling going to the library", italic_green);
         char_typewriter("You🙎: I may just explore other places instead 🤔\n", bold_magenta);
 
-        player_info.checkpoint = "Happy Park";
-        player_manager.update_player(player_info);
-        player_manager.save_players("saves.sav");
-        items.push_back("Continue");
-        items.push_back("Return to main menu");
-        string question = "Game saved at checkpoint Happy Park. Do you want to continue?";
-        int cgame = choose_event(items, question);
-        items.clear(); // Clear the vector
-        if (cgame == 0)
-        {
-            Happy_Park(player_name);
-            return 0;
-        }
-        if (cgame == 1)
-        {
-            main_menu();
-            return 0;
-        }
+        save_game("Happy Park", player_name); // "Library" ended -> save game
     }
     return 0;
 }

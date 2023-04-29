@@ -9,6 +9,7 @@
 #include "../header/battle.h"
 #include "../header/Stairs.h"
 #include "../header/Escalator.h"
+#include "../header/save_game_checkpoint.h"
 
 #include <iostream>
 #include <string>
@@ -43,47 +44,13 @@ int Happy_Park(string player_name)
     {
         // option "Left" chosen
         char_typewriter("\nYou head to the stairs\n", italic_green);
-        player_info.checkpoint = "Stairs";
-        player_manager.update_player(player_info);
-        player_manager.save_players("saves.sav");
-        items.push_back("Continue");
-        items.push_back("Return to main menu");
-        string question = "Game saved at checkpoint Stairs. Do you want to continue?";
-        int cgame = choose_event(items, question);
-        items.clear(); // Clear the vector
-        if (cgame == 0)
-        {
-            Stairs(player_name);
-            return 0;
-        }
-        if (cgame == 1)
-        {
-            main_menu();
-            return 0;
-        }
+        save_game("Stairs", player_name); // "Happy_Park" ended -> save game
     }
     else if (choice == 1)
     {
         // option "Right" chosen
         char_typewriter("\nYou head to the escalators\n", italic_green);
-        player_info.checkpoint = "Escalator";
-        player_manager.update_player(player_info);
-        player_manager.save_players("saves.sav");
-        items.push_back("Continue");
-        items.push_back("Return to main menu");
-        string question = "\nGame saved at checkpoint Escalator. Do you want to continue?";
-        int cgame = choose_event(items, question);
-        items.clear(); // Clear the vector
-        if (cgame == 0)
-        {
-            Escalator(player_name);
-            return 0;
-        }
-        if (cgame == 1)
-        {
-            main_menu();
-            return 0;
-        }
+        save_game("Escalator", player_name); // "Happy_Park" ended -> save game
     }
 
     return 0;

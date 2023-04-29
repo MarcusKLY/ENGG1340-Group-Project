@@ -128,25 +128,9 @@ int CYM(string player_name)
             // code to handle "Help her" option
             char_typewriter("\nYou walk away and leave the old lady alone", italic_green);
             char_typewriter("You🙎: Sorry, I have to go now", bold_magenta);
-            char_typewriter("Old Lady👵: ......", bold_magenta);
-            player_info.checkpoint = "CYM Toilet";
-            player_manager.update_player(player_info);
-            player_manager.save_players("saves.sav");
-            items.push_back("Continue");
-            items.push_back("Return to main menu");
-            string question = "Game saved at checkpoint CYM Toilet. Do you want to continue?";
-            int cgame = choose_event(items, question);
-            items.clear(); // Clear the vector
-            if (cgame == 0)
-            {
-                CYM_Toilet(player_name);
-                return 0;
-            }
-            if (cgame == 1)
-            {
-                main_menu();
-                return 0;
-            }
+            char_typewriter("Old Lady👵: ......\n", bold_magenta);
+            save_game("CYM Toilet", player_name); // "CYM" ended -> save game
+            return 0;
         }
     }
 
@@ -154,24 +138,8 @@ int CYM(string player_name)
     {
         // code to handle "Leave her alone" option
         char_typewriter("\nYou walk away and leave the old lady alone\n", italic_green);
-        player_info.checkpoint = "CYM Toilet";
-        player_manager.update_player(player_info);
-        player_manager.save_players("saves.sav");
-        items.push_back("Continue");
-        items.push_back("Return to main menu");
-        string question = "Game saved at checkpoint CYM Toilet. Do you want to continue?";
-        int cgame = choose_event(items, question);
-        items.clear(); // Clear the vector
-        if (cgame == 0)
-        {
-            CYM_Toilet(player_name);
-            return 0;
-        }
-        if (cgame == 1)
-        {
-            main_menu();
-            return 0;
-        }
+        save_game("CYM Toilet", player_name); // "CYM" ended -> save game
+        return 0;
     }
     return 0;
 }

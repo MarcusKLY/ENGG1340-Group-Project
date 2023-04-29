@@ -255,25 +255,8 @@ int Knowles(string player_name)
                 char_typewriter("The old man vanishes in the air with his voice fading out...", italic_green);
                 char_typewriter("You🙎: Well... I guess I should leave this place", bold_magenta);
                 walking_animation();
-
-                player_info.checkpoint = "Library";
-                player_manager.update_player(player_info);
-                player_manager.save_players("saves.sav");
-                items.push_back("Continue");
-                items.push_back("Return to main menu");
-                string question = "Game saved at checkpoint Library. Do you want to continue?";
-                int cgame = choose_event(items, question);
-                items.clear(); // Clear the vector
-                if (cgame == 0)
-                {
-                    Library(player_name);
-                    return 0;
-                }
-                if (cgame == 1)
-                {
-                    main_menu();
-                    return 0;
-                }
+                cout << endl;
+                save_game("Library", player_name); // "Knowles" ended -> save game
             }
             else
             {

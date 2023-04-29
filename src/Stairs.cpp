@@ -72,24 +72,7 @@ int Stairs(string player_name)
             char_typewriter("You🙎: Told you it is just a myth... Haha... haha", bold_magenta);
             char_typewriter("You🙎: 😓😓😓\n", bold_magenta);
 
-            player_info.checkpoint = "Final Boss";
-            player_manager.update_player(player_info);
-            player_manager.save_players("saves.sav");
-            items.push_back("Continue");
-            items.push_back("Return to main menu");
-            string question = "Game saved at checkpoint Final Boss. Do you want to continue?";
-            int cgame = choose_event(items, question);
-            items.clear(); // Clear the vector
-            if (cgame == 0)
-            {
-                Final_Boss(player_name);
-                return 0;
-            }
-            if (cgame == 1)
-            {
-                main_menu();
-                return 0;
-            }
+            save_game("Final Boss", player_name); // "Stairs" ended -> save game
         }
         else if (look_back_again == 1)
         {
