@@ -80,6 +80,7 @@ void checkInput(int PwLength, int trials, vector<string>& attempts, string passw
         //print empty lines
         cout << endl;
         cin >> input;
+        transform (input.begin(), input.end(), input.begin(), ::tolower);
         cout << endl;
         // transform the input to lower case
         transform(input.begin(), input.end(), input.begin(), ::tolower);
@@ -162,7 +163,7 @@ void printBoard(string password, vector<string> attempts, int trials) {
                 color += " ";
                 color += attempt[j];
                 color += " ";
-                color += "\033[1;32m"; // reset color
+                color += "\033[0m"; // reset color
             }
         // check for correct letters in wrong positions
             else if (attempt[j] != password[j] && password.find(attempt[j]) != string::npos) {
@@ -171,7 +172,7 @@ void printBoard(string password, vector<string> attempts, int trials) {
                 color += " ";
                 color += attempt[j];
                 color += " ";
-                color += "\033[1;33m"; // reset color
+                color += "\033[0m"; // reset color
             }
         // check for wrong letters
             else if (attempt[j] != password[j] && password.find(attempt[j]) == string::npos) {
@@ -179,31 +180,162 @@ void printBoard(string password, vector<string> attempts, int trials) {
                 color += " ";
                 color += attempt[j];
                 color += " ";
-                color += "\033[1;31m"; // reset color
+                color += "\033[0m"; // reset color
             }
         }
         // add the colored attempt to the array
         coloredAttempts.push_back(color);
     }
-    //print all attempts with colors with book emojis
-    for (int i = 0; i < PwLength+5; i++) {
-        cout << "📚";
+    //print all attempts with colors and within rainbow borders
+    if (PwLength==4){
+        cout << "\033[0;31m┌\033[0m";
+        cout << "\033[0;31m─\033[0m";
+        cout << "\033[0;31m─\033[0m";
+        cout << "\033[0;33m─\033[0m";
+        cout << "\033[0;33m─\033[0m";
+        cout << "\033[0;32m─\033[0m";
+        cout << "\033[0;32m─\033[0m";
+        cout << "\033[0;32m─\033[0m";
+        cout << "\033[0;36m─\033[0m";
+        cout << "\033[0;36m─\033[0m";
+        cout << "\033[0;34m─\033[0m";
+        cout << "\033[0;34m─\033[0m";
+        cout << "\033[0;35m─\033[0m";
+        cout << "\033[0;35m─\033[0m";
+        cout << "\033[0;35m─\033[0m";
+        cout << "\033[0;35m┐\033[0m";
+        cout << "\n";
+    } else if (PwLength==5){
+        cout << "\033[0;31m┌\033[0m";
+        cout << "\033[0;31m─\033[0m";
+        cout << "\033[0;31m─\033[0m";
+        cout << "\033[0;33m─\033[0m";
+        cout << "\033[0;33m─\033[0m";
+        cout << "\033[0;33m─\033[0m";
+        cout << "\033[0;32m─\033[0m";
+        cout << "\033[0;32m─\033[0m";
+        cout << "\033[0;32m─\033[0m";
+        cout << "\033[0;36m─\033[0m";
+        cout << "\033[0;36m─\033[0m";
+        cout << "\033[0;36m─\033[0m";
+        cout << "\033[0;34m─\033[0m";
+        cout << "\033[0;34m─\033[0m";
+        cout << "\033[0;34m─\033[0m";
+        cout << "\033[0;35m─\033[0m";
+        cout << "\033[0;35m─\033[0m";
+        cout << "\033[0;35m─\033[0m";
+        cout << "\033[0;35m┐\033[0m";
+        cout << "\n";
+    } else if (PwLength==6){
+        cout << "\033[0;31m┌\033[0m";
+        cout << "\033[0;31m─\033[0m";
+        cout << "\033[0;31m─\033[0m";
+        cout << "\033[0;33m─\033[0m";
+        cout << "\033[0;33m─\033[0m";
+        cout << "\033[0;33m─\033[0m";
+        cout << "\033[0;33m─\033[0m";
+        cout << "\033[0;32m─\033[0m";
+        cout << "\033[0;32m─\033[0m";
+        cout << "\033[0;32m─\033[0m";
+        cout << "\033[0;36m─\033[0m";
+        cout << "\033[0;36m─\033[0m";
+        cout << "\033[0;36m─\033[0m";
+        cout << "\033[0;36m─\033[0m";
+        cout << "\033[0;34m─\033[0m";
+        cout << "\033[0;34m─\033[0m";
+        cout << "\033[0;34m─\033[0m";
+        cout << "\033[0;35m─\033[0m";
+        cout << "\033[0;35m─\033[0m";
+        cout << "\033[0;35m─\033[0m";
+        cout << "\033[0;35m┐\033[0m";
+        cout << "\n";
     }
-    cout << "\n";
     for (int i = 0; i < coloredAttempts.size(); i++) {
-        cout << "📚 "+coloredAttempts[i]+" 📚 " << endl;
-    }
-    for (int i = 0; i < trials - coloredAttempts.size()-1; i++) {
-        cout << "📚 ";
-        for (int j = 0; j < PwLength; j++) {
-            cout << "\033[1;35m - \033[0m";
+        //odd numbers use yellow borders, even numbers use green borders
+        if (i % 2 == 0) {
+            cout << "\033[0;34m│ \033[0m"+coloredAttempts[i]+"\033[0;35m │\033[0m" << endl;
+        } else {
+            cout << "\033[0;35m│ \033[0m"+coloredAttempts[i]+"\033[0;36m │\033[0m" << endl;
         }
-        cout << " 📚 " << endl;
     }
-    for (int i = 0; i < PwLength+5; i++) {
-        cout << "📚";
+    for (int i = 0; i < trials - coloredAttempts.size(); i++) {
+        if (i % 2 == 0) {
+            cout << "\033[0;33m│ \033[0m";
+            for (int j = 0; j < PwLength; j++) {
+                cout << "\033[1;35m - \033[0m";
+            }
+            cout << "\033[0;36m │\033[0m" << endl;
+        } else {
+            cout << "\033[0;32m│ \033[0m";
+            for (int j = 0; j < PwLength; j++) {
+                cout << "\033[1;35m - \033[0m";
+            }
+            cout << "\033[0;32m │\033[0m" << endl;
+        }
     }
-    cout << endl;
+    if (PwLength==4){
+        cout << "\033[0;31m└\033[0m";
+        cout << "\033[0;31m─\033[0m";
+        cout << "\033[0;31m─\033[0m";
+        cout << "\033[0;33m─\033[0m";
+        cout << "\033[0;33m─\033[0m";
+        cout << "\033[0;32m─\033[0m";
+        cout << "\033[0;32m─\033[0m";
+        cout << "\033[0;32m─\033[0m";
+        cout << "\033[0;36m─\033[0m";
+        cout << "\033[0;36m─\033[0m";
+        cout << "\033[0;34m─\033[0m";
+        cout << "\033[0;34m─\033[0m";
+        cout << "\033[0;35m─\033[0m";
+        cout << "\033[0;35m─\033[0m";
+        cout << "\033[0;35m─\033[0m";
+        cout << "\033[0;35m┘\033[0m";
+        cout << "\n";
+    } else if (PwLength==5){
+        cout << "\033[0;31m└\033[0m";
+        cout << "\033[0;31m─\033[0m";
+        cout << "\033[0;31m─\033[0m";
+        cout << "\033[0;33m─\033[0m";
+        cout << "\033[0;33m─\033[0m";
+        cout << "\033[0;33m─\033[0m";
+        cout << "\033[0;32m─\033[0m";
+        cout << "\033[0;32m─\033[0m";
+        cout << "\033[0;32m─\033[0m";
+        cout << "\033[0;36m─\033[0m";
+        cout << "\033[0;36m─\033[0m";
+        cout << "\033[0;36m─\033[0m";
+        cout << "\033[0;34m─\033[0m";
+        cout << "\033[0;34m─\033[0m";
+        cout << "\033[0;34m─\033[0m";
+        cout << "\033[0;35m─\033[0m";
+        cout << "\033[0;35m─\033[0m";
+        cout << "\033[0;35m─\033[0m";
+        cout << "\033[0;35m┘\033[0m";
+        cout << "\n";
+    } else if (PwLength==6){
+        cout << "\033[0;31m└\033[0m";
+        cout << "\033[0;31m─\033[0m";
+        cout << "\033[0;31m─\033[0m";
+        cout << "\033[0;33m─\033[0m";
+        cout << "\033[0;33m─\033[0m";
+        cout << "\033[0;33m─\033[0m";
+        cout << "\033[0;33m─\033[0m";
+        cout << "\033[0;32m─\033[0m";
+        cout << "\033[0;32m─\033[0m";
+        cout << "\033[0;32m─\033[0m";
+        cout << "\033[0;36m─\033[0m";
+        cout << "\033[0;36m─\033[0m";
+        cout << "\033[0;36m─\033[0m";
+        cout << "\033[0;36m─\033[0m";
+        cout << "\033[0;34m─\033[0m";
+        cout << "\033[0;34m─\033[0m";
+        cout << "\033[0;34m─\033[0m";
+        cout << "\033[0;35m─\033[0m";
+        cout << "\033[0;35m─\033[0m";
+        cout << "\033[0;35m─\033[0m";
+        cout << "\033[0;35m┘\033[0m";
+        cout << "\n";
+    }
 }
 
 // main function to return the result
@@ -218,12 +350,15 @@ bool password(string difficulty) {
     if (difficulty=="Easy") {
         PwLength=4;
         trials=10;
-    } else if (difficulty=="Normal") {
-        PwLength=5;
-        trials=7;
+    // } else if (difficulty=="Normal") {
+    //     PwLength=5;
+    //     trials=7;
     } else if (difficulty=="Hard"){
         PwLength=6;
         trials=5;
+    } else {
+        PwLength=5;
+        trials=7;
     }
     // generate a password
     password=generatePassword(PwLength);

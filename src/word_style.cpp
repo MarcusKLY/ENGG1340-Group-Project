@@ -8,11 +8,11 @@
 
 //basic colors
 ColorOption red = {"red", "\033[0;31m"};
-ColorOption green = {"green", "\033[0;32m"};
 ColorOption yellow = {"yellow", "\033[0;33m"};
+ColorOption green = {"green", "\033[0;32m"};
+ColorOption cyan = {"cyan", "\033[0;36m"};
 ColorOption blue = {"blue", "\033[0;34m"};
 ColorOption magenta = {"magenta", "\033[0;35m"};
-ColorOption cyan = {"cyan", "\033[0;36m"};
 ColorOption white = {"white", "\033[0;37m"};
 
 //bold colors

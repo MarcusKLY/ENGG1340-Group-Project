@@ -1,7 +1,7 @@
-ser,ser,Easy,80,0
-checkpoint:Story Background
-end_player
-strn,strn,Easy,80,0
+strm,strm,Easy,80,0
 item:energy drink
 checkpoint:CYM
+end_player
+normal,normal,,1806298416,0
+checkpoint:Story Background
 end_player
