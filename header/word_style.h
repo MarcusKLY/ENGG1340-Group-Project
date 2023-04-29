@@ -130,8 +130,6 @@ struct ColorOption
 // ColorOption background_light_cyan = {"background_light_cyan", "\033[0;106m"};
 // ColorOption background_light_white = {"background_light_white", "\033[0;107m"};
 
-
-
 // extern for color options
 extern ColorOption red;
 extern ColorOption green;
@@ -141,6 +139,7 @@ extern ColorOption magenta;
 extern ColorOption cyan;
 extern ColorOption white;
 
+// bold colors
 extern ColorOption bold_red;
 extern ColorOption bold_green;
 extern ColorOption bold_blue;
@@ -149,6 +148,7 @@ extern ColorOption bold_magenta;
 extern ColorOption bold_cyan;
 extern ColorOption bold_white;
 
+// dark colors
 extern ColorOption dark_red;
 extern ColorOption dark_green;
 extern ColorOption dark_blue;
@@ -157,6 +157,7 @@ extern ColorOption dark_magenta;
 extern ColorOption dark_cyan;
 extern ColorOption dark_white;
 
+// underline colors
 extern ColorOption underline_red;
 extern ColorOption underline_green;
 extern ColorOption underline_blue;
@@ -165,6 +166,7 @@ extern ColorOption underline_magenta;
 extern ColorOption underline_cyan;
 extern ColorOption underline_white;
 
+// background colors
 extern ColorOption background_red;
 extern ColorOption background_green;
 extern ColorOption background_blue;
@@ -173,6 +175,7 @@ extern ColorOption background_magenta;
 extern ColorOption background_cyan;
 extern ColorOption background_white;
 
+// bold background colors
 extern ColorOption bold_background_red;
 extern ColorOption bold_background_green;
 extern ColorOption bold_background_blue;
@@ -181,6 +184,7 @@ extern ColorOption bold_background_magenta;
 extern ColorOption bold_background_cyan;
 extern ColorOption bold_background_white;
 
+// background italic colors
 extern ColorOption background_italic_red;
 extern ColorOption background_italic_green;
 extern ColorOption background_italic_blue;
