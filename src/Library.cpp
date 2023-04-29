@@ -70,7 +70,23 @@ int Library(string player_name)
                 char_typewriter("The librarian loses track of you", italic_green);
                 char_typewriter("You sneak back to the entrance and try to unlock the door", italic_green);
                 char_typewriter("You have to win the tic tac toe in order to unlock it\n", italic_green);
-                // tic tac toe
+                /*
+                () win_tictactoe = 
+                if (win_tictactoe == )
+                {
+                    char_typerwriter("\nThe librarian is coming back!\n", bold_red);
+                    escape = Library_escape(player_name);
+                }
+                else if (win_tictactoe == )
+                {
+                    cout << endl;
+                    walking_animation();
+                    char_typewriter("You unlocked the door and escaped from the librarian successfully", italic_green);
+                    char_typewriter("You🙎: I am not coming to this cursed place again 🙄\n", bold_magenta);
+                    save_game("Happy Park", player_name);
+                    return 0;
+                }
+                */
                 break; //
             }
             if (escape == 1)
@@ -136,7 +152,23 @@ int Library(string player_name)
             char_typewriter("You🙎: This place is so weird. I should just leave 😰", bold_magenta);
             char_typewriter("You go back to the entrance but notice that the doors are locked", italic_green);
             char_typewriter("You have to solve the tic tac toe to unlock it", italic_green);
-            // tic tac toe
+            /*
+            () win_tictactoe = 
+            while (win_tictactoe == )
+            {
+                char_typerwriter("\nYou failed to unlock! Please try again\n", bold_red);
+                win_tictactoe =
+            }
+            if (win_tictactoe == )
+            {
+                cout << endl;
+                walking_animation();
+                char_typewriter("You unlocked the door and left the library successfully", italic_green);
+                char_typewriter("You🙎: The guy who called me must be trolling 🙄\n", bold_magenta);
+                save_game("Happy Park", player_name);
+                return 0;
+            }
+            */
         }
     }
     else if (go_library == 1)
