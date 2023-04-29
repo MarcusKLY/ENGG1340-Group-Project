@@ -70,8 +70,8 @@ int Library(string player_name)
                 char_typewriter("The librarian loses track of you", italic_green);
                 char_typewriter("You sneak back to the entrance and try to unlock the door", italic_green);
                 char_typewriter("You have to win the tic tac toe in order to unlock it\n", italic_green);
-                //tic tac toe
-                break; // 
+                // tic tac toe
+                break; //
             }
             if (escape == 1)
             {
@@ -136,7 +136,7 @@ int Library(string player_name)
             char_typewriter("You🙎: This place is so weird. I should just leave 😰", bold_magenta);
             char_typewriter("You go back to the entrance but notice that the doors are locked", italic_green);
             char_typewriter("You have to solve the tic tac toe to unlock it", italic_green);
-            //tic tac toe
+            // tic tac toe
         }
     }
     else if (go_library == 1)
@@ -154,14 +154,14 @@ int Library(string player_name)
         items.clear(); // Clear the vector
         if (cgame == 0)
         {
-            Happy_Park(player_name); 
+            Happy_Park(player_name);
             return 0;
         }
         if (cgame == 1)
         {
             main_menu();
             return 0;
-        }                
-    }   
-    return 0;     
+        }
+    }
+    return 0;
 }

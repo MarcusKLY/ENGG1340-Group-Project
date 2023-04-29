@@ -62,7 +62,7 @@ int Final_Boss(string player_name)
         char_typewriter("Girl👧: One day I must let you get the taste of helpless and death", bold_magenta);
         char_typewriter("There is small note fell on the floor", italic_green);
         char_typewriter("You step forward cautiously, afraid of another trap\n", italic_green);
-        char_typewriter("Find me, I am in the time tunnel\n", background_italic_cyan); //colour choice?
+        char_typewriter("Find me, I am in the time tunnel\n", background_italic_cyan); // colour choice?
         char_typewriter("Where is time tunnel you wonder", italic_green);
         char_typewriter("You🙎: Ohhhh, its the indoor corridor which from Haking Wong Building to Stephen Hui Geological Museum", bold_magenta);
         char_typewriter("Then you walk away slowly, hoping this nightmare will pass soon", italic_green);

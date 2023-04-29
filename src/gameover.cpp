@@ -17,7 +17,6 @@
 #include "../header/Escalator.h"
 #include "../header/Final_Boss.h"
 
-
 #include <iostream>
 #include <string>
 
@@ -25,11 +24,11 @@ using namespace std;
 
 int gameover(string checkpoint, string player_name)
 {
-    char_typewriter(".",bold_red);
-    char_typewriter(".",bold_red);
-    char_typewriter(".",bold_red);
-    char_typewriter("YOU DIED",bold_background_red);
-    char_typewriter("Game Over",bold_red);
+    char_typewriter(".", bold_red);
+    char_typewriter(".", bold_red);
+    char_typewriter(".", bold_red);
+    char_typewriter("YOU DIED", bold_background_red);
+    char_typewriter("Game Over", bold_red);
 
     this_thread::sleep_for(chrono::seconds(2));
 
@@ -83,6 +82,6 @@ int gameover(string checkpoint, string player_name)
     {
         main_menu();
         return 0;
-    }    
+    }
     return 0;
 }

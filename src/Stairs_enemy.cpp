@@ -24,7 +24,7 @@ int Stairs_Enemy(string player_name)
     char_typewriter("Stair Monster👹: Another poor soul...", bold_magenta);
     char_typewriter("An enormous unknown creature appears in front of you", italic_green);
     char_typewriter("Stair Monster👹: I can't let you go once you see me 😈\n", bold_magenta);
-    
+
     PlayerManager player_manager;
     player_manager.load_players("saves.sav");
     PlayerInfo player_info;

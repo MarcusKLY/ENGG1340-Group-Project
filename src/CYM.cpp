@@ -87,7 +87,7 @@ int CYM(string player_name)
             char_typewriter("Chong🤡: It's no use saying sorry now!!!", bold_magenta);
             char_typewriter("Chong🤡: I guess there is no choice but to kill you for revenge!", bold_magenta);
             char_typewriter("You clench your fists and ready to fight 👊\n", italic_green);
-            
+
             int win = call_new_battle(player_name, "Chong🤡", player_info.items, player_info.difficulty, 1, 0);
             if (win == 0)
             {

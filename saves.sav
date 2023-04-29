@@ -1,7 +1,10 @@
-strm,strm,Easy,80,0
-item:energy drink
+hi,hi,Easy,80,0
+checkpoint:Story Background
+end_player
+dkhfdg,dkhfdg,Normal,70,0
 checkpoint:CYM
 end_player
-normal,normal,,1806298416,0
-checkpoint:Story Background
+df,df,Easy,80,0
+item:energy drink
+checkpoint:Knowles
 end_player

@@ -116,12 +116,16 @@ int story_background(string player_name)
             break;
         }
     }
-    char_typewriter("There is door locked with english vocabulary that is {passwordLength} characters long 🔒\nYou have to guess the password in {passwordAttempt} goes or less, or else the password would be reset\nA correct letter turns green\nA correct letter in the wrong place turns yellow\nAn incorrect letter turns grey", italic_green);
+    if (player_info.difficulty == "Easy")
+        char_typewriter("There is door locked with english vocabulary that is 4 characters long 🔒\nYou have to guess the password in 10 goes or less, or else the password would be reset\nA correct letter turns green\nA correct letter in the wrong place turns yellow\nAn incorrect letter turns grey", italic_green);
+    if (player_info.difficulty == "Normal")
+        char_typewriter("There is door locked with english vocabulary that is 5 characters long 🔒\nYou have to guess the password in 7 goes or less, or else the password would be reset\nA correct letter turns green\nA correct letter in the wrong place turns yellow\nAn incorrect letter turns grey", italic_green);
+    if (player_info.difficulty == "Hard")
+        char_typewriter("There is door locked with english vocabulary that is 6 characters long 🔒\nYou have to guess the password in 5 goes or less, or else the password would be reset\nA correct letter turns green\nA correct letter in the wrong place turns yellow\nAn incorrect letter turns grey", italic_green);
     bool pass = 0;
     while (!pass)
     {
         pass = password(player_info.difficulty);
-
     }
     char_typewriter("You open the door and walk into the building\n", italic_green);
     walking_animation();

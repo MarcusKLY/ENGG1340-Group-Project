@@ -7,6 +7,6 @@
 
 using namespace std;
 
-int Time_Tunnel(string player_name); 
+int Time_Tunnel(string player_name);
 
 #endif

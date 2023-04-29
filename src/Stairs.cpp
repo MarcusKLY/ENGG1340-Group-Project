@@ -33,12 +33,12 @@ int Stairs(string player_name)
     char_typewriter("However, it seems like you are never reaching an end", italic_green);
     char_typewriter("Suddenly, you recall a myth that is well known in the campus...\n", italic_green);
     this_thread::sleep_for(chrono::seconds(1));
-    char_typewriter("Long time ago, a little boy died here falling down the stairs",italic_cyan);
-    char_typewriter("Since then, hundreds of people are trapped here in this infinite staircase",italic_cyan);
-    char_typewriter("They are never out again...",italic_cyan);
-    char_typewriter("Some say they die of exhaustion while climbing stairs",italic_cyan);
-    char_typewriter("Some say they kill each other due to the hopelessness",italic_cyan);
-    char_typewriter("The strong emotions, miserableness and hopelessness, eventually lead to the birth of the stair monster",italic_cyan);
+    char_typewriter("Long time ago, a little boy died here falling down the stairs", italic_cyan);
+    char_typewriter("Since then, hundreds of people are trapped here in this infinite staircase", italic_cyan);
+    char_typewriter("They are never out again...", italic_cyan);
+    char_typewriter("Some say they die of exhaustion while climbing stairs", italic_cyan);
+    char_typewriter("Some say they kill each other due to the hopelessness", italic_cyan);
+    char_typewriter("The strong emotions, miserableness and hopelessness, eventually lead to the birth of the stair monster", italic_cyan);
     this_thread::sleep_for(chrono::seconds(1));
     char_typewriter("\nYou🙎: No way this is happening to me 😱", bold_magenta);
     char_typewriter("You feel like something is dragging your legs and it's getting heavier", italic_green);
@@ -78,7 +78,7 @@ int Stairs(string player_name)
             items.clear(); // Clear the vector
             if (cgame == 0)
             {
-                Final_Boss(player_name); 
+                Final_Boss(player_name);
                 return 0;
             }
             if (cgame == 1)
