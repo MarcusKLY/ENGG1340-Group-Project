@@ -6,6 +6,7 @@
 #include "../header/player.h"
 #include "../header/choose_event.h"
 #include "../header/output_style.h"
+#include "../header/tictactoe.h"
 #include <iostream>
 #include <thread>
 #include <chrono>
@@ -18,6 +19,7 @@ using namespace std;
 
 int main()
 {
+    tictactoe();
     // blink(30, "Welcome to the game", 10, italic_blue);
     //   Knowles("a");
     //    g_name();

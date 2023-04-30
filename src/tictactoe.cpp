@@ -3,6 +3,8 @@
 #include <vector>
 #include <ctime>
 #include <cstdlib>
+#include "../header/output_style.h"
+#include "../header/tictactoe.h"
 
 enum class Player
 {
@@ -18,17 +20,24 @@ struct Board
 
     void print()
     {
+        std::cout << "\033[35m===========================\033[0m" << std::endl;
+        // std::cout<<" "<<std::endl;
         for (const auto &row : cells)
         {
+            std::cout << "          ";
             for (const auto &cell : row)
             {
                 if (cell == Player::None)
-                    std::cout << '-';
+                    std::cout << "\033[1;37m_\033[0m"
+                              << "  ";
                 else if (cell == Player::Human)
-                    std::cout << 'X';
+                    std::cout << "\033[1;32mX\033[0m"
+                              << "  ";
                 else
-                    std::cout << 'O';
+                    std::cout << "\033[1;31mO\033[0m"
+                              << "  ";
             }
+            std::cout << std::endl;
             std::cout << std::endl;
         }
     }
@@ -73,11 +82,14 @@ Player playTicTacToe()
     board.print();
     if (checkWinner(board) == Player::Human)
     {
-        std::cout << "You won!" << std::endl;
+        std::cout << "The door is unlocked!" << std::endl;
+        return 1;
+        
     }
     else
     {
-        std::cout << "The computer won!" << std::endl;
+        std::cout << "You failed to unlock the door!" << std::endl;
+        return 0;
     }
 }
 int tictactoe()
@@ -139,9 +151,10 @@ void humanTurn(Board &board)
     int row, col;
     do
     {
-        std::cout << "Enter your move (1.row(0-2) and 'Enter' 2.col(0-2) and 'Enter'): ";
+        std::cout << "\033[35m===========================\033[0m" << std::endl;
+        std::cout << "Enter your move (1.row(1-3) and 'Enter' 2.col(1-3) and 'Enter'): ";
         std::cin >> row >> col;
-    } while (!board.makeMove(row, col, Player::Human));
+    } while (!board.makeMove(row - 1, col - 1, Player::Human));
 }
 
 void computerTurn(Board &board)
