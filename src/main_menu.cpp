@@ -134,6 +134,7 @@ int main_menu()
                     cout << "Exiting..." << endl;
                     this_thread::sleep_for(chrono::seconds(1));
                     done = true;
+                    tcsetattr(STDIN_FILENO, TCSANOW, &oldt);//restore terminal settings before exit
                     abort(); // turn to exit(0) later
                     break;
                 }

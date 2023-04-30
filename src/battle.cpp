@@ -3,6 +3,7 @@
 #include "../header/battle.h"
 #include "../header/choose_event.h"
 #include "../header/output_style.h"
+#include "../header/random#generator.h"
 #include <iostream>
 #include <stdlib.h>
 #include <string>
@@ -22,7 +23,7 @@ bool dod(int t_blink)
     this_thread::sleep_for(chrono::milliseconds(3000));
     cout << endl;
     // random direction and blink
-    int r = rand() % 4;
+    int r = randnum() % 4;
     string o = "";
     o = ((r == 0) ? "        [ ← ]" : (r == 1) ? "        [ → ]"
                                   : (r == 2)   ? "        [ ↑ ]"
@@ -46,7 +47,6 @@ bool dod(int t_blink)
 // callBattle() returns 0 if the player wins, 1 if the player loses, and 2 if both lose.    if return -1, some magic happened and tmr will snow (•◡•)/.
 int callBattle(const string p_name, int &p_hp, int p_atk[2], const string e_name, int &e_hp, int e_atk[2], bool (&items)[6], float time_allowed)
 {
-    srand(time(NULL)); // seed random number generator
     /***declare variables used in each round***/
     int p_action = 0;
     int e_action = 0;
@@ -65,8 +65,8 @@ int callBattle(const string p_name, int &p_hp, int p_atk[2], const string e_name
     /***battle intro***/
     cout << endl;
     char_typewriter("Here comes a new challenger!", bold_blue);
-    e_action = rand() % 4;
-    e_ultimate_cd = rand() % 3 + 4;
+    e_action = randnum() % 4;
+    e_ultimate_cd = randnum() % 3 + 4;
     /***battle loop***/
     while (true)
     {
@@ -235,7 +235,7 @@ int callBattle(const string p_name, int &p_hp, int p_atk[2], const string e_name
                                 char_typewriter("You used " + dict_item_detail[4], italic_cyan);
                                 cout << endl;
                                 color_print(e_name + ": -10", background_blue);
-                                r = rand() % 5;
+                                r = randnum() % 5;
                                 char_typewriter(e_name + ": " + (r == 0 ? "Ouch!" : r == 1 ? "No!"
                                                                                 : r == 2   ? "Stop!"
                                                                                 : r == 3   ? "Ah!"
@@ -307,11 +307,11 @@ int callBattle(const string p_name, int &p_hp, int p_atk[2], const string e_name
             char_typewriter(p_name + " used " + dict_action[p_action], italic_cyan);
             if (p_action == 0)
             {
-                e_hp -= p_atk[0] + (rand() % (p_atk[1] - p_atk[0] + 1));
+                e_hp -= p_atk[0] + (randnum() % (p_atk[1] - p_atk[0] + 1));
             }
             if (p_action == 1)
             {
-                e_hp -= (p_atk[0] + (rand() % (p_atk[1] - p_atk[0] + 1))) / 1.5;
+                e_hp -= (p_atk[0] + (randnum() % (p_atk[1] - p_atk[0] + 1))) / 1.5;
             }
         }
         // if late input and enemy is not flashed
@@ -320,7 +320,7 @@ int callBattle(const string p_name, int &p_hp, int p_atk[2], const string e_name
             char_typewriter("Your input is too late", italic_cyan);
             if (e_action == 0 || e_action == 1 || e_action == 4)
             {
-                char_typewriter(e_name + (rand() % 3 == 0 ? ": Hahah! Too slow!" : rand() % 3 == 1 ? ": You are so slow!"
+                char_typewriter(e_name + (randnum() % 3 == 0 ? ": Hahah! Too slow!" : randnum() % 3 == 1 ? ": You are so slow!"
                                                                                                    : ": Just stay there and shiver!"),
                                 bold_red);
             }
@@ -328,15 +328,15 @@ int callBattle(const string p_name, int &p_hp, int p_atk[2], const string e_name
             char_typewriter(e_name + " used " + dict_action[e_action], italic_cyan);
             if (e_action == 0)
             {
-                p_hp -= e_atk[0] + (rand() % (e_atk[1] - e_atk[0] + 1));
+                p_hp -= e_atk[0] + (randnum() % (e_atk[1] - e_atk[0] + 1));
             }
             if (e_action == 1)
             {
-                p_hp -= (e_atk[0] + (rand() % (e_atk[1] - e_atk[0] + 1))) / 1.5;
+                p_hp -= (e_atk[0] + (randnum() % (e_atk[1] - e_atk[0] + 1))) / 1.5;
             }
             if (e_action == 4)
             {
-                p_hp -= (e_atk[0] + (rand() % (e_atk[1] - e_atk[0] + 1))) * 1.5;
+                p_hp -= (e_atk[0] + (randnum() % (e_atk[1] - e_atk[0] + 1))) * 1.5;
             }
         }
         // if not late input and enemy is not flashed
@@ -347,51 +347,51 @@ int callBattle(const string p_name, int &p_hp, int p_atk[2], const string e_name
             {
                 if (e_action == 0)
                 {
-                    p_hp -= e_atk[0] + (rand() % (e_atk[1] - e_atk[0] + 1));
-                    e_hp -= p_atk[0] + (rand() % (p_atk[1] - p_atk[0] + 1));
+                    p_hp -= e_atk[0] + (randnum() % (e_atk[1] - e_atk[0] + 1));
+                    e_hp -= p_atk[0] + (randnum() % (p_atk[1] - p_atk[0] + 1));
                 }
                 if (e_action == 1)
                 {
-                    p_hp -= (p_atk[0] + rand() % (p_atk[1] - p_atk[0] + 1)) / 1.5;
-                    e_hp -= p_atk[0] + (rand() % (p_atk[1] - p_atk[0] + 1));
+                    p_hp -= (p_atk[0] + randnum() % (p_atk[1] - p_atk[0] + 1)) / 1.5;
+                    e_hp -= p_atk[0] + (randnum() % (p_atk[1] - p_atk[0] + 1));
                 }
                 if (e_action == 2)
                 {
-                    e_hp -= p_atk[0] + (rand() % (p_atk[1] - p_atk[0] + 1)) / 4;
+                    e_hp -= p_atk[0] + (randnum() % (p_atk[1] - p_atk[0] + 1)) / 4;
                 }
                 if (e_action == 3)
                 {
                     char_typewriter(e_name + " failed to dodge", italic_cyan);
-                    e_hp -= p_atk[0] + (rand() % (p_atk[1] - p_atk[0] + 1));
+                    e_hp -= p_atk[0] + (randnum() % (p_atk[1] - p_atk[0] + 1));
                 }
                 if (e_action == 4)
                 {
-                    p_hp -= (e_atk[0] + (rand() % (e_atk[1] - e_atk[0] + 1))) * 1.5;
-                    e_hp -= p_atk[0] + (rand() % (p_atk[1] - p_atk[0] + 1));
+                    p_hp -= (e_atk[0] + (randnum() % (e_atk[1] - e_atk[0] + 1))) * 1.5;
+                    e_hp -= p_atk[0] + (randnum() % (p_atk[1] - p_atk[0] + 1));
                 }
             }
             if (p_action == 1)
             {
                 if (p_action == 1 && e_action == 0)
                 {
-                    p_hp -= e_atk[0] + (rand() % (e_atk[1] - e_atk[0] + 1));
-                    e_hp -= (p_atk[0] + (rand() % (p_atk[1] - p_atk[0] + 1))) / 1.5;
+                    p_hp -= e_atk[0] + (randnum() % (e_atk[1] - e_atk[0] + 1));
+                    e_hp -= (p_atk[0] + (randnum() % (p_atk[1] - p_atk[0] + 1))) / 1.5;
                 }
                 if (p_action == 1 && e_action == 1)
                 {
-                    p_hp -= (p_atk[0] + (rand() % (p_atk[1] - p_atk[0] + 1))) / 1.5;
-                    e_hp -= (p_atk[0] + (rand() % (p_atk[1] - p_atk[0] + 1))) / 1.5;
+                    p_hp -= (p_atk[0] + (randnum() % (p_atk[1] - p_atk[0] + 1))) / 1.5;
+                    e_hp -= (p_atk[0] + (randnum() % (p_atk[1] - p_atk[0] + 1))) / 1.5;
                 }
                 if (p_action == 1 && e_action == 2)
                 {
-                    e_hp -= p_atk[0] + (rand() % (p_atk[1] - p_atk[0] + 1));
+                    e_hp -= p_atk[0] + (randnum() % (p_atk[1] - p_atk[0] + 1));
                 }
                 if (p_action == 1 && e_action == 3)
                 {
-                    if (rand() % 10 >= 0.7)
+                    if (randnum() % 10 >= 0.7)
                     {
                         char_typewriter(e_name + " failed to dodge", italic_cyan);
-                        e_hp -= (p_atk[0] + (rand() % (p_atk[1] - p_atk[0] + 1))) / 1.5;
+                        e_hp -= (p_atk[0] + (randnum() % (p_atk[1] - p_atk[0] + 1))) / 1.5;
                     }
                     else
                     {
@@ -400,40 +400,28 @@ int callBattle(const string p_name, int &p_hp, int p_atk[2], const string e_name
                 }
                 if (p_action == 1 && e_action == 4)
                 {
-                    p_hp -= (e_atk[0] + (rand() % (e_atk[1] - e_atk[0] + 1))) * 1.5;
-                    e_hp -= (p_atk[0] + (rand() % (p_atk[1] - p_atk[0] + 1))) / 1.5;
+                    p_hp -= (e_atk[0] + (randnum() % (e_atk[1] - e_atk[0] + 1))) * 1.5;
+                    e_hp -= (p_atk[0] + (randnum() % (p_atk[1] - p_atk[0] + 1))) / 1.5;
                 }
             }
             if (p_action == 2)
             {
                 if (p_action == 2 && e_action == 0)
                 {
-                    p_hp -= (e_atk[0] + (rand() % (e_atk[1] - e_atk[0] + 1))) / 4;
+                    p_hp -= (e_atk[0] + (randnum() % (e_atk[1] - e_atk[0] + 1))) / 4;
                 }
                 if (p_action == 2 && e_action == 1)
                 {
-                    p_hp -= p_atk[0] + (rand() % (p_atk[1] - p_atk[0] + 1));
+                    p_hp -= p_atk[0] + (randnum() % (p_atk[1] - p_atk[0] + 1));
                 }
                 if (p_action == 2 && e_action == 4)
                 {
-                    p_hp -= (e_atk[0] + (rand() % (e_atk[1] - e_atk[0] + 1)));
+                    p_hp -= (e_atk[0] + (randnum() % (e_atk[1] - e_atk[0] + 1)));
                 }
             }
             if (p_action == 3)
             {
                 if (p_action == 3 && e_action == 0)
-                {
-                    if (dod((int)time_allowed * 15))
-                    {
-                        char_typewriter(p_name + " dodged successfully", italic_cyan);
-                    }
-                    else
-                    {
-                        char_typewriter(p_name + " failed to dodge", italic_cyan);
-                        p_hp -= e_atk[0] + (rand() % (e_atk[1] - e_atk[0] + 1));
-                    }
-                }
-                if (p_action == 3 && e_action == 1)
                 {
                     if (dod((int)time_allowed * 30))
                     {
@@ -442,19 +430,31 @@ int callBattle(const string p_name, int &p_hp, int p_atk[2], const string e_name
                     else
                     {
                         char_typewriter(p_name + " failed to dodge", italic_cyan);
-                        p_hp -= (e_atk[0] + (rand() % (e_atk[1] - e_atk[0] + 1))) / 1.5;
+                        p_hp -= e_atk[0] + (randnum() % (e_atk[1] - e_atk[0] + 1));
                     }
                 }
-                if (p_action == 3 && e_action == 4)
+                if (p_action == 3 && e_action == 1)
                 {
-                    if (dod((int)time_allowed * 10))
+                    if (dod((int)time_allowed * 50))
                     {
                         char_typewriter(p_name + " dodged successfully", italic_cyan);
                     }
                     else
                     {
                         char_typewriter(p_name + " failed to dodge", italic_cyan);
-                        p_hp -= (e_atk[0] + (rand() % (e_atk[1] - e_atk[0] + 1))) * 1.5;
+                        p_hp -= (e_atk[0] + (randnum() % (e_atk[1] - e_atk[0] + 1))) / 1.5;
+                    }
+                }
+                if (p_action == 3 && e_action == 4)
+                {
+                    if (dod((int)time_allowed * 15))
+                    {
+                        char_typewriter(p_name + " dodged successfully", italic_cyan);
+                    }
+                    else
+                    {
+                        char_typewriter(p_name + " failed to dodge", italic_cyan);
+                        p_hp -= (e_atk[0] + (randnum() % (e_atk[1] - e_atk[0] + 1))) * 1.5;
                     }
                 }
             }
@@ -477,7 +477,7 @@ int callBattle(const string p_name, int &p_hp, int p_atk[2], const string e_name
         {
             color_print(e_name + ": " + to_string(e_hp - ori_e_hp), background_blue);
             // enemy response if hurt
-            r = rand() % 5;
+            r = randnum() % 5;
             char_typewriter(e_name + ": " + (r == 0 ? "Ouch!" : r == 1 ? "No!"
                                                             : r == 2   ? "Stop!"
                                                             : r == 3   ? "Ah!"
@@ -498,20 +498,20 @@ int callBattle(const string p_name, int &p_hp, int p_atk[2], const string e_name
             return 0;
         }
         // random enemy action
-        r = rand() % 4;
+        r = randnum() % 4;
         e_action = r;
         e_ultimate_cd -= 1;
         // enemy ultimate skill
         if (e_ultimate_cd == 0)
         {
             e_action = 4;
-            e_ultimate_cd = rand() % 3 + 4;
+            e_ultimate_cd = randnum() % 3 + 4;
             char_typewriter(e_name + ": Omae wa mou shindeiru!(You are dead!)", bold_red);
         }
         // random show speech
-        else if (rand() % 10 >= 3)
+        else if (randnum() % 10 >= 3)
         {
-            r = rand() % 2;
+            r = randnum() % 2;
             switch (e_action)
             {
             case 0:
