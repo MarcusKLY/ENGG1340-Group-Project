@@ -58,7 +58,7 @@ Player getOpponent(Player player);
 void humanTurn(Board &board);
 void computerTurn(Board &board);
 
-Player playTicTacToe()
+int playTicTacToe()
 {
     srand(time(0));
 
@@ -84,7 +84,6 @@ Player playTicTacToe()
     {
         std::cout << "The door is unlocked!" << std::endl;
         return 1;
-        
     }
     else
     {
@@ -94,8 +93,8 @@ Player playTicTacToe()
 }
 int tictactoe()
 {
-    Player winner = playTicTacToe();
-    return 0;
+    int winner = playTicTacToe();
+    return winner;
 }
 
 Player checkWinner(const Board &board)
