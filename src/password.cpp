@@ -83,7 +83,7 @@ void checkInput(int PwLength, int trials, vector<string> &attempts, string passw
     while (true)
     {
         // ask for user input
-        color_print(" ⬇️ PLEASE ENTER THE PASSWORD 🔑 ⬇️ ", bold_background_magenta);
+        char_typewriter(" ⬇️ PLEASE ENTER THE PASSWORD 🔑 ⬇️ ", bold_background_magenta);
         // print empty lines
         cout << endl;
         cin >> input;
@@ -96,7 +96,7 @@ void checkInput(int PwLength, int trials, vector<string> &attempts, string passw
             // blink to show the password
             cout << endl;
             blink(2, "> > > 🤫 Shhh...please keep it a secret! 😎 The password is " + password + " < < <", 300, bold_yellow);
-            color_print(" > > > 🤫 Shhh...please keep it a secret! 😎 The password is " + password + " < < <", bold_yellow);
+            char_typewriter(" > > > 🤫 Shhh...please keep it a secret! 😎 The password is " + password + " < < <", bold_yellow);
             cout << endl;
             continue;
         }
@@ -105,7 +105,7 @@ void checkInput(int PwLength, int trials, vector<string> &attempts, string passw
         {
             cout << endl;
             blink(2, "> > > 🤬 PASSWORD MUST BE " + to_string(PwLength) + "-LETTER LONG! PLEASE TRY AGAIN! < < <", 300, bold_red);
-            color_print("> > > 🤬 PASSWORD MUST BE " + to_string(PwLength) + "-LETTER LONG! PLEASE TRY AGAIN! < < <", bold_red);
+            char_typewriter("> > > 🤬 PASSWORD MUST BE " + to_string(PwLength) + "-LETTER LONG! PLEASE TRY AGAIN! < < <", bold_red);
             cout << endl;
             continue;
         }
@@ -127,7 +127,7 @@ void checkInput(int PwLength, int trials, vector<string> &attempts, string passw
                 transform(input.begin(), input.end(), input.begin(), ::toupper);
                 cout << endl;
                 blink(2, "> > > 🤬 " + input + " IS NOT A VALID WORD! PLEASE TRY AGAIN! < < <", 300, bright_red);
-                color_print("> > > 🤬 " + input + " IS NOT A VALID WORD! PLEASE TRY AGAIN! < < <", bright_red);
+                char_typewriter("> > > 🤬 " + input + " IS NOT A VALID WORD! PLEASE TRY AGAIN! < < <", bright_red);
                 cout << endl;
                 continue;
             }
@@ -139,7 +139,7 @@ void checkInput(int PwLength, int trials, vector<string> &attempts, string passw
                 transform(input.begin(), input.end(), input.begin(), ::toupper);
                 cout << endl;
                 blink(2, "> > > 🤬 YOU HAVE TRIED " + input + " BEFORE! PLEASE TRY AGAIN! < < <", 300, bright_red);
-                color_print("> > > 🤬 YOU HAVE TRIED " + input + " BEFORE! PLEASE TRY AGAIN! < < <", bright_red);
+                char_typewriter("> > > 🤬 YOU HAVE TRIED " + input + " BEFORE! PLEASE TRY AGAIN! < < <", bright_red);
                 cout << endl;
                 isTried = true;
                 break;
@@ -214,6 +214,7 @@ void printBoard(string password, vector<string> attempts, int trials)
     // print all attempts with colors and within rainbow borders
     if (PwLength == 4)
     {
+        // print the rainbow borders
         cout << "\033[0;31m┌\033[0m";
         cout << "\033[0;31m─\033[0m";
         cout << "\033[0;31m─\033[0m";
@@ -271,6 +272,7 @@ void printBoard(string password, vector<string> attempts, int trials)
         cout << "\033[0;36m─\033[0m";
         cout << "\033[0;36m─\033[0m";
         cout << "\033[0;36m─\033[0m";
+        cout << "\033[0;36m─\033[0m";
         cout << "\033[0;34m─\033[0m";
         cout << "\033[0;34m─\033[0m";
         cout << "\033[0;34m─\033[0m";
@@ -282,7 +284,7 @@ void printBoard(string password, vector<string> attempts, int trials)
     }
     for (int i = 0; i < coloredAttempts.size(); i++)
     {
-        // odd numbers use yellow borders, even numbers use green borders
+        // print the rainbow borders
         if (i % 2 == 0)
         {
             cout << "\033[0;34m│ \033[0m" + coloredAttempts[i] + "\033[0;35m │\033[0m" << endl;
@@ -301,7 +303,7 @@ void printBoard(string password, vector<string> attempts, int trials)
             {
                 cout << "\033[1;35m - \033[0m";
             }
-            cout << "\033[0;36m │\033[0m" << endl;
+            cout << "\033[0;33m │\033[0m" << endl;
         }
         else
         {
@@ -372,6 +374,7 @@ void printBoard(string password, vector<string> attempts, int trials)
         cout << "\033[0;36m─\033[0m";
         cout << "\033[0;36m─\033[0m";
         cout << "\033[0;36m─\033[0m";
+        cout << "\033[0;36m─\033[0m";
         cout << "\033[0;34m─\033[0m";
         cout << "\033[0;34m─\033[0m";
         cout << "\033[0;34m─\033[0m";
@@ -415,7 +418,7 @@ bool password(string difficulty)
     password = generatePassword(PwLength);
     // loop for the game
     blink(3, "> > > 🥸  Markers could enter \"/reveal\" to crack this chapter 🥸  < < <", 500, bold_yellow);
-    color_print("> > > 🥸  Markers could enter \"/reveal\" to crack this chapter 🥸  < < <", bold_yellow);
+    char_typewriter("> > > 🥸  Markers could enter \"/reveal\" to crack this chapter 🥸  < < <", bold_yellow);
     while ((attempts.size() < trials))
     {
         printBoard(password, attempts, trials);
@@ -428,6 +431,8 @@ bool password(string difficulty)
             break;
         }
     }
+    //print the board once again
+    printBoard(password, attempts, trials);
     if (attempts.back() == password)
     {
         return 1;
