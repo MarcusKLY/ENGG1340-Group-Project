@@ -73,11 +73,14 @@ Player playTicTacToe()
     board.print();
     if (checkWinner(board) == Player::Human)
     {
-        std::cout << "You won!" << std::endl;
+        std::cout << "The door is unlocked!" << std::endl;
+        return 1;
+        
     }
     else
     {
-        std::cout << "The computer won!" << std::endl;
+        std::cout << "You failed to unlock the door!" << std::endl;
+        return 0;
     }
 }
 int tictactoe()
