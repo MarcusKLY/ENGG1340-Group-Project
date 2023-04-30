@@ -20,6 +20,10 @@
 #include "../header/gameover.h"
 
 #include <iostream>
+#include <termios.h>
+#include <unistd.h>
+
+#include <iostream>
 #include <fstream>
 #include <string>
 #include <vector>
@@ -86,9 +90,12 @@ void checkInput(int PwLength, int trials, vector<string> &attempts, string passw
         char_typewriter(" ⬇️ PLEASE ENTER THE PASSWORD 🔑 ⬇️ ", bold_background_magenta);
         // print empty lines
         cout << endl;
+        struct termios nowt;
+        tcgetattr(STDIN_FILENO, &nowt);
+        nowt.c_lflag |= ECHO;
+        tcsetattr(STDIN_FILENO, TCSANOW, &nowt);
         cin >> input;
         transform(input.begin(), input.end(), input.begin(), ::tolower);
-        cout << endl;
         // transform the input to lower case
         transform(input.begin(), input.end(), input.begin(), ::tolower);
         if (input == "/reveal")
