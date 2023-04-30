@@ -1,5 +1,5 @@
 CXX = g++
-CPPFLAGS = -std=c++11 -Wall -Wextra -pedantic #add -Wall -Wextra -pedantic for more warnings
+CPPFLAGS = -std=c++11 -w #-Wall -Wextra -pedantic #add -Wall -Wextra -pedantic for more warnings
 
 SRCDIR = src
 INCDIR = header

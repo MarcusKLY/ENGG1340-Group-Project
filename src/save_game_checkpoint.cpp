@@ -18,12 +18,13 @@
 #include "../header/Final_Boss.h"
 #include "../header/Time_Tunnel.h"
 
-
 #include <iostream>
 #include <string>
 
 using namespace std;
 
+// input: checkpoint name, player name
+// call the next part of the story if the player choose to continue, otherwise return to main menu
 int save_game(string reached_checkpoint, string player_name)
 {
     PlayerManager player_manager;
@@ -37,10 +38,10 @@ int save_game(string reached_checkpoint, string player_name)
     vector<string> items;
     items.push_back("Continue");
     items.push_back("Return to main menu");
-    string question = "Game saved at checkpoint " + reached_checkpoint +". Do you want to continue?";
+    string question = "Game saved at checkpoint " + reached_checkpoint + ". Do you want to continue?";
     int cgame = choose_event(items, question);
     items.clear(); // Clear the vector
-    if (cgame == 0)
+    if (cgame == 0) // Continue
     {
         if (reached_checkpoint == "Story Background")
         {
@@ -84,7 +85,7 @@ int save_game(string reached_checkpoint, string player_name)
         }
         return 0;
     }
-    if (cgame == 1)
+    if (cgame == 1) // Return to main menu
     {
         main_menu();
         return 0;

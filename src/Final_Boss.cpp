@@ -17,6 +17,8 @@
 
 using namespace std;
 
+// input: player name
+// function for the story chapter "Final_Boss"
 int Final_Boss(string player_name)
 {
     system("clear");
@@ -54,42 +56,45 @@ int Final_Boss(string player_name)
     char_typewriter("Girl👧: I want a life for a life!", bold_magenta);
     char_typewriter("You🙎: Again??\n", bold_magenta);
 
-    int win = call_new_battle(player_name, "Girl👧", player_info.items, player_info.difficulty, 5, player_info.buff);
+    int win = call_new_battle(player_name, "Girl👧", player_info.items, player_info.difficulty, 5, player_info.buff); // call battle
     if (win == 0)
     {
+        // player won the battle
         char_typewriter("\nYou see the girl slowly burn herself away...", italic_green);
         char_typewriter("Girl👧: Why is there no justice!!!", bold_magenta);
         char_typewriter("Girl👧: One day I must let you get the taste of helpless and death", bold_magenta);
         char_typewriter("There is small note fell on the floor", italic_green);
         char_typewriter("You step forward cautiously, afraid of another trap\n", italic_green);
-        char_typewriter("Find me, I am in the time tunnel\n", background_italic_cyan); //colour choice?
+        char_typewriter("Find me, I am in the time tunnel\n", background_italic_cyan); // colour choice?
         char_typewriter("Where is time tunnel you wonder", italic_green);
         char_typewriter("You🙎: Ohhhh, its the indoor corridor which from Haking Wong Building to Stephen Hui Geological Museum", bold_magenta);
         char_typewriter("Then you walk away slowly, hoping this nightmare will pass soon", italic_green);
         walking_animation();
-        save_game("Time Tunnel", player_name);
+        save_game("Time Tunnel", player_name); // "Final_Boss" ended -> save game
         return 0;
     }
     else if (win == 1)
     {
+        // player lost the battle
         char_typewriter("You slowly lose you consciousness in a pool of blood while feeling extremely pain...", italic_green);
         char_typewriter("Girl👧: FINALLLLLY", bold_magenta);
         char_typewriter("Girl👧: You can get a taste the feeling of helpless and death now", bold_magenta);
         char_typewriter("Girl👧: This is how I felt when I was killed, and nothing helped in your witness", bold_magenta);
         char_typewriter("Girl👧: GO TO HELLLLLL", bold_magenta);
         char_typewriter("Girl👧: HAHAHAHAHA\n", bold_magenta);
-        gameover("Final Boss", player_name);
+        gameover("Final Boss", player_name); // gameover
         return 0;
     }
     else if (win == 2)
     {
+        // both player and enemy died -> player lost the battle
         char_typewriter("You all fell in a pool of blood and heard each other screaming in pain...", italic_green);
         char_typewriter("Girl👧: FINALLLLLY", bold_magenta);
         char_typewriter("Girl👧: You can get a taste the feeling of helpless and death now", bold_magenta);
         char_typewriter("Girl👧: This is how I felt when I was killed, and nothing helped in your witness", bold_magenta);
         char_typewriter("Girl👧: Let's meet again in HELLLLLL", bold_magenta);
         char_typewriter("Girl👧: HAHAHAHAHA\n", bold_magenta);
-        gameover("Final Boss", player_name);
+        gameover("Final Boss", player_name); // gameover
         return 0;
     }
     return 0;

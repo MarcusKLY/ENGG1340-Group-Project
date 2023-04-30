@@ -1,4 +1,4 @@
-//tictactoe.cpp
+// tictactoe.cpp
 #include <iostream>
 #include <vector>
 #include <ctime>
@@ -6,9 +6,15 @@
 #include "../header/output_style.h"
 #include "../header/tictactoe.h"
 
-enum class Player { None, Human, Computer };
+enum class Player
+{
+    None,
+    Human,
+    Computer
+};
 
-struct Board {
+struct Board
+{
     std::vector<std::vector<Player>> cells;
     Board() : cells(3, std::vector<Player>(3, Player::None)) {}
 
@@ -27,8 +33,10 @@ struct Board {
         }
     }
 
-    bool makeMove(int row, int col, Player player) {
-        if (cells[row][col] == Player::None) {
+    bool makeMove(int row, int col, Player player)
+    {
+        if (cells[row][col] == Player::None)
+        {
             cells[row][col] = player;
             return true;
         }
@@ -41,51 +49,63 @@ Player getOpponent(Player player);
 void humanTurn(Board &board);
 void computerTurn(Board &board);
 
-
-Player playTicTacToe(){
+Player playTicTacToe()
+{
     srand(time(0));
 
     Board board;
     Player currentPlayer = Player::Human;
 
-    while (checkWinner(board) == Player::None) {
+    while (checkWinner(board) == Player::None)
+    {
         board.print();
-        if (currentPlayer == Player::Human) {
+        if (currentPlayer == Player::Human)
+        {
             humanTurn(board);
-        } else {
+        }
+        else
+        {
             computerTurn(board);
         }
         currentPlayer = getOpponent(currentPlayer);
     }
 
     board.print();
-    if (checkWinner(board) == Player::Human) {
+    if (checkWinner(board) == Player::Human)
+    {
         std::cout << "You won!" << std::endl;
-    } else {
+    }
+    else
+    {
         std::cout << "The computer won!" << std::endl;
     }
-
 }
-int tictactoe(){
+int tictactoe()
+{
     Player winner = playTicTacToe();
     return 0;
 }
 
-Player checkWinner(const Board &board) {
+Player checkWinner(const Board &board)
+{
     // Check rows
-    for (int row = 0; row < 3; ++row) {
+    for (int row = 0; row < 3; ++row)
+    {
         if (board.cells[row][0] != Player::None &&
             board.cells[row][0] == board.cells[row][1] &&
-            board.cells[row][1] == board.cells[row][2]) {
+            board.cells[row][1] == board.cells[row][2])
+        {
             return board.cells[row][0];
         }
     }
 
     // Check columns
-    for (int col = 0; col < 3; ++col) {
+    for (int col = 0; col < 3; ++col)
+    {
         if (board.cells[0][col] != Player::None &&
             board.cells[0][col] == board.cells[1][col] &&
-            board.cells[1][col] == board.cells[2][col]) {
+            board.cells[1][col] == board.cells[2][col])
+        {
             return board.cells[0][col];
         }
     }
@@ -93,13 +113,15 @@ Player checkWinner(const Board &board) {
     // Check diagonals
     if (board.cells[0][0] != Player::None &&
         board.cells[0][0] == board.cells[1][1] &&
-        board.cells[1][1] == board.cells[2][2]) {
+        board.cells[1][1] == board.cells[2][2])
+    {
         return board.cells[0][0];
     }
 
     if (board.cells[0][2] != Player::None &&
         board.cells[0][2] == board.cells[1][1] &&
-        board.cells[1][1] == board.cells[2][0]) {
+        board.cells[1][1] == board.cells[2][0])
+    {
         return board.cells[0][2];
     }
 
@@ -107,11 +129,13 @@ Player checkWinner(const Board &board) {
     return Player::None;
 }
 
-Player getOpponent(Player player) {
+Player getOpponent(Player player)
+{
     return (player == Player::Human) ? Player::Computer : Player::Human;
 }
 
-void humanTurn(Board &board) {
+void humanTurn(Board &board)
+{
     int row, col;
     do {std::cout <<"\033[35m===========================\033[0m"<<std::endl;
         std::cout << "Enter your move (1.row(1-3) and 'Enter' 2.col(1-3) and 'Enter'): ";
@@ -119,9 +143,11 @@ void humanTurn(Board &board) {
     } while (!board.makeMove(row-1, col-1, Player::Human));
 }
 
-void computerTurn(Board &board) {
+void computerTurn(Board &board)
+{
     int row, col;
-    do {
+    do
+    {
         row = rand() % 3;
         col = rand() % 3;
     } while (!board.makeMove(row, col, Player::Computer));

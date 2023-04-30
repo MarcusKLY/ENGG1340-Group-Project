@@ -18,6 +18,8 @@
 
 using namespace std;
 
+// input: player name
+// function for the story chapter "Stairs"
 int Stairs(string player_name)
 {
     system("clear");
@@ -33,12 +35,12 @@ int Stairs(string player_name)
     char_typewriter("However, it seems like you are never reaching an end", italic_green);
     char_typewriter("Suddenly, you recall a myth that is well known in the campus...\n", italic_green);
     this_thread::sleep_for(chrono::seconds(1));
-    char_typewriter("Long time ago, a little boy died here falling down the stairs",italic_cyan);
-    char_typewriter("Since then, hundreds of people are trapped here in this infinite staircase",italic_cyan);
-    char_typewriter("They are never out again...",italic_cyan);
-    char_typewriter("Some say they die of exhaustion while climbing stairs",italic_cyan);
-    char_typewriter("Some say they kill each other due to the hopelessness",italic_cyan);
-    char_typewriter("The strong emotions, miserableness and hopelessness, eventually lead to the birth of the stair monster",italic_cyan);
+    char_typewriter("Long time ago, a little boy died here falling down the stairs", italic_cyan);
+    char_typewriter("Since then, hundreds of people are trapped here in this infinite staircase", italic_cyan);
+    char_typewriter("They are never out again...", italic_cyan);
+    char_typewriter("Some say they die of exhaustion while climbing stairs", italic_cyan);
+    char_typewriter("Some say they kill each other due to the hopelessness", italic_cyan);
+    char_typewriter("The strong emotions, miserableness and hopelessness, eventually lead to the birth of the stair monster", italic_cyan);
     this_thread::sleep_for(chrono::seconds(1));
     char_typewriter("\nYou🙎: No way this is happening to me 😱", bold_magenta);
     char_typewriter("You feel like something is dragging your legs and it's getting heavier", italic_green);
@@ -51,6 +53,7 @@ int Stairs(string player_name)
     items.clear(); // Clear the vector
     if (look_back == 0)
     {
+        // option "Keep walking" chosen
         char_typewriter("\nYou believe in your sixth sense and decide not to look back", italic_green);
         char_typewriter("After several minutes, you have a strong feeling that you are reaching the end", italic_green);
         char_typewriter("However, your feet are so heavy that you can barely make a step\n", italic_green);
@@ -61,6 +64,7 @@ int Stairs(string player_name)
         items.clear(); // Clear the vector
         if (look_back_again == 0)
         {
+            // option "Keep walking, still" chosen
             char_typewriter("\nYou🙎: It is just a myth... It is fine...", bold_magenta);
             char_typewriter("You keep comforting yourself while trying your best to overcome the weights", italic_green);
             char_typewriter("And finally there is an end!", italic_green);
@@ -68,33 +72,18 @@ int Stairs(string player_name)
             char_typewriter("You🙎: Told you it is just a myth... Haha... haha", bold_magenta);
             char_typewriter("You🙎: 😓😓😓\n", bold_magenta);
 
-            player_info.checkpoint = "Final Boss";
-            player_manager.update_player(player_info);
-            player_manager.save_players("saves.sav");
-            items.push_back("Continue");
-            items.push_back("Return to main menu");
-            string question = "Game saved at checkpoint Final Boss. Do you want to continue?";
-            int cgame = choose_event(items, question);
-            items.clear(); // Clear the vector
-            if (cgame == 0)
-            {
-                Final_Boss(player_name); 
-                return 0;
-            }
-            if (cgame == 1)
-            {
-                main_menu();
-                return 0;
-            }
+            save_game("Final Boss", player_name); // "Stairs" ended -> save game
         }
         else if (look_back_again == 1)
         {
+            // option "I cannot resist looking back ANYMORE" chosen
             Stairs_Enemy(player_name);
             return 0;
         }
     }
     else if (look_back == 1)
     {
+        // option "Look back to see what is messing with you" chosen
         Stairs_Enemy(player_name);
         return 0;
     }

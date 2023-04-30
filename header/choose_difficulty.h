@@ -1,4 +1,4 @@
-//choose_difficulty.h
+// choose_difficulty.h
 
 #ifndef CHOOSE_DIFFICULTY_H
 #define CHOOSE_DIFFICULTY_H

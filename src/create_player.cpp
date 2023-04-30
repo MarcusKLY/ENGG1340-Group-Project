@@ -63,6 +63,13 @@ int create_player(string difficulty) //
                 this_thread::sleep_for(chrono::seconds(1));
                 system("clear"); // clear screen
             }
+            // check if name contain invalid characters
+            else if (user_name.find_first_not_of("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ01234567890") != string::npos)
+            {
+                color_print("Please enter a valid name! (With number and characters only)", bold_red);
+                this_thread::sleep_for(chrono::seconds(1));
+                system("clear"); // clear screen
+            }
             else
             {
                 for (int i = 0; i < player_names.size(); i++)
@@ -90,9 +97,9 @@ int create_player(string difficulty) //
         player_info.difficulty = "Easy";
         player_info.hp = 80;
     }
-    else if (difficulty == "Medium")
+    else if (difficulty == "Normal")
     {
-        player_info.difficulty = "Medium";
+        player_info.difficulty = "Normal";
         player_info.hp = 70;
     }
     else if (difficulty == "Hard")
