@@ -1,7 +1,3 @@
-strm,strm,Hard,60,0
-item:energy drink
-checkpoint:CYM
-end_player
-nor,nor,Normal,70,0
-checkpoint:Story Background
+eas,eas,Easy,80,0
+checkpoint:Knowles
 end_player
