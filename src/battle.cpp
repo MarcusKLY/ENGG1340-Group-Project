@@ -14,18 +14,21 @@
 #include <algorithm>
 using namespace std;
 
+//this is the dodging minigame that take in number of millisecond direction will appear
+//return true if player dodge in correct direction
 bool dod(int t_blink)
     {
-        int r=rand()%4;
-        char_typewriter("direction to dodge will be shown in an instant,input correct direction to dodge successfully", italic_cyan);
+        char_typewriter("Direction to dodge will be shown in an instant, input correct direction to dodge successfully", italic_cyan);
         this_thread::sleep_for(chrono::milliseconds(3000));
         cout << endl;
+        //random direction and blink
+        int r=rand()%4;
         string o="";
         o=((r==0) ? "        [ ← ]" : (r==1) ? "        [ → ]" : (r==2) ? "        [ ↑ ]" : "        [ ↓ ]");
         color_print(o,bold_green);
         this_thread::sleep_for(chrono::milliseconds(t_blink));
         clear_previous_lines(1);
-        //system("clear");
+        //ask for direction
         vector<string> opt;
         opt.push_back("Left");
         opt.push_back("Right");
@@ -33,9 +36,9 @@ bool dod(int t_blink)
         opt.push_back("Down");
         int indir=choose_event(opt,"Which direction will you dodge?");
         opt.clear();
-        //system("clear");
         return (indir==r);
     }
+
 // [DO NOT CALL THIS FUNCTION DIRECTLY]
 // callBattle() is a function that takes in the player's name, hp, attack, enemy's name, hp, attack, items, and time allowed.
 // callBattle() returns 0 if the player wins, 1 if the player loses, and 2 if both lose.    if return -1, some magic happened and tmr will snow (•◡•)/.
@@ -48,8 +51,8 @@ int callBattle(const string p_name, int& p_hp, int p_atk[2], const string e_name
     int e_ultimate_cd=0;
     bool first=true;
     const string dict_item[6] = {"energy drink","half-eaten sXXway sandwich","golden leaf","Xphone phone case","key","one-time-use flashlight"};
-    const string dict_item_detail[6] = {"energy drink(+5atk in next 3round)","half-eaten sXXway sandwich(+10HP)","golden leaf(+5HP per next 3round)","Xphone phone case(neutralize all of next damage dealt by enemy)","key(throw at enemy to deal 10damage)","one-time-use flashlight(stop next enemy action)"};
-    const string dict_action[5] = {"Punch", "Kick", "Block", "Dodge", "Ars Blasto"};
+    const string dict_item_detail[6] = {"Energy drink(+5atk in next 3round)","Half-eaten sXXway sandwich(+10HP)","Golden leaf(+5HP per next 3round)","Xphone phone case(neutralize all of next damage dealt by enemy)","Key(throw at enemy to deal 10damage)","One-time-use flashlight(stop next enemy action)"};
+    const string dict_action[5] = {"punch", "kick", "block", "dodge", "ultimate ability"};
     int p_effect[3] = {-1,-1,-1};
     bool e_frozen=false;
     bool late=false;
@@ -74,19 +77,19 @@ int callBattle(const string p_name, int& p_hp, int p_atk[2], const string e_name
         {
             bool chosen = false;
             bool item_available = false;
-            color_print(p_name+": "+to_string(p_hp)+" HP | "+e_name+": "+to_string(e_hp),background_blue);
-            color_print("items available: ",background_green);
+            color_print(p_name+": "+to_string(p_hp)+" HP | "+e_name+": "+to_string(e_hp)+" HP",background_blue);
+            color_print("Items available: ",background_green);
             for (int i=0; i<6; i++)
             {
                 if (items[i])
                 {
-                    color_print_no_newline("| "+to_string(i)+":"+dict_item_detail[i]+" ",background_green);
+                    color_print_no_newline("| "+dict_item_detail[i]+" ",background_green);
                     item_available = true;
                 }
             }
             if(!item_available)
             {
-                color_print_no_newline("| X",background_green);
+                color_print_no_newline("| /",background_green);
             }
             color_print(" |",background_green);
             if(first)
@@ -99,7 +102,6 @@ int callBattle(const string p_name, int& p_hp, int p_atk[2], const string e_name
                 late = false;
                 first=false;
             }
-            //cout << "select action [ i:use item | p:punch | k:kick | b:block | d:dodge ]" << endl;
 
             /***input action loop***/
             while (true)
@@ -111,17 +113,16 @@ int callBattle(const string p_name, int& p_hp, int p_atk[2], const string e_name
                 string o = to_string(time_left);
                 color_print("You have "+((o.find('.')==string::npos)?o:o.substr(0,o.find('.')+2))+"s left in this round",bold_blue);
                 vector<string> opt;
-                opt.push_back("use items");
-                opt.push_back("punch");
-                opt.push_back("kick");
-                opt.push_back("block");
-                opt.push_back("dodge");
+                opt.push_back("Use items");
+                opt.push_back("Punch");
+                opt.push_back("Kick");
+                opt.push_back("Block");
+                opt.push_back("Dodge");
                 pin=choose_event(opt,"What action do you choose?");
                 opt.clear();
                 //check time left
                 if(std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - start_time).count()/1000.0 >= time_allowed)
                 {
-                    char_typewriter("Your input is too late",italic_cyan);
                     late = true;
                     break;
                 }
@@ -145,15 +146,35 @@ int callBattle(const string p_name, int& p_hp, int p_atk[2], const string e_name
                                 string o = to_string(time_left);
                                 color_print("You have "+((o.find('.')==string::npos)?o:o.substr(0,o.find('.')+2))+"s left in this round",bold_blue);
                                 vector<string> opt;
-                                vector<int> convert;
-                                opt.push_back("cancel");
-                                convert.push_back(-1);
+                                opt.push_back("Cancel");
                                 for (int i = 0; i < (int)sizeof(items)/(int)sizeof(items[0]); i++)
                                 {
                                     if(items[i])
                                     {
                                         opt.push_back(dict_item_detail[i]);
-                                        convert.push_back(i);
+                                    }
+                                }
+                                int size=0;
+                                //dynamic memory management: new int array each round storing id of items available for identifying after player input
+                                int* choice = new int[size];
+                                for (int i = 0; i < (int)sizeof(items)/(int)sizeof(items[0]); i++)
+                                {
+                                    if(items[i])
+                                    {
+                                        int* temp = new int[size];
+                                        for(int j=0; j<size; j++)
+                                        {
+                                            temp[j]=choice[j];
+                                        }
+                                        delete[] choice;
+                                        size++;
+                                        choice = new int[size];
+                                        for(int j=0; j<size-1; j++)
+                                        {
+                                            choice[j]=temp[j];
+                                        }
+                                        delete[] temp;
+                                        choice[size-1]=i;
                                     }
                                 }
                                 pin=choose_event(opt,"Select your choice: ");
@@ -170,7 +191,8 @@ int callBattle(const string p_name, int& p_hp, int p_atk[2], const string e_name
                                     break;
                                 }
                                 //if use
-                                if(convert[pin]==0)//|atk up|
+                                int convert=*(choice+pin-1);
+                                if(*(choice+pin-1)==0)//|atk up|
                                 {
                                     
                                     p_atk[0] += 5;
@@ -181,7 +203,7 @@ int callBattle(const string p_name, int& p_hp, int p_atk[2], const string e_name
                                     items[0] = false;
                                     break;
                                 }
-                                if(convert[pin]==1)//|heal|
+                                if(*(choice+pin-1)==1)//|heal|
                                 {
                                     p_hp+=10;
                                     char_typewriter("[Om Nom Nom ... Om Nom Nom]",italic_cyan);
@@ -189,7 +211,7 @@ int callBattle(const string p_name, int& p_hp, int p_atk[2], const string e_name
                                     items[1] = false;
                                     break;
                                 }
-                                if(convert[pin]==2)//|regen|
+                                if(*(choice+pin-1)==2)//|regen|
                                 {
                                     p_effect[2] = 3;
                                     char_typewriter("[Sulu Sulu...]",italic_cyan);
@@ -197,24 +219,26 @@ int callBattle(const string p_name, int& p_hp, int p_atk[2], const string e_name
                                     items[2] = false;
                                     break;
                                 }
-                                if(convert[pin]==3)//|block|
+                                if(*(choice+pin-1)==3)//|block|
                                 {
                                     p_effect[3] = 1000;
                                     char_typewriter("You used "+dict_item_detail[3],italic_cyan);
                                     items[3] = false;
                                     break;
                                 }
-                                if(convert[pin]==4)//|hurt enemy|
+                                if(*(choice+pin-1)==4)//|hurt enemy|
                                 {
                                     e_hp-=10;
                                     char_typewriter("[Weeeeeeeee]",italic_cyan);
                                     char_typewriter("You used "+dict_item_detail[4],italic_cyan);
-                                    r=rand()%4;
-                                    char_typewriter(e_name+": "+(r == 0 ? "Ouch!" : r == 1 ? "No!" : r == 2 ? "Stop!" : "Ah!"),bold_red);
+                                    cout<<endl;
+                                    color_print(e_name+": -10",background_blue);
+                                    r=rand()%5;
+                                    char_typewriter(e_name+": "+(r==0 ? "Ouch!" : r==1 ? "No!" : r==2 ? "Stop!" : r==3 ? "Ah!" : "How dare you!"),bold_red);
                                     items[4] = false;
                                     break;
                                 }
-                                if(convert[pin]==5)//|freeze enemy|
+                                if(*(choice+pin-1)==5)//|freeze enemy|
                                 {
                                     e_frozen = true;
                                     char_typewriter("You used ",italic_cyan);
@@ -222,6 +246,7 @@ int callBattle(const string p_name, int& p_hp, int p_atk[2], const string e_name
                                     items[5] = false;
                                     break;
                                 }
+                                delete[] choice;
                             }
                             //back to choose action
                             break;
@@ -238,7 +263,6 @@ int callBattle(const string p_name, int& p_hp, int p_atk[2], const string e_name
                     //check time left
                 if(std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - start_time).count()/1000.0 >= time_allowed)
                 {
-                    char_typewriter("Your input is too late",italic_cyan);
                     late = true;
                     break;
                 }
@@ -310,7 +334,7 @@ int callBattle(const string p_name, int& p_hp, int p_atk[2], const string e_name
         //if not late input and enemy is not flashed
         if(!late && !e_frozen)
         {
-            char_typewriter(p_name+" used "+dict_action[p_action]+" , "+e_name+" used "+dict_action[e_action],italic_cyan);
+            char_typewriter(p_name+" used "+dict_action[p_action]+", "+e_name+" used "+dict_action[e_action],italic_cyan);
             if(p_action==0)
             {
                 if(e_action==0)
@@ -509,7 +533,7 @@ int callBattle(const string p_name, int& p_hp, int p_atk[2], const string e_name
 
 //call this function to start a new battle where (p_name) is the player's name, (e_name) is the enemy's name, (items) is a vector of items that the player has, (difficulty) is the difficulty of the battle [Easy, Medium, Hard], (level) is the level of the enemy[1-5 higher level is more stronger], (p_atk_offset) is the change to player attack damage if you desire
 // returns 0 if the player wins, 1 if the player loses, and 2 if both lose.    if return -1, some magic happened and tmr will snow (•◡•)/.
-int call_new_battle(const string p_name, const string e_name, vector<string> items, string difficulty, int level, int p_atk_offset)
+int call_new_battle(const string p_name, const string e_name, vector<string>& items, string difficulty, int level, int p_atk_offset)
 {
     int p_hp;
     int p_atk[2];
@@ -517,6 +541,7 @@ int call_new_battle(const string p_name, const string e_name, vector<string> ite
     int e_atk[2];
     bool item[6] = {false, false, false, false, false, false};
     float time_allowed;
+    //change game data for different difficulty
     if(difficulty=="Easy")
     {
         p_hp = 100;
@@ -556,7 +581,7 @@ int call_new_battle(const string p_name, const string e_name, vector<string> ite
     e_atk[0]*=(0.7+0.1*level);
     e_atk[1]*=(0.7+0.1*level);
 
-
+    //convert playerinfo item to better used in battle
     for(int i=0; i<items.size(); i++)
     {
         if(items[i]=="energy drink")
@@ -584,11 +609,20 @@ int call_new_battle(const string p_name, const string e_name, vector<string> ite
             item[5]=true;
         }
     }
-
-    return callBattle(p_name, p_hp, p_atk, e_name, e_hp, e_atk, item, time_allowed);
+    //call battle
+    int result=callBattle(p_name, p_hp, p_atk, e_name, e_hp, e_atk, item, time_allowed);
+    //update playerinfo item
+    items.clear();
+    if(item[0]){items.push_back("energy drink");}
+    if(item[1]){items.push_back("half-eaten sXXway sandwich");}
+    if(item[2]){items.push_back("golden leaf");}
+    if(item[3]){items.push_back("Xphone phone case");}
+    if(item[4]){items.push_back("key");}
+    if(item[5]){items.push_back("one-time-use flashlight");}
+    return result;
 }
-
-//this call a sample battle with medium difficulty and a level3 enemy;
+// [for testing only]
+// this call a sample battle with medium difficulty and a level3 enemy;
 // returns 0 if the player wins, 1 if the player loses, and 2 if both lose.    if return -1, some magic happened and tmr will snow (•◡•)/.
 int call_sample_battle()
 {
@@ -598,6 +632,5 @@ int call_sample_battle()
     items.push_back("energy drink");
     items.push_back("Xphone phone case");
     items.push_back("golden leaf");
-    call_new_battle(p_name, e_name, items, "Medium", 3, 1);
-    return 0;
+    return call_new_battle(p_name, e_name, items, "Medium", 3, 1);
 }

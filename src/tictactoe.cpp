@@ -66,10 +66,10 @@ Player playTicTacToe(){
     }
 
 }
-//int main(){
-   // Player winner = playTicTacToe();
-    //return 0;
-//}
+int tictactoe(){
+    Player winner = playTicTacToe();
+    return 0;
+}
 
 Player checkWinner(const Board &board) {
     // Check rows

@@ -11,6 +11,7 @@
 #include "../header/Stairs.h"
 #include "../header/Escalator.h"
 #include "../header/Final_Boss.h"
+#include "../header/Time_Tunnel.h"
 
 #include <iostream>
 #include <string>
@@ -61,6 +62,10 @@ void load_checkpoint(string player_name)
     }
     else if (checkpoint == "Final Boss")
     {
-        Final_Boss(user_name); //buff
+        Final_Boss(user_name);
+    }
+    else if (checkpoint == "Time Tunnel")
+    {
+        Time_Tunnel(user_name);
     }
 }

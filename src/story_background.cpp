@@ -48,12 +48,12 @@ int story_background(string player_name)
         case 0:
             // code to handle "Continue sleeping" option
             char_typewriter("\nYou've slept too long, you can't sleep again! (choose again)        ", italic_green);
-            clear_previous_lines(6);
+            cout << endl;
             continue;
         case 1:
             // code to handle "Continue staying without leaving" option
             char_typewriter("\n...................Nothing happens (choose again)              ", italic_green);
-            clear_previous_lines(6);
+            cout << endl;
             continue;
             ;
         case 2:
@@ -77,7 +77,7 @@ int story_background(string player_name)
         case 0:
             char_typewriter("\nYou put the drink in your inventory", italic_green);
             char_typewriter("You then walk to the elevator and head to ground floor", italic_green);
-            player_info.items.push_back("Energy Drink");
+            player_info.items.push_back("energy drink");
             is_valid = true;
             break;
         case 1:
@@ -117,10 +117,11 @@ int story_background(string player_name)
         }
     }
     char_typewriter("There is door locked with english vocabulary that is {passwordLength} characters long 🔒\nYou have to guess the password in {passwordAttempt} goes or less, or else the password would be reset\nA correct letter turns green\nA correct letter in the wrong place turns yellow\nAn incorrect letter turns grey", italic_green);
-    bool pass = false;
+    bool pass = 0;
     while (!pass)
     {
         pass = password(player_info.difficulty);
+
     }
     char_typewriter("You open the door and walk into the building\n", italic_green);
     walking_animation();

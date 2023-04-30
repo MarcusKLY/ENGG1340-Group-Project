@@ -22,7 +22,6 @@ using namespace std;
 int Library(string player_name)
 {
     system("clear");
-    this_thread::sleep_for(chrono::seconds(2));
     PlayerManager player_manager;
     player_manager.load_players("saves.sav");
     PlayerInfo player_info;
