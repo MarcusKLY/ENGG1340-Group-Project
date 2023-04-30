@@ -29,7 +29,7 @@ bool check_terminal_size()
         else
         {
             std::cout << "Current terminal size: " << size.ws_col << "x" << size.ws_row << std::endl;
-            std::cout << "Please resize the terminal to 150x40." << std::endl;
+            std::cout << "\033[31mPlease resize the terminal to a minumum of 150x40.\033[0m" << std::endl;
         }
     }
     else
@@ -74,9 +74,9 @@ int checking()
         }
     }
 
-    std::cout << "Terminal size is 150x40. Continuing..." << std::endl;
+   // std::cout << "Terminal size is 150x40. Continuing..." << std::endl;
 
-    std::cout << "The program is ended" << std::endl;
+    std::cout << "\033[32mEnough terminal size ! ! !\033[0m" << std::endl;
 
     return 0;
 }
