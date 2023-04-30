@@ -161,13 +161,7 @@ void humanTurn(Board &board)
             std::cout << "Invalid input! Please enter row number between 1 and 3." << std::endl;}
            } while (row < 1 || row > 3);
 
-        do{
-            std::cout << "2.Enter col number:1~3: ";
-            std::cin >> col ;
-           // std::cout << std::endl;
-             if (col < 1 || col > 3) {
-            std::cout << "\033[31mInvalid input! Please enter column number between 1 and 3.\033[0m" << std::endl;}
-        } while (col < 1 || col > 3);
+        
 
     } while (!board.makeMove(row - 1, col - 1, Player::Human));
 }
