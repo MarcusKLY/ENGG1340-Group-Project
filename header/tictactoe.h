@@ -1,7 +1,10 @@
-//tictactoe.h
+// tictactoe.h
+
 #ifndef TICTACTOE_H
 #define TICTACTOE_H
-#include <string>
+
 using namespace std;
-int playTicTacToe();
+
+int tictactoe();
+
 #endif
