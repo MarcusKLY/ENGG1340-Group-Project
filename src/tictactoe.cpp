@@ -141,37 +141,3 @@ Player checkWinner(const Board &board)
     return Player::None;
 }
 
-Player getOpponent(Player player)
-{
-    return (player == Player::Human) ? Player::Computer : Player::Human;
-}
-
-void humanTurn(Board &board)
-{
-    int row, col;
-    do
-    {
-        std::cout << "\033[35m===========================\033[0m" << std::endl;
-        
-        do{
-            std::cout << "1.Enter row number:1~3: ";
-            std::cin >> row ;
-           // std::cout << std::endl;
-             if (row < 1 || row > 3) {
-            std::cout << "Invalid input! Please enter row number between 1 and 3." << std::endl;}
-           } while (row < 1 || row > 3);
-
-        
-
-    } while (!board.makeMove(row - 1, col - 1, Player::Human));
-}
-
-void computerTurn(Board &board)
-{
-    int row, col;
-    do
-    {
-        row = rand() % 3;
-        col = rand() % 3;
-    } while (!board.makeMove(row, col, Player::Computer));
-}
