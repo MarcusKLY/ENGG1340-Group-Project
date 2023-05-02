@@ -64,7 +64,7 @@ int Time_Tunnel(string player_name)
         char_typewriter("But the difference is that everything is back to normal", italic_green);
         char_typewriter("You🙎: I guess he may have also been teleported back to his original world", bold_magenta);
         char_typewriter("You look at the computer in front of you, and the word document is still empty", italic_green);
-        char_typewriter("You🙎: Damn it! After all, I still have to complete my assignments...", bold_magenta);
+        char_typewriter("You🙎: Damn it! After all, I still have to complete my assignments...\n", bold_magenta);
     }
     else if (response == 1)
     {
@@ -81,8 +81,16 @@ int Time_Tunnel(string player_name)
         char_typewriter("But the difference is that everything is back to normal", italic_green);
         char_typewriter("You🙎: Hmmm...don't know what will happen to him in the future", bold_magenta);
         char_typewriter("You look at the computer in front of you, and the word document is still empty", italic_green);
-        char_typewriter("You🙎: Damn it! After all, I still have to complete my assignments...", bold_magenta);
+        char_typewriter("You🙎: Damn it! After all, I still have to complete my assignments...\n", bold_magenta);
     }
-    this_thread::sleep_for(chrono::seconds(2));
+    char_typewriter("THANKS FOR PLAYING\n", bold_blue);
+    char_typewriter("PROJECT BY:", bold_blue);
+    char_typewriter("Kam Long Yin", bold_blue);
+    char_typewriter("Chan Yat Kwan", bold_blue);
+    char_typewriter("Wong Chun Hei", bold_blue);
+    char_typewriter("Lam Chuck Yu", bold_blue);
+    char_typewriter("Diao Mo Chiu\n", bold_blue);
+    char_typewriter("Play again if you want to know more about the different options for the story!", bold_blue);
+    this_thread::sleep_for(chrono::seconds(3));
     return 0;
 }
