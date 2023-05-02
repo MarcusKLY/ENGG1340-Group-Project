@@ -59,7 +59,7 @@ int create_player(string difficulty) //
             getline(cin, user_name);
             if (user_name == "")
             {
-                color_print("Please enter a valid name!", bold_red);
+                color_print("Please enter a non empty name!", bold_red);
                 this_thread::sleep_for(chrono::seconds(1));
                 system("clear"); // clear screen
             }
