@@ -102,8 +102,7 @@ The game is a text-based game.
 
 
 ## Installation & Run
-`make` to build the program
 
-`./program` to run the program after `make`
-
-`make love` to make the program and run it directly
+1. In Linux/ Mac Terminal, change the directory to the one that want the game to be downloaded.
+2. Run `git clone https://github.com/MarcusKLY/ENGG1340-Group-Project` to clone this reporepository to the directory.
+3. Run `make game` to compile and start the game.

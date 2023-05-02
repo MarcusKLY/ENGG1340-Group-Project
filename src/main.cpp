@@ -12,13 +12,26 @@
 #include <iostream>
 #include <thread>
 #include <chrono>
+#include <termios.h>
+#include <unistd.h>
+#include <csignal>
 
 #include "../header/Knowles.h"
 
 using namespace std;
 
+void signalHandler(int signal) //turn terminal line buffering and echo on
+{
+    struct termios term;
+    tcgetattr(STDIN_FILENO, &term);
+    term.c_lflag |= ~(ICANON | ECHO);  
+    tcsetattr(STDIN_FILENO, TCSANOW, &term);
+    exit(0);
+}
 int main()
 {
+    signal(SIGINT, signalHandler);//when interrupted with ctrl-c
+    
     checking();
     cout << tictactoe();
 

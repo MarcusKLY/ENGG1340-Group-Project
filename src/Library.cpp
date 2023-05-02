@@ -11,6 +11,7 @@
 #include "../header/save_game_checkpoint.h"
 #include "../header/gameover.h"
 #include "../header/Library_escape.h"
+#include "../header/tictactoe.h"
 
 #include <iostream>
 #include <string>
@@ -75,25 +76,23 @@ int Library(string player_name)
                 char_typewriter("The librarian loses track of you", italic_green);
                 char_typewriter("You sneak back to the entrance and try to unlock the door", italic_green);
                 char_typewriter("You have to win the tic tac toe in order to unlock it\n", italic_green);
-                /*
-                () win_tictactoe = 
-                if (win_tictactoe == )
+                
+                int win_tictactoe = tictactoe();
+                if (win_tictactoe == 0)
                 {
                     // if player lost tictactoe, player will have to escape again to get another chance to play tictactoe
-                    char_typerwriter("\nThe librarian is coming back!\n", bold_red);
+                    char_typewriter("\nThe librarian is coming back!\n", bold_red);
                     escape = Library_escape(player_name);
                 }
-                else if (win_tictactoe == )
+                else if (win_tictactoe == 1)
                 {
                     cout << endl;
                     walking_animation();
-                    char_typewriter("You unlocked the door and escaped from the librarian successfully", italic_green);
+                    char_typewriter("You escaped from the librarian successfully", italic_green);
                     char_typewriter("You🙎: I am not coming to this cursed place again 🙄\n", bold_magenta);
                     save_game("Happy Park", player_name);
                     return 0;
                 }
-                */
-                break; //
             }
             if (escape == 1)
             {
@@ -163,25 +162,25 @@ int Library(string player_name)
             char_typewriter("Searching around in the library, there is nothing but silence", italic_green);
             char_typewriter("You🙎: This place is so weird. I should just leave 😰", bold_magenta);
             char_typewriter("You go back to the entrance but notice that the doors are locked", italic_green);
-            char_typewriter("You have to solve the tic tac toe to unlock it", italic_green);
-            /*
-            () win_tictactoe = 
-            while (win_tictactoe == )
+            char_typewriter("You have to solve the tic tac toe to unlock it\n", italic_green);
+
+            int win_tictactoe = tictactoe();
+            while (win_tictactoe == 0)
             {
-                char_typerwriter("\nYou failed to unlock! Please try again\n", bold_red);
+                char_typewriter("\nPlease try again!\n", bold_red);
                 // if player lost tictactoe, player will have to play again
-                win_tictactoe =
+                win_tictactoe = tictactoe();
             }
-            if (win_tictactoe == )
+            if (win_tictactoe == 1)
             {
                 cout << endl;
                 walking_animation();
-                char_typewriter("You unlocked the door and left the library successfully", italic_green);
+                char_typewriter("You left the library successfully", italic_green);
                 char_typewriter("You🙎: The guy who called me must be trolling 🙄\n", bold_magenta);
                 save_game("Happy Park", player_name);
                 return 0;
             }
-            */
+            
         }
     }
     else if (go_library == 1)

@@ -49,6 +49,7 @@ struct Board
             cells[row][col] = player;
             return true;
         }
+        std::cout <<"\033[1;31mTHE POSISTION HAS ALREADY BE CHOSEN !! ENTER AGAIN!!"<< std::endl;
         return false;
     }
 };
@@ -151,8 +152,23 @@ void humanTurn(Board &board)
     do
     {
         std::cout << "\033[35m===========================\033[0m" << std::endl;
-        std::cout << "Enter your move (1.row(1-3) and 'Enter' 2.col(1-3) and 'Enter'): ";
-        std::cin >> row >> col;
+        
+        do{
+            std::cout << "1.Enter row number:1~3: ";
+            std::cin >> row ;
+           // std::cout << std::endl;
+             if (row < 1 || row > 3) {
+            std::cout << "Invalid input! Please enter row number between 1 and 3." << std::endl;}
+           } while (row < 1 || row > 3);
+
+        do{
+            std::cout << "2.Enter col number:1~3: ";
+            std::cin >> col ;
+           // std::cout << std::endl;
+             if (col < 1 || col > 3) {
+            std::cout << "\033[31mInvalid input! Please enter column number between 1 and 3.\033[0m" << std::endl;}
+        } while (col < 1 || col > 3);
+
     } while (!board.makeMove(row - 1, col - 1, Player::Human));
 }
 
