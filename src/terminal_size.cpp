@@ -22,14 +22,14 @@ bool check_terminal_size()
     struct winsize size;
     if (ioctl(STDOUT_FILENO, TIOCGWINSZ, &size) == 0)
     {
-        if (size.ws_col >= 150 && size.ws_row >= 40)
+        if (size.ws_col >= 138 && size.ws_row >= 32)
         {
             return true;
         }
         else
         {
             std::cout << "Current terminal size: " << size.ws_col << "x" << size.ws_row << std::endl;
-            std::cout << "\033[31mPlease resize the terminal to a minumum of 150x40.\033[0m" << std::endl;
+            std::cout << "\033[31mPlease resize the terminal to a minumum of 138x32.\033[0m" << std::endl;
         }
     }
     else
