@@ -27,6 +27,9 @@ obj/%.o: $(SRCDIR)/%.cpp $(wildcard $(INCDIR)/*.h)
 love: program
 	./program || (make clean && false)
 
+game: program
+	./program
+
 clean:
 	rm -f $(OBJS) $(DEPS) program
 
