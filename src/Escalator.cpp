@@ -96,7 +96,7 @@ int Escalator(string player_name)
     if (talk_option_2 == 0 or talk_option_2 == 2)
     {
         // option "Ask if he needs help" or "Stay silent" chosen
-        char_typewriter("Little boy🤡🎈: I am lost in the campus. Can you help me?", bold_magenta);
+        char_typewriter("Little boy🤡🎈: I am lost in the campus. Can you help me?\n", bold_magenta);
         items.push_back("For sure");
         items.push_back("No, I still have to deal with other things");
         int talk_option_3 = choose_event(items, "Your response?");
