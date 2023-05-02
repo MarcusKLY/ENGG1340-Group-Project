@@ -129,7 +129,7 @@ int story_background(string player_name)
     }
     char_typewriter("You open the door and walk into the building\n", italic_green);
     walking_animation();
-    system("clear"); // clear screen
+    //system("clear"); // clear screen
     player_info.checkpoint = choose_building;
     player_manager.update_player(player_info);
     player_manager.save_players("saves.sav");
