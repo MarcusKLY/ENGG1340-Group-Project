@@ -41,7 +41,7 @@ bool check_terminal_size()
 
 int checking()
 {
-    cout << "\033[2J\033[1;1H";
+    cout << "\033[2J\033[1;1H"; // Clear the screen
     // Set up the signal handler for SIGWINCH
     struct sigaction sa;
     sa.sa_handler = handle_sigwinch;
@@ -60,6 +60,7 @@ int checking()
         {
             if (terminal_resized)
             {
+                cout << "\033[2J\033[1;1H"; // Clear the screen
                 if (check_terminal_size())
                 {
                     flag = true;
@@ -78,6 +79,6 @@ int checking()
     // std::cout << "Terminal size is 150x40. Continuing..." << std::endl;
 
     std::cout << "\033[32mTerminal Size Requirement Satisfy\033[0m" << std::endl;
-    cout << "\033[2J\033[1;1H";
+    cout << "\033[2J\033[1;1H"; // Clear the screen
     return 0;
 }
