@@ -5,10 +5,12 @@
 #include "../header/player.h"
 #include "../header/output_style.h"
 #include "../header/word_style.h"
+#include "../header/main_menu.h"
 
 #include <iostream>
 #include <string>
 #include <chrono>
+#include <vector>
 
 using namespace std;
 
@@ -90,7 +92,15 @@ int Time_Tunnel(string player_name)
     char_typewriter("Wong Chun Hei", bold_blue);
     char_typewriter("Lam Chuck Yu", bold_blue);
     char_typewriter("Diao Mo Chiu\n", bold_blue);
-    char_typewriter("Play again if you want to know more about the different options for the story!", bold_blue);
-    this_thread::sleep_for(chrono::seconds(3));
+    char_typewriter("Play again if you want to know more about the different options for the story!\n", bold_blue);
+    this_thread::sleep_for(chrono::seconds(1));
+
+    items.push_back("Confirm");
+    int menu = choose_event(items, "Return to main menu?");
+    items.clear(); // Clear the vector
+    if (menu == 0)
+    {
+        main_menu();
+    }
     return 0;
 }
