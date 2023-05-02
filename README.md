@@ -101,8 +101,9 @@ The game is a text-based game.
 ## Game State Design
 
 
-## Installation & Run
+## Installation & Running the game
 
-1. In Linux/ Mac Terminal, change the directory to the one that want the game to be downloaded.
-2. Run `git clone https://github.com/MarcusKLY/ENGG1340-Group-Project` to clone this reporepository to the directory.
-3. Run `make game` to compile and start the game.
+1. Open the Linux/Mac Terminal and navigate to the directory where you want to download the game.
+2. Clone the repository using the command `git clone https://github.com/MarcusKLY/ENGG1340-Group-Project`.
+3. Change your directory to the downloaded repository using the command `cd ENGG1340-Group-Project`.
+4. Compile and start the game by running the command `make game`.
