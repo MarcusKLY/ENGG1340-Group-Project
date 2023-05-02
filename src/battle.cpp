@@ -97,7 +97,7 @@ int callBattle(const string p_name, int &p_hp, int p_atk[2], const string e_name
             if (first)
             {
                 // reset variable used for each round
-                this_thread::sleep_for(chrono::milliseconds(2000));
+                this_thread::sleep_for(chrono::milliseconds(1000));
                 start_time = std::chrono::steady_clock::now();
                 time_left = time_allowed;
                 e_frozen = false;
@@ -321,7 +321,7 @@ int callBattle(const string p_name, int &p_hp, int p_atk[2], const string e_name
             if (e_action == 0 || e_action == 1 || e_action == 4)
             {
                 char_typewriter(e_name + (randnum() % 3 == 0 ? ": Hahah! Too slow!" : randnum() % 3 == 1 ? ": You are so slow!"
-                                                                                                   : ": Just stay there and shiver!"),
+                                                                                                         : ": Just stay there and shiver!"),
                                 bold_red);
             }
             char_typewriter(p_name + " cannot decide what to do", italic_cyan);

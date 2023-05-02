@@ -20,20 +20,20 @@
 
 using namespace std;
 
-void signalHandler(int signal) //turn terminal line buffering and echo on
+void signalHandler(int signal) // turn terminal line buffering and echo on
 {
     struct termios term;
     tcgetattr(STDIN_FILENO, &term);
-    term.c_lflag |= ~(ICANON | ECHO);  
+    term.c_lflag |= ~(ICANON | ECHO);
     tcsetattr(STDIN_FILENO, TCSANOW, &term);
     exit(0);
 }
 int main()
 {
-    signal(SIGINT, signalHandler);//when interrupted with ctrl-c
-    
+    signal(SIGINT, signalHandler); // when interrupted with ctrl-c
+
     checking();
-    cout << tictactoe();
+    // cout << tictactoe();
 
     // blink(30, "Welcome to the game", 10, italic_blue);
     //   Knowles("a");

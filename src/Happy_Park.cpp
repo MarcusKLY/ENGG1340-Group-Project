@@ -23,7 +23,7 @@ using namespace std;
 int Happy_Park(string player_name)
 {
     system("clear");
-    this_thread::sleep_for(chrono::seconds(2));
+    this_thread::sleep_for(chrono::seconds(1));
     PlayerManager player_manager;
     player_manager.load_players("saves.sav");
     PlayerInfo player_info;

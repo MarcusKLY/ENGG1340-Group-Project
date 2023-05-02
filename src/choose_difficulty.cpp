@@ -127,6 +127,7 @@ int choose_difficulty()
                     create_player("Hard");
                     break;
                 case 3: // Back
+                    main_menu();
                     done = true;
                     break;
                 }
