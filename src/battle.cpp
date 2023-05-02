@@ -215,7 +215,7 @@ int callBattle(const string p_name, int &p_hp, int p_atk[2], const string e_name
                             }
                             if (*(choice + pin - 1) == 2) //|regen|
                             {
-                                p_effect[2] = 3;
+                                p_effect[1] = 3;
                                 char_typewriter("[Sulu Sulu...]", italic_cyan);
                                 char_typewriter("You used " + dict_item_detail[2], italic_cyan);
                                 items[2] = false;
@@ -223,7 +223,7 @@ int callBattle(const string p_name, int &p_hp, int p_atk[2], const string e_name
                             }
                             if (*(choice + pin - 1) == 3) //|block|
                             {
-                                p_effect[3] = 1000;
+                                p_effect[2] = 1000;
                                 char_typewriter("You used " + dict_item_detail[3], italic_cyan);
                                 items[3] = false;
                                 break;
@@ -298,7 +298,6 @@ int callBattle(const string p_name, int &p_hp, int p_atk[2], const string e_name
             char_typewriter("Your input is too late", italic_cyan);
             char_typewriter(e_name + " is blinded", italic_cyan);
             char_typewriter(p_name + " cannot decide what to do", italic_cyan);
-            p_effect[3] = 1;
         }
         // if not late input and enemy is flashed
         if (!late && e_frozen)
@@ -531,15 +530,15 @@ int callBattle(const string p_name, int &p_hp, int p_atk[2], const string e_name
             }
         }
         // player effect
-        if (p_effect[0] > 0)
-        {
-            p_hp += 5;
-            char_typewriter(p_name + " restored 5HP", italic_cyan);
-        }
-        if (p_effect[1] == 0)
+        if (p_effect[0] > 0)//when atk up end
         {
             p_atk[0] -= 5;
             p_atk[1] -= 5;
+        }
+        if (p_effect[1] > 0)//when regen is up
+        {
+            p_hp += 5;
+            char_typewriter(p_name + " restored 5HP", italic_cyan);
         }
         p_effect[0] -= 1;
         p_effect[1] -= 1;
