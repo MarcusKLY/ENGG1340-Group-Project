@@ -89,7 +89,7 @@ int story_background(string player_name)
     }
     char_typewriter("When you reach the ground floor, there is a sign in front of you:\n", italic_green);
     char_typewriter("  ← CYM Building    ", bold_background_cyan);
-    char_typewriter(" Knowles Building ➡ ", bold_background_cyan);
+    char_typewriter(" Knowles Building → ", bold_background_cyan);
     cout << endl;
     is_valid = false;
     string choose_building;
