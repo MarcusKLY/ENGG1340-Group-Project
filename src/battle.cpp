@@ -530,7 +530,7 @@ int callBattle(const string p_name, int &p_hp, int p_atk[2], const string e_name
             }
         }
         // player effect
-        if (p_effect[0] > 0)//when atk up end
+        if (p_effect[0] == 1)//when atk up end
         {
             p_atk[0] -= 5;
             p_atk[1] -= 5;
