@@ -16,7 +16,9 @@ using namespace std;
 // initializing the game(player's name, difficulty, etc.) and start the game
 int create_player(string difficulty) //
 {
-    system("clear"); // clear screen
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    system("clear");            // clear screen
+    cout << "\033[2J\033[1;1H"; // clear screen and move cursor to top-left corner
     // initialize the player
     PlayerManager player_manager;
     player_manager.load_players("saves.sav");

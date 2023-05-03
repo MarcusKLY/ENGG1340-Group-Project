@@ -33,11 +33,12 @@ int main()
     signal(SIGINT, signalHandler); // when interrupted with ctrl-c
 
     checking();
-    cout << tictactoe("Easy");
+    cout << tictactoe("Hard");
+    this_thread::sleep_for(chrono::seconds(3));
 
     // blink(30, "Welcome to the game", 10, italic_blue);
     //   Knowles("a");
-    //    g_name();
+    g_name();
     main_menu();
     // call_sample_battle();
     return 0;
