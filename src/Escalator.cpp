@@ -132,7 +132,8 @@ int Escalator(string player_name)
             char_typewriter("You🙎: It is what it is 🤷, I should just keep going I guess\n", bold_magenta);
         }
     }
+    player_manager.update_player(player_info);
+    player_manager.save_players("saves.sav");
     save_game("Final Boss", player_name); // "Escalator" ended -> save game
-
     return 0;
 }

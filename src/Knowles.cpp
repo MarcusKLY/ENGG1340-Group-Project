@@ -118,6 +118,8 @@ int Knowles(string player_name)
                 char_typewriter("You🙎: I am not staying here any longer! 😨", bold_magenta);
                 char_typewriter("You decide to leave the building", italic_green);
                 walking_animation();
+                player_manager.update_player(player_info);
+                player_manager.save_players("saves.sav");
                 save_game("Library", player_name); // "Knowles" ended -> save game
                 return 0;
             }
@@ -165,6 +167,8 @@ int Knowles(string player_name)
                 char_typewriter("You🙎: I am not staying here any longer! 😨", bold_magenta);
                 char_typewriter("You decide to leave the building", italic_green);
                 walking_animation();
+                player_manager.update_player(player_info);
+                player_manager.save_players("saves.sav");
                 save_game("Library", player_name); // "Knowles" ended -> save game
                 return 0;
             }
@@ -214,6 +218,8 @@ int Knowles(string player_name)
                 char_typewriter("You🙎: I am not staying here any longer! 😨", bold_magenta);
                 char_typewriter("You decide to leave the building", italic_green);
                 walking_animation();
+                player_manager.update_player(player_info);
+                player_manager.save_players("saves.sav");
                 save_game("Library", player_name); // "Knowles" ended -> save game
                 return 0;
             }
@@ -256,6 +262,8 @@ int Knowles(string player_name)
                 char_typewriter("You🙎: Well... I guess I should leave this place", bold_magenta);
                 walking_animation();
                 cout << endl;
+                player_manager.update_player(player_info);
+                player_manager.save_players("saves.sav");
                 save_game("Library", player_name); // "Knowles" ended -> save game
             }
             else
