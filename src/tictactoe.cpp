@@ -137,7 +137,7 @@
 //     int winner = playTicTacToe();
 //     return winner;
 // }
-//version 2 of tictactoe
+// version 2 of tictactoe
 #include <iostream>
 #include <vector>
 #include <cstdlib>
@@ -247,7 +247,6 @@ int getComputerMoveHard(const vector<char> &board)
 // Play Tic Tac Toe with the given difficulty level
 int tictactoe(string difficulty)
 {
-    cout << (difficulty == "Normal") << endl;
     // Initialize board
     vector<char> board(9, ' ');
     // Print instructions
@@ -285,8 +284,8 @@ int tictactoe(string difficulty)
         }
         else if (result == -1)
         {
-            cout << "It's a draw and you fail to unlock the door." << endl;
-            return 0;
+            cout << "It's a draw, yet the door unlocked!" << endl;
+            return 1;
         }
         // Computer's turn
         int computerMove;
@@ -296,6 +295,7 @@ int tictactoe(string difficulty)
             computerMove = getComputerMoveEasyNormal(board);
         else if (difficulty == "Hard") // Hard
             computerMove = getComputerMoveHard(board);
+        cout << "\033[2J\033[1;1H"; // clear screen and move cursor to top-left corner
         cout << "Door's move: " << computerMove + 1 << endl;
         board[computerMove] = 'O';
         printBoard(board);
@@ -307,8 +307,8 @@ int tictactoe(string difficulty)
         }
         else if (result == -1)
         {
-            cout << "It's a draw." << endl;
-            return 0;
+            cout << "It's a draw, yet the door unlocked!" << endl;
+            return 1;
         }
     }
 }
