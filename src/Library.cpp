@@ -76,8 +76,8 @@ int Library(string player_name)
                 char_typewriter("The librarian loses track of you", italic_green);
                 char_typewriter("You sneak back to the entrance and try to unlock the door", italic_green);
                 char_typewriter("You have to win the tic tac toe in order to unlock it\n", italic_green);
-                
-                int win_tictactoe = tictactoe();
+
+                int win_tictactoe = tictactoe(player_info.difficulty);
                 if (win_tictactoe == 0)
                 {
                     // if player lost tictactoe, player will have to escape again to get another chance to play tictactoe
@@ -170,12 +170,12 @@ int Library(string player_name)
             char_typewriter("You go back to the entrance but notice that the doors are locked", italic_green);
             char_typewriter("You have to solve the tic tac toe to unlock it\n", italic_green);
 
-            int win_tictactoe = tictactoe();
+            int win_tictactoe = tictactoe(player_info.difficulty);
             while (win_tictactoe == 0)
             {
                 char_typewriter("\nPlease try again!\n", bold_red);
                 // if player lost tictactoe, player will have to play again
-                win_tictactoe = tictactoe();
+                win_tictactoe = tictactoe(player_info.difficulty);
             }
             if (win_tictactoe == 1)
             {
@@ -188,7 +188,6 @@ int Library(string player_name)
                 save_game("Happy Park", player_name); // "Library" ended -> save game
                 return 0;
             }
-            
         }
     }
     else if (go_library == 1)

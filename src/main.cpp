@@ -33,7 +33,7 @@ int main()
     signal(SIGINT, signalHandler); // when interrupted with ctrl-c
 
     checking();
-    // cout << tictactoe();
+    cout << tictactoe("Easy");
 
     // blink(30, "Welcome to the game", 10, italic_blue);
     //   Knowles("a");
