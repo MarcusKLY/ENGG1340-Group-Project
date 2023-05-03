@@ -59,7 +59,7 @@ The game is a text-based game.
 
 
 ## Combat
-
+A turn-based battle game, player can choose actions of punch, kick, block, dodge and use items. Different actions has its advantage and disadvantage against different opponent action. Consider what action opponent will take and choose the suitable action to win the battle.
 
 ## Coding Features
 
