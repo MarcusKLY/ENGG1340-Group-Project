@@ -45,21 +45,21 @@ Group 1
     ┋           \/                   \/    ┋
     ┋======================================┋
 
-You are an ordinary HKU student. As an HKU student, it is normal to have a lot of homework to complete. One day, you were stuck in the KKL building and fell asleep while working on a deadline for the next day.
+In a world where every HKU student is constantly juggling a multitude of assignments, you find yourself as an ordinary student embroiled in this never-ending struggle. One fateful night, you're trapped in the enigmatic KKL building, feverishly working to meet a deadline for the next day. Overwhelmed, you drift off to sleep, with dreams of completing your work and returning home to your family.
 
-You need to go home immediately or you will be scolded by your family. However, you notice that it's weird, there's no light source, and you can't find anyone to help.
+Jolted awake, you realize that the once-familiar surroundings have transformed into a dimly-lit labyrinth. Desperate to leave, you search for help, only to find that you are completely alone.
 
-As you look for your way out of HKU, you encounter many obstacles to overcome, and then you slowly discover that the whole thing behind it is much more serious than you thought.
+Embarking on a thrilling quest to escape HKU, you face a series of increasingly formidable obstacles. As you delve deeper into the unknown, you start to unravel a sinister conspiracy lurking beneath the surface, with implications far more profound than you could have ever imagined.
 
-Do your best to get through all the challenges, learn the story behind this event, and get out of the place!
+Unleash your inner strength, conquer the challenges that lie ahead, and uncover the shocking truth behind this mysterious event. The fate of your world rests in your hands, as you embark on a heart-pounding race against time to break free from the clutches of this enigmatic realm!
 
 
 ## Gameplay
-The game is a text-based game.
+In this text-based game, players use their keyboard and mouse to control their character, making different decisions that influence the outcome and progression of the story.
 
 
 ## Combat
-A turn-based battle game, player can choose actions of punch, kick, block, dodge and use items. Different actions has its advantage and disadvantage against different opponent action. Consider what action opponent will take and choose the suitable action to win the battle.
+A turn-based battle game, player can choose actions of punch, kick, block, dodge and use items. Different actions has its advantage and disadvantage against different opponent action. Consider what action opponent will take and choose the suitable action to win the battle. Moreover, various games will be implemented such as tic-tac-toe and wordle, where the players could battle with the program.
 
 ## Coding Features
 
