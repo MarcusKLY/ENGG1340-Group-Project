@@ -45,6 +45,8 @@ int Stairs_Enemy(string player_name)
         char_typewriter("You🙎: I guess I will be taking the escalators from now on 😱", bold_magenta);
         char_typewriter("Skeletons💀: Thanks for setting us free", bold_magenta);
         char_typewriter("The skeletons vanish one by one in front of you...\n", italic_green);
+        player_manager.update_player(player_info);
+        player_manager.save_players("saves.sav");
         save_game("Final Boss", player_name); // "Stairs" ended -> save game
         return 0;
     }

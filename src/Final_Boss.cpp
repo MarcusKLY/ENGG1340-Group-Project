@@ -71,6 +71,8 @@ int Final_Boss(string player_name)
         char_typewriter("You🙎: Ohhhh, its the indoor corridor which from Haking Wong Building to Stephen Hui Geological Museum", bold_magenta);
         char_typewriter("Then you walk away slowly, hoping this nightmare will pass soon", italic_green);
         walking_animation();
+        player_manager.update_player(player_info);
+        player_manager.save_players("saves.sav");
         save_game("Time Tunnel", player_name); // "Final_Boss" ended -> save game
         return 0;
     }

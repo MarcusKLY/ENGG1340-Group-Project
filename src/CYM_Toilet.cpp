@@ -149,6 +149,8 @@ int CYM_Toilet(string player_name)
         char_typewriter("Chong🤡: I will come back and revenge!!!", bold_magenta);
         char_typewriter("You walk away with extreme fatigue...", italic_green);
         walking_animation();
+        player_manager.update_player(player_info);
+        player_manager.save_players("saves.sav");
         save_game("Library", player_name); // "CYM_Toilet" ended -> save game
         return 0;
     }

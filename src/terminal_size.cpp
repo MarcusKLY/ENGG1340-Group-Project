@@ -30,6 +30,7 @@ bool check_terminal_size()
         {
             std::cout << "Current terminal size: " << size.ws_col << "x" << size.ws_row << std::endl;
             std::cout << "\033[31mPlease resize the terminal to a minumum of 138x32.\033[0m" << std::endl;
+            std::cout << "\nConsider the following solution \n1.Maximize terminal window \n2.Decrease terminal font size( Ctrl+MouseWheelDown / Ctrl+Minus / Settings->Profile->Appearence->Text->FontSize ) \n3.Maximize your display resolution \n4.Minimize your display scale" << std::endl;
         }
     }
     else

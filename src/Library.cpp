@@ -76,8 +76,8 @@ int Library(string player_name)
                 char_typewriter("The librarian loses track of you", italic_green);
                 char_typewriter("You sneak back to the entrance and try to unlock the door", italic_green);
                 char_typewriter("You have to win the tic tac toe in order to unlock it\n", italic_green);
-                
-                int win_tictactoe = tictactoe();
+
+                int win_tictactoe = tictactoe(player_info.difficulty);
                 if (win_tictactoe == 0)
                 {
                     // if player lost tictactoe, player will have to escape again to get another chance to play tictactoe
@@ -90,7 +90,9 @@ int Library(string player_name)
                     walking_animation();
                     char_typewriter("You escaped from the librarian successfully", italic_green);
                     char_typewriter("You🙎: I am not coming to this cursed place again 🙄\n", bold_magenta);
-                    save_game("Happy Park", player_name);
+                    player_manager.update_player(player_info);
+                    player_manager.save_players("saves.sav");
+                    save_game("Happy Park", player_name); // "Library" ended -> save game
                     return 0;
                 }
             }
@@ -113,7 +115,9 @@ int Library(string player_name)
                     char_typewriter("You leave the library feeling extremely exhausted", italic_green);
                     walking_animation();
                     char_typewriter("You🙎: The guy who asked me to come here must be trolling 🙄\n", bold_magenta);
-                    save_game("Happy Park", player_name); // "Happy Park" ended -> save game
+                    player_manager.update_player(player_info);
+                    player_manager.save_players("saves.sav");
+                    save_game("Happy Park", player_name); // "Library" ended -> save game
                     return 0;
                 }
                 else if (clean_library == 1)
@@ -132,7 +136,9 @@ int Library(string player_name)
                         walking_animation();
                         char_typewriter("You rush out of the library without a doubt", italic_green);
                         char_typewriter("You🙎: The guy who called me must be trolling 🙄\n", bold_magenta);
-                        save_game("Happy Park", player_name); // "Happy Park" ended -> save game
+                        player_manager.update_player(player_info);
+                        player_manager.save_players("saves.sav");
+                        save_game("Happy Park", player_name); // "Library" ended -> save game
                         return 0;
                     }
                     else if (win == 1)
@@ -164,12 +170,12 @@ int Library(string player_name)
             char_typewriter("You go back to the entrance but notice that the doors are locked", italic_green);
             char_typewriter("You have to solve the tic tac toe to unlock it\n", italic_green);
 
-            int win_tictactoe = tictactoe();
+            int win_tictactoe = tictactoe(player_info.difficulty);
             while (win_tictactoe == 0)
             {
                 char_typewriter("\nPlease try again!\n", bold_red);
                 // if player lost tictactoe, player will have to play again
-                win_tictactoe = tictactoe();
+                win_tictactoe = tictactoe(player_info.difficulty);
             }
             if (win_tictactoe == 1)
             {
@@ -177,17 +183,19 @@ int Library(string player_name)
                 walking_animation();
                 char_typewriter("You left the library successfully", italic_green);
                 char_typewriter("You🙎: The guy who called me must be trolling 🙄\n", bold_magenta);
-                save_game("Happy Park", player_name);
+                player_manager.update_player(player_info);
+                player_manager.save_players("saves.sav");
+                save_game("Happy Park", player_name); // "Library" ended -> save game
                 return 0;
             }
-            
         }
     }
     else if (go_library == 1)
     {
         char_typewriter("\nYou have a bad feeling going to the library", italic_green);
         char_typewriter("You🙎: I may just explore other places instead 🤔\n", bold_magenta);
-
+        player_manager.update_player(player_info);
+        player_manager.save_players("saves.sav");
         save_game("Happy Park", player_name); // "Library" ended -> save game
     }
     return 0;

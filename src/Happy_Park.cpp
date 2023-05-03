@@ -44,12 +44,16 @@ int Happy_Park(string player_name)
     {
         // option "Left" chosen
         char_typewriter("\nYou head to the stairs\n", italic_green);
+        player_manager.update_player(player_info);
+        player_manager.save_players("saves.sav");
         save_game("Stairs", player_name); // "Happy_Park" ended -> save game
     }
     else if (choice == 1)
     {
         // option "Right" chosen
         char_typewriter("\nYou head to the escalators\n", italic_green);
+        player_manager.update_player(player_info);
+        player_manager.save_players("saves.sav");
         save_game("Escalator", player_name); // "Happy_Park" ended -> save game
     }
 

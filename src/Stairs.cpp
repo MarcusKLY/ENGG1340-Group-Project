@@ -71,7 +71,8 @@ int Stairs(string player_name)
             char_typewriter("The moment you make the last step, the weights on your legs are gone", italic_green);
             char_typewriter("You🙎: Told you it is just a myth... Haha... haha", bold_magenta);
             char_typewriter("You🙎: 😓😓😓\n", bold_magenta);
-
+            player_manager.update_player(player_info);
+            player_manager.save_players("saves.sav");
             save_game("Final Boss", player_name); // "Stairs" ended -> save game
         }
         else if (look_back_again == 1)

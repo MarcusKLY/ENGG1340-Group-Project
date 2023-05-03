@@ -102,6 +102,8 @@ int CYM(string player_name)
                 char_typewriter("Chong🤡: I will come back and revenge!!!", bold_magenta);
                 char_typewriter("You walk away with extreme fatigue...", italic_green);
                 walking_animation();
+                player_manager.update_player(player_info);
+                player_manager.save_players("saves.sav");
                 save_game("Library", player_name); // "CYM" ended -> save game
                 return 0;
             }
@@ -129,6 +131,8 @@ int CYM(string player_name)
             char_typewriter("\nYou walk away and leave the old lady alone", italic_green);
             char_typewriter("You🙎: Sorry, I have to go now", bold_magenta);
             char_typewriter("Old Lady👵: ......\n", bold_magenta);
+            player_manager.update_player(player_info);
+            player_manager.save_players("saves.sav");
             save_game("CYM Toilet", player_name); // "CYM" ended -> save game
             return 0;
         }
@@ -138,6 +142,8 @@ int CYM(string player_name)
     {
         // code to handle "Leave her alone" option
         char_typewriter("\nYou walk away and leave the old lady alone\n", italic_green);
+        player_manager.update_player(player_info);
+        player_manager.save_players("saves.sav");
         save_game("CYM Toilet", player_name); // "CYM" ended -> save game
         return 0;
     }
