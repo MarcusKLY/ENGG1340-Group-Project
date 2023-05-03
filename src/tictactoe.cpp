@@ -4,6 +4,7 @@
 // #include <ctime>
 // #include "../header/output_style.h"
 #include "../header/tictactoe.h"
+#include "../header/random#generator.h"
 
 // using namespace std;
 
@@ -142,17 +143,30 @@
 #include <cstdlib>
 #include <ctime>
 #include <string>
+#include <limits>
 
 using namespace std;
 
-// Print the current state of the board
+// Print the current state of the board with 'X' and 'O' characters inside the boxes
 void printBoard(const vector<char> &board)
 {
-    cout << " " << board[0] << " | " << board[1] << " | " << board[2] << endl;
-    cout << "---+---+---" << endl;
-    cout << " " << board[3] << " | " << board[4] << " | " << board[5] << endl;
-    cout << "---+---+---" << endl;
-    cout << " " << board[6] << " | " << board[7] << " | " << board[8] << endl;
+    cout << "\033[1m";
+    cout << "     |     |     " << endl;
+    cout << "  " << (board[0] == 'X' ? "\033[1;32mX\033[0m" : (board[0] == 'O' ? "\033[1;31mO\033[0m" : "\033[1m1\033[0m")) << "  |  "
+         << (board[1] == 'X' ? "\033[1;32mX\033[0m" : (board[1] == 'O' ? "\033[1;31mO\033[0m" : "\033[1m2\033[0m")) << "  |  "
+         << (board[2] == 'X' ? "\033[1;32mX\033[0m" : (board[2] == 'O' ? "\033[1;31mO\033[0m" : "\033[1m3\033[0m")) << "  " << endl;
+    cout << "_____|_____|_____" << endl;
+    cout << "     |     |     " << endl;
+    cout << "  " << (board[3] == 'X' ? "\033[1;32mX\033[0m" : (board[3] == 'O' ? "\033[1;31mO\033[0m" : "\033[1m4\033[0m")) << "  |  "
+         << (board[4] == 'X' ? "\033[1;32mX\033[0m" : (board[4] == 'O' ? "\033[1;31mO\033[0m" : "\033[1m5\033[0m")) << "  |  "
+         << (board[5] == 'X' ? "\033[1;32mX\033[0m" : (board[5] == 'O' ? "\033[1;31mO\033[0m" : "\033[1m6\033[0m")) << "  " << endl;
+    cout << "_____|_____|_____" << endl;
+    cout << "     |     |     " << endl;
+    cout << "  " << (board[6] == 'X' ? "\033[1;32mX\033[0m" : (board[6] == 'O' ? "\033[1;31mO\033[0m" : "\033[1m7\033[0m")) << "  |  "
+         << (board[7] == 'X' ? "\033[1;32mX\033[0m" : (board[7] == 'O' ? "\033[1;31mO\033[0m" : "\033[1m8\033[0m")) << "  |  "
+         << (board[8] == 'X' ? "\033[1;32mX\033[0m" : (board[8] == 'O' ? "\033[1;31mO\033[0m" : "\033[1m9\033[0m")) << "  " << endl;
+    cout << "     |     |     " << endl
+         << endl;
 }
 
 // Check if the game is over (win or draw)
@@ -185,19 +199,19 @@ int checkGame(const vector<char> &board)
 }
 
 // Get the computer's move (easy difficulty)
-int getComputerMoveEasy(const vector<char> &board)
+int getComputerMoveEasyNormal(const vector<char> &board)
 {
     // Choose a random empty cell
     int move;
     do
     {
-        move = rand() % 9;
+        move = randnum() % 9;
     } while (board[move] != ' ');
     return move;
 }
 
 // Get the computer's move (normal difficulty)
-int getComputerMoveNormal(const vector<char> &board)
+int getComputerMoveHard(const vector<char> &board)
 {
     // Check if computer can win in one move
     for (int i = 0; i < 9; i++)
@@ -225,102 +239,20 @@ int getComputerMoveNormal(const vector<char> &board)
     int move;
     do
     {
-        move = rand() % 9;
+        move = randnum() % 9;
     } while (board[move] != ' ');
     return move;
-}
-
-// MiniMax algorithm with alpha-beta pruning
-int miniMax(vector<char> &board, char player, int alpha, int beta)
-{
-    int result = checkGame(board);
-    if (result != 0)
-        return result;
-    if (player == 'O')
-    {
-        int bestScore = -1000;
-        for (int i = 0; i < 9; i++)
-        {
-            if (board[i] == ' ')
-            {
-                board[i] = 'O';
-                int score = miniMax(board, 'X', alpha, beta);
-                board[i] = ' ';
-                if (score > bestScore)
-                {
-                    bestScore = score;
-                }
-                if (bestScore > alpha)
-                {
-                    alpha = bestScore;
-                }
-                if (beta <= alpha)
-                {
-                    break;
-                }
-            }
-        }
-        return bestScore;
-    }
-    else
-    {
-        int bestScore = 1000;
-        for (int i = 0; i < 9; i++)
-        {
-            if (board[i] == ' ')
-            {
-                board[i] = 'X';
-                int score = miniMax(board, 'O', alpha, beta);
-                board[i] = ' ';
-                if (score < bestScore)
-                {
-                    bestScore = score;
-                }
-                if (bestScore < beta)
-                {
-                    beta = bestScore;
-                }
-                if (beta <= alpha)
-                {
-                    break;
-                }
-            }
-        }
-        return bestScore;
-    }
-}
-
-// Get the computer's move (hard difficulty)
-int getComputerMoveHard(const vector<char> &board)
-{
-    // MiniMax algorithm with alpha-beta pruning
-    int bestScore = -1000;
-    int bestMove = -1;
-    for (int i = 0; i < 9; i++)
-    {
-        if (board[i] == ' ')
-        {
-            vector<char> boardCopy = board;
-            boardCopy[i] = 'O';
-            int score = miniMax(boardCopy, 'X', -1000, 1000);
-            if (score > bestScore)
-            {
-                bestScore = score;
-                bestMove = i;
-            }
-        }
-    }
-    return bestMove;
 }
 
 // Play Tic Tac Toe with the given difficulty level
 int tictactoe(string difficulty)
 {
+    cout << (difficulty == "Normal") << endl;
     // Initialize board
     vector<char> board(9, ' ');
     // Print instructions
     cout << "Welcome to Tic Tac Toe!" << endl;
-    cout << "You are X, and the computer is O." << endl;
+    cout << "\033[1mYou are \033[0m\033[1;32mX\033[0m\033[1m, and the Door is \033[0m\033[1;31mO\033[0m\033[1m.\033[0m" << endl;
     cout << "Enter a number from 1 to 9 to make your move." << endl;
     // Print initial board
     printBoard(board);
@@ -335,7 +267,8 @@ int tictactoe(string difficulty)
             cin >> playerMove;
             if (cin.fail() || playerMove < 1 || playerMove > 9 || board[playerMove - 1] != ' ')
             {
-                cout << "Invalid move. Please try again." << endl;
+                cout << "\033[7m\033[1;31mInvalid move. Please try again.\033[0m" << endl;
+                cout << "Your move: ";
                 cin.clear();                                         // clear error flags
                 cin.ignore(numeric_limits<streamsize>::max(), '\n'); // ignore remaining characters in input stream
                 continue;
@@ -347,29 +280,29 @@ int tictactoe(string difficulty)
         int result = checkGame(board);
         if (result == 1)
         {
-            cout << "Congratulations! You win!" << endl;
+            cout << "Congratulations! You win the Door!" << endl;
             return 1;
         }
         else if (result == -1)
         {
-            cout << "It's a draw." << endl;
+            cout << "It's a draw and you fail to unlock the door." << endl;
             return 0;
         }
         // Computer's turn
         int computerMove;
         if (difficulty == "Easy") // Easy
-            computerMove = getComputerMoveEasy(board);
+            computerMove = getComputerMoveEasyNormal(board);
         else if (difficulty == "Normal") // Normal
-            computerMove = getComputerMoveNormal(board);
+            computerMove = getComputerMoveEasyNormal(board);
         else if (difficulty == "Hard") // Hard
             computerMove = getComputerMoveHard(board);
-        cout << "Computer's move: " << computerMove + 1 << endl;
+        cout << "Door's move: " << computerMove + 1 << endl;
         board[computerMove] = 'O';
         printBoard(board);
         result = checkGame(board);
         if (result == 1)
         {
-            cout << "Sorry, you lose." << endl;
+            cout << "Sorry, you lose and fail to unlock the door" << endl;
             return 0;
         }
         else if (result == -1)
