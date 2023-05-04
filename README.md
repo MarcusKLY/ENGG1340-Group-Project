@@ -14,7 +14,7 @@ Group 1
 
 
 ## Documentation
-* [Background](#Storyline)
+* [Background](#Background)
 * [Gameplay](#Gameplay)
 * [Combat](#Combat)
 * [Coding Features](#Coding-Features)
