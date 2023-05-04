@@ -9,7 +9,7 @@ Group 1
 - Kam Long Yin, Marcus (3036050738)
 - Chan Yat Kwan, Simon (3036066517)
 - Wong Chun Hei (3036067066)
-- Lam Chuck Yu, Chuck (3036057786)
+- Lam Chak Yu, Chuck (3036057786)
 - Diao Mo Chiu, Stream (3036067327)
 
 
@@ -53,19 +53,24 @@ The fate of your world hangs in the balance as you race against time to break fr
 
 
 ## Gameplay
-In this text-based game, players use their keyboard and mouse to control their character, making different decisions that influence the outcome and progression of the story.
+In this text-based role-playing game, player uses their keyboard and mouse to control their character, making different decisions to influence the outcome and trajectory of the story. Clear instructions will be given at every stage throughout the entire gameplay.
 
+### Mini Games
+2 mini games are included. Players may have to pass one or both of the games to unveil latter chapters, depending on the trajectory. For the first mini game "wordle", a classic word guessing game, player would be given the password length and number of trials, both vary with the difficulty chosen at the beginning of the game.
 
-## Combat
-A turn-based battle game, player can choose actions of punch, kick, block, dodge and use items. Different actions has its advantage and disadvantage against different opponent action. Consider what action opponent will take and choose the suitable action to win the battle. Moreover, various games will be implemented such as tic-tac-toe and wordle, where the players could battle with the program.
+### Combat
+In each turn-based battle game, player can choose different actions: punch, kick, block, dodge or use items. Each action offers different merits and risks against different opponent action. Considering what action the opponent will take and choosing wisely what action to take could be challenging.
 
 
 ## Coding Features
 
-### Generation of random game sets and events
-- In battle, attack damage(p_atk,e_atk) is an random integer within a specific range, enemy have random action(e_action) and random dialogue with player in each round.
--
-### Data structures for storing game statuses
+### Generation of Random Game Sets and Events
+
+- Multiple C++ standard libraries are used to ensure a high level of randomness, considering that computer fails to generate genuine random number.
+- In a battle, attack damage(p_atk,e_atk) is an random integer within a specific range, enemy have random action(e_action) and random dialogue with player in each round.
+- Password is randomly chosen from answer.txt
+
+### Data Structures For Storing Game Status
 
 - Inside the `PlayerInfo`, player specific information will be stored, including:
   - `user_name`, in form of string
@@ -82,18 +87,29 @@ A turn-based battle game, player can choose actions of punch, kick, block, dodge
 ### Dynamic memory management
 
 - In battle, a dynamic int array with changing size is used to store id of items player have in each round
+- vectors (dynamic arrays) are used to store sequences of elements
+- Examples: vector<string> answerlist; vector<string> attempts;
 
 ### File input/output
 
-- Game data are stored in the `saves.sav` file for player to save and load game saves. Those files could also be delete in the game menu.
-- The wordle's predefined words are stored in `answer.txt`, and loaded during the game.
-  
+- Game data, like checkpoint completion, are stored in `saves.sav` for player to save and load game saves. Those files could also be delete in the game menu.
+- For the Password checkpoint, a wide variety of possible passwords are stored in `answer.txt`, and a extensive list of valid English words is stored in `dictionary.txt`. They are loaded when a password is randomly chosen and when each player input goes through a validity check. The program reads from files using ifstream.
+
 ### Program codes in multiple files
 
 - Functions are stored in multiple seperated files. Examples include:
   - `PlayerInfo` and `ColorOption` struct,  will be declared and defined in its own header and source files, which could be used in all other sourse files.
   - Functions for different output styles, animations, colors and fonts etc. are included in `output_style.h` and `word_style.h` and could be used repeatedly and globally, without copying the same codes everytime to establish a specific format.
-  - From main game, player could call function `call_new_battle` in `battle.h` to start a new battle
+  - From main game, player could call function `call_new_battle` in `battle.h` to start a new battle.
+  
+### Elucidation of what each section does through extensive comments
+
+- Example: "// function to generate a random password (randomly choose one from answer.txt)"
+
+### Formatting
+
+- The code is organized into functions to make it readable and modular
+- Function and variable names are made self-explanatory and with a consistent style
 
 ## Installation & Running the game
 
