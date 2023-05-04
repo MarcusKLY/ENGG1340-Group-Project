@@ -14,7 +14,7 @@ Group 1
 
 
 ## Documentation
-* [Storyline](#Storyline)
+* [Background](#Storyline)
 * [Gameplay](#Gameplay)
 * [Combat](#Combat)
 * [Coding Features](#Coding-Features)
@@ -22,7 +22,7 @@ Group 1
 * [Installation & Run](#Installation--Run)
 
 
-## Game Description
+## Background
 
     ┋======================================┋
     ┋      ___ ___  ____  __.____ ___      ┋
