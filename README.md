@@ -59,12 +59,13 @@ In this text-based game, players use their keyboard and mouse to control their c
 ## Combat
 A turn-based battle game, player can choose actions of punch, kick, block, dodge and use items. Different actions has its advantage and disadvantage against different opponent action. Consider what action opponent will take and choose the suitable action to win the battle. Moreover, various games will be implemented such as tic-tac-toe and wordle, where the players could battle with the program.
 
+
 ## Coding Features
 
-### 1. Generation of random game sets or events
-- In battle, attack damage(p_atk,e_atk) is random integer within a range, enemy have random action(e_action) and random dialogue with player in each round.
+### Generation of random game sets and events
+- In battle, attack damage(p_atk,e_atk) is an random integer within a specific range, enemy have random action(e_action) and random dialogue with player in each round.
 -
-### 2. Data structures for storing game status
+### Data structures for storing game statuses
 
 - Inside the `PlayerInfo`, player specific information will be stored, including:
   - `user_name`, in form of string
@@ -78,30 +79,25 @@ A turn-based battle game, player can choose actions of punch, kick, block, dodge
 
 - In battle, int is used to store player and enemy hp, and array of int is used to store remain numbers of rounds of special effect players have.
 
-### 3. Dynamic memory management
+### Dynamic memory management
 
 - In battle, a dynamic int array with changing size is used to store id of items player have in each round
 
-### 4. File input/output
+### File input/output
 
 - Game data are stored in the `saves.sav` file for player to save and load game saves. Those files could also be delete in the game menu.
 - The wordle's predefined words are stored in `answer.txt`, and loaded during the game.
   
-### 5. Program codes in multiple files
+### Program codes in multiple files
 
-- DIfferent function are in multiple files (some examples below)
-  - `PlayerInfo` and `ColorOption` struct,  will be declared and defined in its own header and source files, which could be used in all other sourse file.
-  - Different word output styles in `output_style.h` could be used repeatedly.
-  - From main game can call function `call_new_battle` in `battle.h` to start a new battle 
-
-
-
-## Game State Design
-
+- Functions are stored in multiple seperated files. Examples include:
+  - `PlayerInfo` and `ColorOption` struct,  will be declared and defined in its own header and source files, which could be used in all other sourse files.
+  - Functions for different output styles, animations, colors and fonts etc. are included in `output_style.h` and `word_style.h` and could be used repeatedly and globally, without copying the same codes everytime to establish a specific format.
+  - From main game, player could call function `call_new_battle` in `battle.h` to start a new battle
 
 ## Installation & Running the game
 
-1. Open the Linux/Mac Terminal and navigate to the directory where you want to download the game.
+1. On Mac/Linux computers, open the Terminal app and navigate to the directory where you want to download the game.
 2. Clone the repository using the command `git clone https://github.com/MarcusKLY/ENGG1340-Group-Project`.
 3. Change your directory to the downloaded repository using the command `cd ENGG1340-Group-Project`.
 4. Compile and start the game by running the command `make game`.
