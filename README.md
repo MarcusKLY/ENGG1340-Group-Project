@@ -45,7 +45,7 @@ Group 1
     ┋           \/                   \/    ┋
     ┋======================================┋
 
-In a world where every HKU student is constantly juggling a multitude of assignments, you find yourself as an ordinary student embroiled in this never-ending struggle. One fateful night, you're trapped in the enigmatic KKL building, feverishly working to meet a deadline for the next day. Overwhelmed, you drift off to sleep, with dreams of completing your work and returning home to your family.
+In a world where every HKU student is constantly juggling a multitude of assignments, you find yourself as an ordinary student embroiled in this never-ending struggle. One fateful night, you're trapped in the enigmatic KKL building, feverishly working to meet a deadline before 23:59. Overwhelmed, you drift off to sleep, with dreams of completing your work and returning home to your family.
 
 Jolted awake, you realize that the once-familiar surroundings have transformed into a dimly-lit labyrinth. Desperate to leave, you search for help, only to find that you are completely alone.
 
