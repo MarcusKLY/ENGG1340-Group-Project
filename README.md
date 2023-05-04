@@ -20,7 +20,6 @@ Group 1
 * [Background](#Background)
 * [Gameplay](#Gameplay)
 * [Coding Features](#Coding-Features)
-* [Game State Design](#Game-State-Design)
 * [Installation & Run](#Installation--Run)
 
 
@@ -114,9 +113,9 @@ In each turn-based battle, player can choose different actions: punch, kick, blo
 - The code is organized into functions to make it readable and modular
 - Function and variable names are made self-explanatory and with a consistent style
 
-## Installation & Running the game
+## Installation & Run
 
-1. On Mac/Linux computers, open the Terminal app and navigate to the directory where you want to download the game.
+1. On Mac/Linux computers, open Terminal and navigate to the directory where you want to download the game.
 2. Clone the repository using the command `git clone https://github.com/MarcusKLY/ENGG1340-Group-Project`.
 3. Change your directory to the downloaded repository using the command `cd ENGG1340-Group-Project`.
-4. Compile and start the game by running the command `make game`.
+4. Compile and start the game by entering the command `make game`.
