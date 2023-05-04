@@ -45,7 +45,11 @@ Group 1
     ┋           \/                   \/    ┋
     ┋======================================┋
 
-As a typical HKU student, you're stuck in the KKL building late at night, struggling to meet a deadline. You jolted awake to find yourself lost in a dark maze and completely alone. Your mission is to escape HKU by overcoming obstacles and unraveling a sinister conspiracy. Can you unleash your inner strength and conquer the challenges that lie ahead to uncover the truth?
+As an HKU student, you're no stranger to the pressures of managing multiple assignments. One night, while working on a deadline in the KKL building, you doze off only to wake up in a dimly-lit maze. Alone and desperate to escape, you embark on a thrilling quest that leads you to face a series of obstacles.
+
+As you progress, you uncover a sinister conspiracy that threatens the very fabric of your world. To unravel the mystery and escape, you must summon your inner strength and overcome increasingly daunting challenges.
+
+The fate of your world hangs in the balance as you race against time to break free from the clutches of this enigmatic realm. Are you ready to unleash your full potential and uncover the shocking truth behind this mysterious event? The adventure awaits!
 
 
 ## Gameplay
