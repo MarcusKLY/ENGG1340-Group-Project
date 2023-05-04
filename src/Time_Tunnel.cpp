@@ -90,7 +90,7 @@ int Time_Tunnel(string player_name)
     char_typewriter("Kam Long Yin", bold_blue);
     char_typewriter("Chan Yat Kwan", bold_blue);
     char_typewriter("Wong Chun Hei", bold_blue);
-    char_typewriter("Lam Chuck Yu", bold_blue);
+    char_typewriter("Lam Chak Yu", bold_blue);
     char_typewriter("Diao Mo Chiu\n", bold_blue);
     char_typewriter("Play again if you want to know more about the different options for the story!\n", bold_blue);
     this_thread::sleep_for(chrono::seconds(1));
