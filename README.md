@@ -45,11 +45,11 @@ Group 1
     ┋           \/                   \/    ┋
     ┋======================================┋
 
-As an HKU student, you're no stranger to the pressures of managing multiple assignments. One night, while working on a deadline in the KKL building, you doze off only to wake up in a dimly-lit maze. Alone and desperate to escape, you embark on a thrilling quest that leads you to face a series of obstacles.
+As an HKU student, you're no stranger to the pressure of managing multiple assignments. One night, while working on a deadline in the KKL building, you doze off only to wake up in a dimly-lit maze. Feeling alone and desperate to escape, you embarked on a thrilling quest and faced a series of obstacles.
 
-As you progress, you uncover a sinister conspiracy that threatens the very fabric of your world. To unravel the mystery and escape, you must summon your inner strength and overcome increasingly daunting challenges.
+As you delve deeper into the myth, you uncover a sinister conspiracy that threatens the very fabric of your world. To unravel the mystery and escape, you must summon your inner strength and overcome increasingly daunting challenges.
 
-The fate of your world hangs in the balance as you race against time to break free from the clutches of this enigmatic realm. Are you ready to unleash your full potential and uncover the shocking truth behind this mysterious event? The adventure awaits!
+The fate of your world hangs in the balance as you race against time to break free from the clutches of this enigmatic realm. Are you ready to unleash your full potential and uncover the shocking truth behind this mysterious event? Adventure awaits!
 
 
 ## Gameplay
