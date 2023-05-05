@@ -7,7 +7,7 @@ Group 1
 
 "You learned a lot by playing RPGs, although not all of it was useful, or real for that matter." - Sorin Suciu
 
-Important Note: The game runs on Linux ONLY.
+*Important Note: The game runs on Linux ONLY.*
 
 
 ## Group Members
