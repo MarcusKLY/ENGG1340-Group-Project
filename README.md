@@ -7,7 +7,7 @@ Group 1
 
 "You learned a lot by playing RPGs, although not all of it was useful, or real for that matter." - Sorin Suciu
 
-The game can only be run in Linux.
+The game can only run on Linux.
 
 
 ## Group Members
@@ -108,7 +108,7 @@ https://user-images.githubusercontent.com/50311376/236372925-86c16918-9592-4da8-
   - `items`, in the form of string vector
   - `checkpoint`, in the form of a string
   
- - Inside `ColorOption`, a wide variety of combinations of word colors and fonts are stored.
+ - In `ColorOption`, a wide variety of combinations of word colors and fonts are stored.
 
 - In each battle, int is used to store player and enemy hp, and an array of int is used to store the remaining numbers of rounds of special effects players have.
 
