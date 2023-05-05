@@ -7,6 +7,8 @@ Group 1
 
 "You learned a lot by playing RPGs, although not all of it was useful, or real for that matter." - Sorin Suciu
 
+The game can only be run in Linux.
+
 
 ## Group Members
 - Kam Long Yin, Marcus (3036050738)
@@ -19,6 +21,8 @@ Group 1
 ## Documentation
 * [Background](#Background)
 * [Gameplay](#Gameplay)
+* [Demo Video](#Demo-Video)
+* [Screenshots](#Screenshots)
 * [Coding Features](#Coding-Features)
 * [Installation & Run](#Installation--Run)
 
@@ -65,6 +69,26 @@ In this text-based role-playing game, player uses their keyboard and mouse to co
 ### Combat
 
 In each turn-based battle, player can choose different actions: punch, kick, block, dodge or use items. Each action offers different merits and risks against different opponent actions. Considering what action the opponent will take and choosing wisely what action to take within a tight time limit can be challenging.
+
+## Demo Video
+
+https://user-images.githubusercontent.com/50311376/236372925-86c16918-9592-4da8-9e3f-09bd236dbec7.MOV
+
+
+## Screenshots
+
+<img width="610" alt="Difficulty" src="https://user-images.githubusercontent.com/50311376/236372947-368631c5-6834-4d5f-9138-d6d26b8ea1a8.png">
+
+<img width="610" alt="Save Detail" src="https://user-images.githubusercontent.com/50311376/236372954-9c4e9911-e4ce-4a73-9e74-51db644b9c30.png">
+
+<img width="610" alt="Story" src="https://user-images.githubusercontent.com/50311376/236372959-6ee2628e-6ecc-4ebe-a15b-6148d682986c.png">
+
+<img width="610" alt="Wordle" src="https://user-images.githubusercontent.com/50311376/236372965-30e67b77-c9e7-4c14-a574-b30ac55f0306.png">
+
+<img width="610" alt="Tictactoe" src="https://user-images.githubusercontent.com/50311376/236372971-86cf67d5-863f-4890-8eaf-63505955088c.png">
+
+<img width="610" alt="Battle" src="https://user-images.githubusercontent.com/50311376/236372975-d26c343d-3653-4b3a-8755-19b2ba41e422.png">
+
 
 ## Coding Features
 
