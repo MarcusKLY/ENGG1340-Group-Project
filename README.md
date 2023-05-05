@@ -136,7 +136,7 @@ https://user-images.githubusercontent.com/50311376/236372925-86c16918-9592-4da8-
   
 ### In-code Documentation
 
-- Elucidation of what each section does through extensive comments is prepared
+- Extensive comments are provided to clearly explain what each section does
 - Example: `// function to generate a random password (randomly choose one from answer.txt)`
 
 ### Formatting
