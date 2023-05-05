@@ -103,7 +103,7 @@ void checkInput(int PwLength, int trials, vector<string> &attempts, string passw
             // blink to show the password
             cout << endl;
             blink(2, "> > > 🤫 Shhh...please keep it a secret! 😎 The password is " + password + " < < <", 300, bold_yellow);
-            char_typewriter(" > > > 🤫 Shhh...please keep it a secret! 😎 The password is " + password + " < < <", bold_yellow);
+            line_typewriter(" > > > 🤫 Shhh...please keep it a secret! 😎 The password is " + password + " < < <", bold_yellow);
             cout << endl;
             continue;
         }
@@ -112,7 +112,7 @@ void checkInput(int PwLength, int trials, vector<string> &attempts, string passw
         {
             cout << endl;
             blink(2, "> > > 🤬 PASSWORD MUST BE " + to_string(PwLength) + "-LETTER LONG! PLEASE TRY AGAIN! < < <", 300, bold_red);
-            char_typewriter("> > > 🤬 PASSWORD MUST BE " + to_string(PwLength) + "-LETTER LONG! PLEASE TRY AGAIN! < < <", bold_red);
+            line_typewriter("> > > 🤬 PASSWORD MUST BE " + to_string(PwLength) + "-LETTER LONG! PLEASE TRY AGAIN! < < <", bold_red);
             cout << endl;
             continue;
         }
@@ -134,7 +134,7 @@ void checkInput(int PwLength, int trials, vector<string> &attempts, string passw
                 transform(input.begin(), input.end(), input.begin(), ::toupper);
                 cout << endl;
                 blink(2, "> > > 🤬 " + input + " IS NOT A VALID WORD! PLEASE TRY AGAIN! < < <", 300, bright_red);
-                char_typewriter("> > > 🤬 " + input + " IS NOT A VALID WORD! PLEASE TRY AGAIN! < < <", bright_red);
+                line_typewriter("> > > 🤬 " + input + " IS NOT A VALID WORD! PLEASE TRY AGAIN! < < <", bright_red);
                 cout << endl;
                 continue;
             }
@@ -146,7 +146,7 @@ void checkInput(int PwLength, int trials, vector<string> &attempts, string passw
                 transform(input.begin(), input.end(), input.begin(), ::toupper);
                 cout << endl;
                 blink(2, "> > > 🤬 YOU HAVE TRIED " + input + " BEFORE! PLEASE TRY AGAIN! < < <", 300, bright_red);
-                char_typewriter("> > > 🤬 YOU HAVE TRIED " + input + " BEFORE! PLEASE TRY AGAIN! < < <", bright_red);
+                line_typewriter("> > > 🤬 YOU HAVE TRIED " + input + " BEFORE! PLEASE TRY AGAIN! < < <", bright_red);
                 cout << endl;
                 isTried = true;
                 break;
@@ -425,7 +425,7 @@ bool password(string difficulty)
     password = generatePassword(PwLength);
     // loop for the game
     blink(3, "> > > 🥸  Markers could enter \"/reveal\" to crack this chapter 🥸  < < <", 500, bold_yellow);
-    char_typewriter("> > > 🥸  Markers could enter \"/reveal\" to crack this chapter 🥸  < < <", bold_yellow);
+    line_typewriter("> > > 🥸  Markers could enter \"/reveal\" to crack this chapter 🥸  < < <", bold_yellow);
     while ((attempts.size() < trials))
     {
         printBoard(password, attempts, trials);
@@ -438,7 +438,7 @@ bool password(string difficulty)
             break;
         }
     }
-    //print the board once again
+    // print the board once again
     printBoard(password, attempts, trials);
     if (attempts.back() == password)
     {
@@ -447,7 +447,7 @@ bool password(string difficulty)
     else
     {
         blink(3, "OH NO", 300, bold_background_red);
-        char_typewriter("PASSWORD RESET IN PROGRESS...", bold_background_red);
+        line_typewriter("PASSWORD RESET IN PROGRESS...", bold_background_red);
         return 0;
     }
 }

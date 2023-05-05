@@ -6,7 +6,8 @@
 #include "../header/player.h"
 #include "../header/choose_event.h"
 #include "../header/output_style.h"
-#include "../header/tictactoe.h"
+// #include "../header/tictactoe.h"
+// #include "../header/password.h"
 #include "../header/terminal_size.h"
 
 #include <iostream>
@@ -30,8 +31,8 @@ void signalHandler(int signal) // turn terminal line buffering and echo on
 }
 int main()
 {
-    signal(SIGINT, signalHandler); // when interrupted with ctrl-c
 
+    signal(SIGINT, signalHandler); // when interrupted with ctrl-c
     checking();
     // cout << tictactoe("Hard");
     this_thread::sleep_for(chrono::seconds(3));
