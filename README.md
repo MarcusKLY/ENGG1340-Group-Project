@@ -11,6 +11,17 @@ Important Note: The game runs on Linux ONLY.
 
 
 ## Group Members
+
+
+| Name | UID | GitHub Nickname |
+| --- | --- | --- |
+| Kam Long Yin, Marcus | 3036050738 | MarcusKLY |
+| Chan Yat Kwan, Simon  | 3036066517  | SimonTheLiquid |
+| Wong Chun Hei  | 3036067066 | WongJ642 |
+| Lam Chak Yu, Chuck | 3036057786 | Majorui |
+| Diao Mo Chiu, Stream | 3036067327 | Strmologypfm |
+
+
 - Kam Long Yin, Marcus (3036050738) [Nickname: MarcusKLY]
 - Chan Yat Kwan, Simon (3036066517) [Nickname: SimonTheLiquid]
 - Wong Chun Hei (3036067066) [Nickname: WongJ642]
