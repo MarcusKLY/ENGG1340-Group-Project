@@ -54,27 +54,27 @@ The fate of your world hangs in the balance as you race against time to break fr
 
 
 ## Gameplay
-In this text-based role-playing game, player uses their keyboard and mouse to control their character, making different decisions to influence the outcome and trajectory of the story. Clear instructions will be given at every stage throughout the entire gameplay.
+In this text-based role-playing game, player uses their keyboard and mouse to control their character, making different decisions to influence the outcome and trajectory of the story. Clear instructions on what to do will be given at every stage throughout the entire game.
 
 ### Mini Games
-- 2 mini games are included. Players may have to pass one or both of the games to unveil latter chapters, depending on the trajectory.
-- In the Password checkpoint, the first mini game "wordle", a classic word guessing game would be implemented to prompt the player for password input. Player would be given the password length and number of allowed trials, both vary with the difficulty chosen at the beginning of the game.
+- 2 mini games are included. Player may have to pass one or both of the games to unveil latter chapters, depending on the trajectory.
+- In the Password checkpoint, the first mini game "wordle", a classic word guessing game would be implemented to prompt the player for password input. Player would be given the password length and number of trials allowed, both vary with the difficulty chosen at the beginning of the game.
 - The other mini game is the classic Tic-Tac-Toe but with our twist. Like Wordle, versions of distinct levels of difficulty were made. Under "Hard" mode, the game becomes very challenging due to the state-of-the-art AI algorithms embedded. Try to defeat it!
 
 ### Combat
-In each turn-based battle, player can choose different actions: punch, kick, block, dodge or use items. Each action offers different merits and risks against different opponent actions. Considering what action the opponent will take and choosing wisely what action to take within a tight time limit could be challenging.
+In each turn-based battle, player can choose different actions: punch, kick, block, dodge or use items. Each action offers different merits and risks against different opponent actions. Considering what action the opponent will take and choosing wisely what action to take within a tight time limit can be challenging.
 
 ## Coding Features
 
 ### Generation of Random Game Sets and Events
 
-- Numerous C++ standard libraries are used to ensure a high level of randomness, considering that computer fails to generate genuine random numbers on its own.
-- In each battle, attack damage(p_atk,e_atk) is a random integer within a specific range; enemy has random action(e_action) and random dialogue with player in each round.
-- Password is randomly chosen from answer.txt for each game.
+- Numerous C++ standard libraries are used to build the `rand()` function, which is a random number generator, to ensure a high level of randomness, considering that computer fails to generate genuine random numbers on its own.
+- In each battle, attack damage(`p_atk` & `e_atk`) is a random integer within a specific range; enemy has random action(`e_action`) and random dialogue with player in each round.
+- Password is randomly chosen from `answer.txt` for each game.
 
 ### Data Structures For Storing Game Status
 
-- Inside the `PlayerInfo`, player-specific information will be stored, including:
+- Inside `PlayerInfo`, player-specific information will be stored, including:
   - `user_name`, in the form of a string
   - `difficulty`, in the form of a string
   - `hp`(Health Point), in form of integer
@@ -82,20 +82,20 @@ In each turn-based battle, player can choose different actions: punch, kick, blo
   - `items`, in the form of string vector
   - `checkpoint`, in the form of a string
   
- - Inside `ColorOption`, a wide variety of combinations of word colors and fonts are stored
+ - Inside `ColorOption`, a wide variety of combinations of word colors and fonts are stored.
 
 - In each battle, int is used to store player and enemy hp, and an array of int is used to store the remaining numbers of rounds of special effects players have.
 
 ### Dynamic Memory Management
 
-- In each battle, a dynamic int array with varying sizes is used to store the ID of the items the player have within each round
-- vectors (dynamic arrays) are used to store sequences of elements
-- Examples: vector<string> answerlist; vector<string> attempts;
+- In each battle, a dynamic int array with varying sizes is used to store the ID of the items the player have within each round.
+- vectors (dynamic arrays) are used to store sequences of elements.
+- Examples: `vector<string> answerlist` & `vector<string> attempts`.
 
 ### File input/output
 
 - Game data, like checkpoint completion, are stored in `saves.sav` for multiple players to save and load game saves. Those files could also be deleted from the game menu.
-- For the Password checkpoint, a wide variety of possible passwords are stored in `answer.txt`, and an extensive list of valid English words is stored in `dictionary.txt`. They are loaded when a password is randomly chosen and when each player input goes through a validity check. The program reads from files using ifstream.
+- For the Password checkpoint, a wide variety of possible passwords are stored in `answer.txt`, and an extensive list of valid English words is stored in `dictionary.txt`. They are loaded when a password is randomly chosen and when each player input goes through a validity check. The program reads from files using `ifstream`.
 
 ### Program codes in multiple files
 
@@ -106,7 +106,7 @@ In each turn-based battle, player can choose different actions: punch, kick, blo
   
 ### Elucidation of what each section does through extensive comments
 
-- Example: "// function to generate a random password (randomly choose one from answer.txt)"
+- Example: `// function to generate a random password (randomly choose one from answer.txt)`
 
 ### Formatting
 
@@ -118,4 +118,4 @@ In each turn-based battle, player can choose different actions: punch, kick, blo
 1. On Mac/Linux computers, open Terminal and navigate to the directory where you want to download the game.
 2. Clone the repository using the command `git clone https://github.com/MarcusKLY/ENGG1340-Group-Project`.
 3. Change your directory to the downloaded repository using the command `cd ENGG1340-Group-Project`.
-4. Compile and start the game by entering the command `make game`.
+4. Compile and start the game by a single command `make game`.
