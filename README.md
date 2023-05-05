@@ -52,16 +52,18 @@ As you delve deeper into the myth, you uncover a sinister conspiracy that threat
 
 The fate of your world hangs in the balance as you race against time to break free from the clutches of this enigmatic realm. Are you ready to unleash your full potential and uncover the shocking truth behind this mysterious event? Adventure awaits!
 
-
 ## Gameplay
+
 In this text-based role-playing game, player uses their keyboard and mouse to control their character, making different decisions to influence the outcome and trajectory of the story. Clear instructions on what to do will be given at every stage throughout the entire game.
 
 ### Mini Games
+
 - 2 mini games are included. Player may have to pass one or both of the games to unveil latter chapters, depending on the trajectory.
 - In the Password checkpoint, the first mini game "wordle", a classic word guessing game would be implemented to prompt the player for password input. Player would be given the password length and number of trials allowed, both vary with the difficulty chosen at the beginning of the game.
 - The other mini game is the classic Tic-Tac-Toe but with our twist. Like Wordle, versions of distinct levels of difficulty were made. Under "Hard" mode, the game becomes very challenging due to the state-of-the-art AI algorithms embedded. Try to defeat it!
 
 ### Combat
+
 In each turn-based battle, player can choose different actions: punch, kick, block, dodge or use items. Each action offers different merits and risks against different opponent actions. Considering what action the opponent will take and choosing wisely what action to take within a tight time limit can be challenging.
 
 ## Coding Features
@@ -92,20 +94,21 @@ In each turn-based battle, player can choose different actions: punch, kick, blo
 - vectors (dynamic arrays) are used to store sequences of elements.
 - Examples: `vector<string> answerlist` & `vector<string> attempts`.
 
-### File input/output
+### File Input/Output
 
 - Game data, like checkpoint completion, are stored in `saves.sav` for multiple players to save and load game saves. Those files could also be deleted from the game menu.
 - For the Password checkpoint, a wide variety of possible passwords are stored in `answer.txt`, and an extensive list of valid English words is stored in `dictionary.txt`. They are loaded when a password is randomly chosen and when each player input goes through a validity check. The program reads from files using `ifstream`.
 
-### Program codes in multiple files
+### Program Codes in Multiple Files
 
 - Functions are stored in multiple separate files. Examples include:
   - `PlayerInfo` and `ColorOption` structs,  will be declared and defined in their own header and source files, which could be used in all other source files.
   - Functions for different output styles, animations, colors and fonts, etc. are included in `output_style.h` and `word_style.h` and could be used repeatedly and globally, without copying the same blocks of code every time to establish a specific format.
   - From the main game, player could call the function `call_new_battle` in `battle.h` to start a new battle.
   
-### Elucidation of what each section does through extensive comments
+### In-code Documentation
 
+- Elucidation of what each section does through extensive comments is prepared
 - Example: `// function to generate a random password (randomly choose one from answer.txt)`
 
 ### Formatting
