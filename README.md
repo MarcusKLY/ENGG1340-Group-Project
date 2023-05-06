@@ -68,7 +68,7 @@ In this text-based role-playing game, player uses their keyboard and mouse to co
 
 ### Mini Games
 
-- 2 mini games are included. Player may have to pass one or both of the games to unveil latter chapters, depending on the trajectory.
+- There are 2 mini games. Player may have to pass one or both of the games to unveil latter chapters, depending on the trajectory.
 - In the Password checkpoint, the first mini game "wordle", a classic word guessing game would be implemented to prompt the player for password input. Player would be given the password length and number of trials allowed, both vary with the difficulty chosen at the beginning of the game.
 - The other mini game is the classic Tic-Tac-Toe but with our twist. Like Wordle, versions of distinct levels of difficulty were made. Under "Hard" mode, the game becomes very challenging due to the state-of-the-art AI algorithms embedded. Try to defeat it!
 
