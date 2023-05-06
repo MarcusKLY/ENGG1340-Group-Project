@@ -69,7 +69,7 @@ In this text-based role-playing game, player uses their keyboard and mouse to co
 ### Mini Games
 
 - There are 2 mini games. Player may have to pass one or both of the games to unveil latter chapters, depending on the trajectory.
-- In the Password checkpoint, the first mini game "wordle", a classic word guessing game would be implemented to prompt the player for password input. Player would be given the password length and number of trials allowed, both vary with the difficulty chosen at the beginning of the game.
+- In the Password checkpoint, the first mini game "wordle", a classic word guessing game would be implemented to prompt the player for password input. Player would be given the password length and number of trials allowed, both vary with the difficulty chosen from the game menu.
 - The other mini game is the classic Tic-Tac-Toe but with our twist. Like Wordle, versions of distinct levels of difficulty were made. Under "Hard" mode, the game becomes very challenging due to the state-of-the-art AI algorithms embedded. Try to defeat it!
 
 ### Combat
@@ -106,44 +106,44 @@ https://user-images.githubusercontent.com/50311376/236372925-86c16918-9592-4da8-
 
 ### Data Structures For Storing Game Status
 
-- Inside `PlayerInfo`, player-specific information will be stored, including:
+- In `PlayerInfo`, player-specific information will be stored, including:
   - `user_name`, in the form of a string
   - `difficulty`, in the form of a string
-  - `hp`(Health Point), in form of integer
+  - `hp`(Health Point), in the form of an integer
   - `buff`, in the form of an integer
-  - `items`, in the form of string vector
+  - `items`, in the form of a string vector
   - `checkpoint`, in the form of a string
   
  - In `ColorOption`, a wide variety of combinations of word colors and fonts are stored.
 
-- In each battle, int is used to store player and enemy hp, and an array of int is used to store the remaining numbers of rounds of special effects players have.
+- In each battle, `int` is used to store player and enemy hp, and an array of `int` is used to store the remaining numbers of rounds of special effects players have.
 
 ### Dynamic Memory Management
 
-- In each battle, a dynamic int array with varying sizes is used to store the ID of the items the player have within each round.
+- In each battle, a dynamic `int` array with varying sizes is used to store the ID of the items the player have within each round.
 - vectors (dynamic arrays) are used to store sequences of elements.
 - Examples: `vector<string> answerlist` & `vector<string> attempts`.
 
 ### File Input/Output
 
 - Game data, like checkpoint completion, are stored in `saves.sav` for multiple players to save and load game saves. Those files could also be deleted from the game menu.
-- For the Password checkpoint, a wide variety of possible passwords are stored in `answer.txt`, and an extensive list of valid English words is stored in `dictionary.txt`. They are loaded when a password is randomly chosen and when each player input goes through a validity check. The program reads from files using `ifstream`.
+- For the Password checkpoint, a list of wide variety of possible passwords `answer.txt` and an extensive list of valid English words `dictionary.txt` are made. They are loaded when a password is randomly chosen and when each player input goes through a validity check. The program reads from files using `ifstream`.
 
 ### Program Codes in Multiple Files
 
 - Functions are stored in multiple separate files. Examples include:
   - `PlayerInfo` and `ColorOption` structs,  will be declared and defined in their own header and source files, which could be used in all other source files.
-  - Functions for different output styles, animations, colors and fonts, etc. are included in `output_style.h` and `word_style.h` and could be used repeatedly and globally, without copying the same blocks of code every time to establish a specific format.
+  - Functions for different output styles, animations, colors and fonts, etc. are included in `output_style.h` and `word_style.h` and could be used repeatedly and globally so that we don't need to copy the same blocks of code every time to establish a specific format.
   - From the main game, player could call the function `call_new_battle` in `battle.h` to start a new battle.
   
 ### In-code Documentation
 
-- Extensive comments are provided to clearly explain what each section does
+- Extensive comments were provided to clearly explain what each section does
 - Example: `// function to generate a random password (randomly choose one from answer.txt)`
 
 ### Formatting
 
-- The code is organized into functions to make it readable and modular.
+- The entire program was organized into functions to make it readable and modular.
 - For our naming style, function and variable names are made self-explanatory and in a consistent style.
 
 ## Installation & Run
