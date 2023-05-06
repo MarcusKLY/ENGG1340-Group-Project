@@ -9,6 +9,8 @@ Group 1
 
 *Important Note: The game runs on Linux ONLY.*
 
+Tested in HKU CS Academy Server with Ubuntu 20.04.4 LTS
+
 
 ## Group Members
 
