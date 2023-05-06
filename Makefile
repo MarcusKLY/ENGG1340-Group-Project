@@ -24,7 +24,7 @@ obj/%.o: $(SRCDIR)/%.cpp $(wildcard $(INCDIR)/*.h)
 
 -include $(DEPS)
 
-love: program
+test: program
 	./program || (make clean && false)
 
 game: program
