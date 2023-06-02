@@ -15,13 +15,13 @@ Tested on HKU CS Academy Server with Ubuntu 20.04.4 LTS
 ## Group Members
 
 
-| Name | UID | GitHub Nickname |
-| --- | --- | --- |
-| Kam Long Yin, Marcus | 3036050738 | MarcusKLY |
-| Chan Yat Kwan, Simon  | 3036066517  | SimonTheLiquid |
-| Wong Chun Hei  | 3036067066 | WongJ642 |
-| Lam Chak Yu, Chuck | 3036057786 | Majorui |
-| Diao Mo Chiu, Stream | 3036067327 | Strmologypfm |
+| Name | GitHub Nickname |
+| --- | --- |
+| Kam Long Yin, Marcus | MarcusKLY |
+| Chan Yat Kwan, Simon   | SimonTheLiquid |
+| Wong Chun Hei  | WongJ642 |
+| Lam Chak Yu, Chuck | Majorui |
+| Diao Mo Chiu, Stream | Strmologypfm |
 
 
 ## Documentation
